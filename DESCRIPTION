@@ -1,0 +1,51 @@
+Package: shopifyr
+Type: Package
+Title: An R Interface to the Shopify API
+Version: 0.23
+Date: 2014-07-28
+Author: Charlie Friedemann
+Maintainer: Charlie Friedemann <cfriedem@gmail.com>
+Description: This package provides an interface to the Shopify API.
+License: GPL-3
+Depends:
+    R6,
+    RJSONIO,
+    RCurl
+Collate:
+    'Announcement.R'
+    'ApplicationCharge.R'
+    'Article.R'
+    'Asset.R'
+    'Blog.R'
+    'CarrierService.R'
+    'Checkout.R'
+    'Collect.R'
+    'Comment.R'
+    'Country.R'
+    'CustomCollection.R'
+    'Customer.R'
+    'CustomerGroup.R'
+    'Event.R'
+    'Fulfillment.R'
+    'FulfillmentService.R'
+    'Location.R'
+    'MetaField.R'
+    'Order.R'
+    'OrderRisks.R'
+    'Page.R'
+    'Product.R'
+    'ProductImage.R'
+    'ProductVariant.R'
+    'Province.R'
+    'RecurringApplicationCharge.R'
+    'Redirect.R'
+    'Refund.R'
+    'ScriptTag.R'
+    'Shop.R'
+    'private.R'
+    'Webhook.R'
+    'Transaction.R'
+    'Theme.R'
+    'SmartCollection.R'
+    'ShopifyShop.R'
+    'shopfyr-package.R'

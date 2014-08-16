@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+man-roxygen
+^\.travis.yml$
+README\.md
+travis-tool\.sh
