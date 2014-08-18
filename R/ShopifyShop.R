@@ -25,22 +25,26 @@
 #' as such is initialized via the \sQuote{new} function (see the example section for details). 
 #' 
 #' In order to access the Shopify API, users will need a set of authorized API access credentials.
-#' Generally, users will create these so-called \sQuote{private app} credentials in their Shopify store's
+#' Tthese so-called \sQuote{private app} credentials can be created in the Shopify store
 #' admin section. More information about how to do this can be found 
 #' \href{http://docs.shopify.com/api/tutorials/creating-a-private-app}{here}. Once the credentials are
 #' created, they remain valid and can be used in subsequent R sessions.
 #' 
+#' At the moment, the \code{ShopifyShop} class does not support OAuth authentication. It is possible that  
+#' this may be implemented in the future. Note that users who possess a valid \sQuote{permanent access token} 
+#' from a previous OAuth Authentication (see \href{http://docs.shopify.com/api/tutorials/oauth}{here}) may 
+#' use it as the \code{password} field of the ShopifyShop class as the private app password is essentially 
+#' analagous to the permanent token granted through successful OAuth authentication.
+#' 
 #' @field shopInfo information about the shop as returned by \code{\link{getShop}}
 #' 
-#' @param shopName the name of your shop, as in shop-name.myshopify.com
-#' @param apiKey the API key authorized in the Shopify admin
-#' @param password the Shopify API password to be used with the API key
-#' @param sharedSecret an authorized shared secret to be used with the API key
+#' @param shopURL the URL of your shop, as in shopname.myshopify.com
+#' @param password a Shopify API private app password or permanent access token (see Details)
 #' @param quiet suppress output of API announcements
 #' @return a ShopifyShop object
 #' 
 #' @usage
-#' ShopifyShop$new(shopName, apiKey, password, sharedSecret, quiet = FALSE)
+#' ShopifyShop$new(shopURL, password, quiet = FALSE)
 #' 
 #' @examples
 #' \dontrun{
@@ -320,9 +324,7 @@ ShopifyShop <- R6Class("ShopifyShop",
     public = list(
         # Public fields
         shopURL = NULL,
-        apiKey = NULL,
         password = NULL,
-        sharedSecret = NULL,
         shopInfo = NULL,
         
         # Constructor
@@ -611,5 +613,4 @@ print.ShopifyShop <- function(x, ...) {
     cat("--",x$shopInfo$name,"Shopify API Client --\n")
     cat("Site Domain: ", x$shopInfo$domain, "\n")
     cat("Shopify Domain: ", x$shopInfo$myshopify_domain, "\n")
-    cat("API Key: ", x$apiKey, "\n")
 }

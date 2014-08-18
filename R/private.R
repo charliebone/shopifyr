@@ -20,16 +20,12 @@
 
 ########### ShopifyShop constructor ###########
 #' @importFrom RCurl getCurlHandle
-.initialize <- function(shopName, apiKey, password, sharedSecret, quiet = FALSE) {
-    if (missing(shopName)) stop("shopName is required to create a ShopifyShop")
-    if (missing(apiKey)) stop("apiKey is required to create a ShopifyShop")
+.initialize <- function(shopURL, password, quiet = FALSE) {
+    if (missing(shopURL)) stop("shopURL is required to create a ShopifyShop")
     if (missing(password)) stop("password is required to create a ShopifyShop")
-    if (missing(sharedSecret)) stop("sharedSecret is required to create a ShopifyShop")
     
-    self$shopURL <- paste0(gsub(".myshopify.com", "", shopName), ".myshopify.com")
-    self$apiKey <- apiKey
+    self$shopURL <- paste0(gsub(".myshopify.com", "", shopURL), ".myshopify.com")
     self$password <- password
-    self$sharedSecret <- sharedSecret
     
     # generate curl handle and header gatherer
     private$.curlHandle <- getCurlHandle(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"),
@@ -73,7 +69,7 @@
 }
 
 .baseUrl <- function() {
-    paste0("https://", apiKey, ":", password, "@", shopURL, "/admin/")
+    paste0("https://", shopURL, "/admin/")
 }
 
 .wrap <- function(data, name, check = "id") {

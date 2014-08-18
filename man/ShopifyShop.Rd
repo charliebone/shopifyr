@@ -4,16 +4,12 @@
 \alias{ShopifyShop}
 \title{ShopifyShop class}
 \usage{
-ShopifyShop$new(shopName, apiKey, password, sharedSecret, quiet = FALSE)
+ShopifyShop$new(shopURL, password, quiet = FALSE)
 }
 \arguments{
-\item{shopName}{the name of your shop, as in shop-name.myshopify.com}
+\item{shopURL}{the URL of your shop, as in shopname.myshopify.com}
 
-\item{apiKey}{the API key authorized in the Shopify admin}
-
-\item{password}{the Shopify API password to be used with the API key}
-
-\item{sharedSecret}{an authorized shared secret to be used with the API key}
+\item{password}{a Shopify API private app password or permanent access token (see Details)}
 
 \item{quiet}{suppress output of API announcements}
 }
@@ -26,10 +22,16 @@ as such is initialized via the \sQuote{new} function (see the example section fo
 }
 \details{
 In order to access the Shopify API, users will need a set of authorized API access credentials.
-Generally, users will create these so-called \sQuote{private app} credentials in their Shopify store's
+Tthese so-called \sQuote{private app} credentials can be created in the Shopify store
 admin section. More information about how to do this can be found
 \href{http://docs.shopify.com/api/tutorials/creating-a-private-app}{here}. Once the credentials are
 created, they remain valid and can be used in subsequent R sessions.
+
+At the moment, the \code{ShopifyShop} class does not support OAuth authentication. It is possible that
+this may be implemented in the future. Note that users who possess a valid \sQuote{permanent access token}
+from a previous OAuth Authentication (see \href{http://docs.shopify.com/api/tutorials/oauth}{here}) may
+use it as the \code{password} field of the ShopifyShop class as the private app password is essentially
+analagous to the permanent token granted through successful OAuth authentication.
 }
 \section{Fields}{
 
