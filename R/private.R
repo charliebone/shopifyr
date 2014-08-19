@@ -24,7 +24,7 @@
     if (missing(shopURL)) stop("shopURL is required to create a ShopifyShop")
     if (missing(password)) stop("password is required to create a ShopifyShop")
     
-    self$shopURL <- paste0(gsub(".myshopify.com", "", shopURL), ".myshopify.com")
+    self$shopURL <- paste0(gsub(".myshopify.com", "", tolower(shopURL)), ".myshopify.com")
     self$password <- password
     
     # generate curl handle and header gatherer
