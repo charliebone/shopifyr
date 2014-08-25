@@ -1,0 +1,4 @@
+- add higher level metafields functions to resources that support it (products, collections, etc)
+- add other high-level functions (add product to collection, remove product from collection, etc)
+- built-in OAuth allowing users to use username and password w/ saved authentication token between sessions
+- add reproducible reports for users to run on their shops (sales reports, abandoned cart reports, user breakdowns, etc)
