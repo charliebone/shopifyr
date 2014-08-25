@@ -619,3 +619,6 @@ ShopifyShop <- R6Class("ShopifyShop",
         .parseShopifyTimestamp = .parseShopifyTimestamp
     )
 )
+
+# list of supposedly 'global' names to appease R CMD check
+.__global__ <- c("self","shopURL","password","shopInfo",".curlHandle",".responseHeaders",".responseBody")
