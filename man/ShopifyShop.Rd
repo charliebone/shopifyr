@@ -3,18 +3,12 @@
 \name{ShopifyShop}
 \alias{ShopifyShop}
 \title{ShopifyShop class}
-\usage{
-ShopifyShop$new(shopURL, password, quiet = FALSE)
-}
 \arguments{
 \item{shopURL}{the URL of your shop, as in shopname.myshopify.com}
 
 \item{password}{a Shopify API private app password or permanent access token (see Details)}
 
 \item{quiet}{suppress output of API announcements}
-}
-\value{
-a ShopifyShop object
 }
 \description{
 The \code{ShopifyShop} class fully encapsulates the Shopify API. It is an \code{\link{R6}} class, and
@@ -33,11 +27,23 @@ from a previous OAuth Authentication (see \href{http://docs.shopify.com/api/tuto
 use it as the \code{password} field of the ShopifyShop class as the private app password is essentially
 analagous to the permanent token granted through successful OAuth authentication.
 }
-\section{Fields}{
+\section{ShopifyShop Class Generator Usage}{
+
 
 \describe{
-\item{\code{shopInfo}}{information about the shop as returned by \code{\link{getShop}}}
+\item{\code{ShopifyShop$new(shopURL, password, quiet = FALSE)}}{
+if successful, will return a new \code{ShopifyShop} object.
 }}
+}
+
+\section{Public Fields}{
+
+\describe{
+\item{\code{shopInfo}}{
+information about the shop as returned by \code{\link{getShop}}
+}}
+}
+
 \section{Public Functions}{
 
 \describe{
@@ -290,13 +296,13 @@ analagous to the permanent token granted through successful OAuth authentication
 \examples{
 \dontrun{
 # Before you can access the API, you must create a ShopifyShop object using your credentials
-shop <- ShopifyShop$new("yourstore.myshopify.com","api_key","password","shared_secret")
+shop <- ShopifyShop$new("yourstore.myshopify.com","private_app_password")
 
-# Get all collections
-collections <- shop$getCollections()
+# Get all smart collections
+collections <- shop$getSmartCollections()
 
-# Get customers named Bob from the United States
-bobs <- shop$getCustomers("Bob country:United States")
+# Search for customers named Bob from the United States
+bobs <- shop$searchCustomers("Bob country:United States")
 
 # Create a new product
 product <- list(title="The R Inferno",

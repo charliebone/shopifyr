@@ -36,36 +36,23 @@
 #' use it as the \code{password} field of the ShopifyShop class as the private app password is essentially 
 #' analagous to the permanent token granted through successful OAuth authentication.
 #' 
-#' @field shopInfo information about the shop as returned by \code{\link{getShop}}
-#' 
 #' @param shopURL the URL of your shop, as in shopname.myshopify.com
 #' @param password a Shopify API private app password or permanent access token (see Details)
 #' @param quiet suppress output of API announcements
-#' @return a ShopifyShop object
 #' 
-#' @usage
-#' ShopifyShop$new(shopURL, password, quiet = FALSE)
+#' @usage NULL
+#' @section ShopifyShop Class Generator Usage:
 #' 
-#' @examples
-#' \dontrun{
-#' # Before you can access the API, you must create a ShopifyShop object using your credentials
-#' shop <- ShopifyShop$new("yourstore.myshopify.com","api_key","password","shared_secret")
+#' \describe{
+#' \item{\code{ShopifyShop$new(shopURL, password, quiet = FALSE)}}{
+#' if successful, will return a new \code{ShopifyShop} object.
+#' }}
 #' 
-#' # Get all collections
-#' collections <- shop$getCollections()
-#' 
-#' # Get customers named Bob from the United States
-#' bobs <- shop$getCustomers("Bob country:United States")
-#' 
-#' # Create a new product
-#' product <- list(title="The R Inferno",
-#'                 body="<b>The R Inferno</b><i>by Patrick Burns</i>",
-#'                 vendor="Burns Statistics",
-#'                 product_type="Paperback",
-#'                 images=list(list(src="http://www.burns-stat.com/wp-content/
-#'                                       uploads/2012/12/R_inferno_cover.jpg")))
-#' newProduct <- shop$createProduct(product)
-#' }
+#' @section Public Fields:
+#' \describe{
+#' \item{\code{shopInfo}}{
+#' information about the shop as returned by \code{\link{getShop}}
+#' }}
 #' 
 #' @format NULL
 #' 
@@ -315,6 +302,27 @@
 #'      \item \code{\link{modifyWebhook}}
 #'      \item \code{\link{deleteWebhook}}
 #' }}
+#' }
+#' 
+#' @examples
+#' \dontrun{
+#' # Before you can access the API, you must create a ShopifyShop object using your credentials
+#' shop <- ShopifyShop$new("yourstore.myshopify.com","private_app_password")
+#' 
+#' # Get all smart collections
+#' collections <- shop$getSmartCollections()
+#' 
+#' # Search for customers named Bob from the United States
+#' bobs <- shop$searchCustomers("Bob country:United States")
+#' 
+#' # Create a new product
+#' product <- list(title="The R Inferno",
+#'                 body="<b>The R Inferno</b><i>by Patrick Burns</i>",
+#'                 vendor="Burns Statistics",
+#'                 product_type="Paperback",
+#'                 images=list(list(src="http://www.burns-stat.com/wp-content/
+#'                                       uploads/2012/12/R_inferno_cover.jpg")))
+#' newProduct <- shop$createProduct(product)
 #' }
 #' 
 #' @include private.R Announcement.R ApplicationCharge.R Article.R Asset.R Blog.R CarrierService.R Checkout.R Collect.R Comment.R Country.R CustomCollection.R Customer.R CustomerGroup.R Event.R Fulfillment.R FulfillmentService.R Location.R MetaField.R Order.R OrderRisks.R Page.R Product.R ProductImage.R ProductVariant.R Province.R RecurringApplicationCharge.R Redirect.R Refund.R ScriptTag.R Shop.R SmartCollection.R Theme.R Transaction.R Webhook.R
