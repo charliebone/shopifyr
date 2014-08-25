@@ -71,13 +71,13 @@
 #' 
 #' @section Public Functions: 
 #' \describe{
-#' \item{ApplicationCharge functions}{\itemize{
+#' \item{\bold{ApplicationCharge} functions}{\itemize{
 #'      \item \code{\link{createApplicationCharge}}
 #'      \item \code{\link{getApplicationCharge}}
 #'      \item \code{\link{getApplicationCharges}}
 #'      \item \code{\link{activateApplicationCharge}}
 #' }}
-#' \item{Article functions}{\itemize{
+#' \item{\bold{Article} functions}{\itemize{
 #'      \item \code{\link{getArticles}}
 #'      \item \code{\link{getArticlesCount}}
 #'      \item \code{\link{getArticle}}
@@ -87,14 +87,14 @@
 #'      \item \code{\link{getArticleTags}}
 #'      \item \code{\link{deleteArticle}}
 #' }}
-#' \item{Asset functions}{\itemize{
+#' \item{\bold{Asset} functions}{\itemize{
 #'      \item \code{\link{getAssets}}
 #'      \item \code{\link{getAsset}}
 #'      \item \code{\link{createAsset}}
 #'      \item \code{\link{modifyAsset}}
 #'      \item \code{\link{deleteAsset}}
 #' }}
-#' \item{Blog functions}{\itemize{
+#' \item{\bold{Blog} functions}{\itemize{
 #'      \item \code{\link{getBlogs}}
 #'      \item \code{\link{getBlogsCount}}
 #'      \item \code{\link{getBlog}}
@@ -102,25 +102,25 @@
 #'      \item \code{\link{modifyBlog}}
 #'      \item \code{\link{deleteBlog}}
 #' }}
-#' \item{CarrierService functions}{\itemize{
+#' \item{\bold{CarrierService} functions}{\itemize{
 #'      \item \code{\link{createCarrierService}}
 #'      \item \code{\link{modifyCarrierService}}
 #'      \item \code{\link{getCarrierServices}}
 #'      \item \code{\link{getCarrierService}}
 #'      \item \code{\link{deleteCarrierService}}
 #' }}
-#' \item{Checkout functions}{\itemize{
+#' \item{\bold{Checkout} functions}{\itemize{
 #'      \item \code{\link{getCheckoutsCount}}
 #'      \item \code{\link{getCheckouts}}
 #' }}
-#' \item{Collect functions}{\itemize{
+#' \item{\bold{Collect} functions}{\itemize{
 #'      \item \code{\link{createCollect}}
 #'      \item \code{\link{deleteCollect}}
 #'      \item \code{\link{getCollects}}
 #'      \item \code{\link{getCollectsCount}}
 #'      \item \code{\link{getCollect}}
 #' }}
-#' \item{Comment functions}{\itemize{
+#' \item{\bold{Comment} functions}{\itemize{
 #'      \item \code{\link{getComments}}
 #'      \item \code{\link{getCommentsCount}}
 #'      \item \code{\link{getComment}}
@@ -132,7 +132,7 @@
 #'      \item \code{\link{removeComment}}
 #'      \item \code{\link{restoreComment}}
 #' }}
-#' \item{Country functions}{\itemize{
+#' \item{\bold{Country} functions}{\itemize{
 #'      \item \code{\link{getCountries}}
 #'      \item \code{\link{getCountriesCount}}
 #'      \item \code{\link{getCountry}}
@@ -140,7 +140,7 @@
 #'      \item \code{\link{modifyCountry}}
 #'      \item \code{\link{deleteCountry}}
 #' }}
-#' \item{CustomCollection functions}{\itemize{
+#' \item{\bold{CustomCollection} functions}{\itemize{
 #'      \item \code{\link{getCustomCollections}}
 #'      \item \code{\link{getCustomCollectionsCount}}
 #'      \item \code{\link{getCustomCollection}}
@@ -148,7 +148,7 @@
 #'      \item \code{\link{modifyCustomCollection}}
 #'      \item \code{\link{deleteCustomCollection}}
 #' }}
-#' \item{Customer functions}{\itemize{
+#' \item{\bold{Customer} functions}{\itemize{
 #'      \item \code{\link{getCustomers}}
 #'      \item \code{\link{searchCustomers}}
 #'      \item \code{\link{getCustomer}}
@@ -158,7 +158,7 @@
 #'      \item \code{\link{getCustomersCount}}
 #'      \item \code{\link{getCustomerOrders}}
 #' }}
-#' \item{CustomerGroup & CustomerSavedSearch functions}{\itemize{
+#' \item{\bold{CustomerGroup & CustomerSavedSearch} functions}{\itemize{
 #'      \item \code{\link{getCustomerGroups}}
 #'      \item \code{\link{getCustomerGroupsCount}}
 #'      \item \code{\link{getCustomerGroup}}
@@ -167,12 +167,12 @@
 #'      \item \code{\link{modifyCustomerGroup}}
 #'      \item \code{\link{deleteCustomerGroup}}
 #' }}
-#' \item{Event functions}{\itemize{
+#' \item{\bold{Event} functions}{\itemize{
 #'      \item \code{\link{getEvents}}
 #'      \item \code{\link{getEvent}}
 #'      \item \code{\link{getEventsCount}}
 #' }}
-#' \item{Fulfillment functions}{\itemize{
+#' \item{\bold{Fulfillment} functions}{\itemize{
 #'      \item \code{\link{getFulfillments}}
 #'      \item \code{\link{getFulfillmentsCount}}
 #'      \item \code{\link{getFulfillment}}
@@ -181,18 +181,18 @@
 #'      \item \code{\link{completeFulfillment}}
 #'      \item \code{\link{cancelFulfillment}}
 #' }}
-#' \item{FulfillmentService functions}{\itemize{
+#' \item{\bold{FulfillmentService} functions}{\itemize{
 #'      \item \code{\link{getFulfillmentServices}}
 #'      \item \code{\link{createFulfillmentService}}
 #'      \item \code{\link{getFulfillmentService}}
 #'      \item \code{\link{modifyFulfillmentService}}
 #'      \item \code{\link{deleteFulfillmentService}}
 #' }}
-#' \item{Location functions}{\itemize{
+#' \item{\bold{Location} functions}{\itemize{
 #'      \item \code{\link{getLocations}}
 #'      \item \code{\link{getLocation}}
 #' }}
-#' \item{Metafield functions}{\itemize{
+#' \item{\bold{Metafield} functions}{\itemize{
 #'      \item \code{\link{getMetafields}}
 #'      \item \code{\link{getMetafieldsCount}}
 #'      \item \code{\link{getMetafield}}
@@ -200,7 +200,7 @@
 #'      \item \code{\link{modifyMetafield}}
 #'      \item \code{\link{deleteMetafield}}
 #' }}
-#' \item{Order functions}{\itemize{
+#' \item{\bold{Order} functions}{\itemize{
 #'      \item \code{\link{getOrders}}
 #'      \item \code{\link{getOrder}}
 #'      \item \code{\link{getOrdersCount}}
@@ -211,14 +211,14 @@
 #'      \item \code{\link{modifyOrder}}
 #'      \item \code{\link{deleteOrder}}
 #' }}
-#' \item{Order Risks functions}{\itemize{
+#' \item{\bold{Order Risks} functions}{\itemize{
 #'      \item \code{\link{createOrderRisk}}
 #'      \item \code{\link{getOrderRisks}}
 #'      \item \code{\link{getOrderRisk}}
 #'      \item \code{\link{modifyOrderRisk}}
 #'      \item \code{\link{deleteOrderRisk}}
 #' }}
-#' \item{Page functions}{\itemize{
+#' \item{\bold{Page} functions}{\itemize{
 #'      \item \code{\link{getPages}}
 #'      \item \code{\link{getPagesCount}}
 #'      \item \code{\link{getPage}}
@@ -226,7 +226,7 @@
 #'      \item \code{\link{modifyPage}}
 #'      \item \code{\link{deletePage}}
 #' }}
-#' \item{Product functions}{\itemize{
+#' \item{\bold{Product} functions}{\itemize{
 #'      \item \code{\link{getProducts}}
 #'      \item \code{\link{getProductsCount}}
 #'      \item \code{\link{getProduct}}
@@ -234,7 +234,7 @@
 #'      \item \code{\link{modifyProduct}}
 #'      \item \code{\link{deleteProduct}}
 #' }}
-#' \item{Product Image functions}{\itemize{
+#' \item{\bold{Product Image} functions}{\itemize{
 #'      \item \code{\link{getProductImages}}
 #'      \item \code{\link{getProductImagesCount}}
 #'      \item \code{\link{getProductImage}}
@@ -242,7 +242,7 @@
 #'      \item \code{\link{modifyProductImage}}
 #'      \item \code{\link{deleteProductImage}}
 #' }}
-#' \item{Product Variant functions}{\itemize{
+#' \item{\bold{Product Variant} functions}{\itemize{
 #'      \item \code{\link{getProductVariants}}
 #'      \item \code{\link{getProductVariantsCount}}
 #'      \item \code{\link{getProductVariant}}
@@ -250,20 +250,20 @@
 #'      \item \code{\link{modifyProductVariant}}
 #'      \item \code{\link{deleteProductVariant}}
 #' }}
-#' \item{Province functions}{\itemize{
+#' \item{\bold{Province} functions}{\itemize{
 #'      \item \code{\link{getProvinces}}
 #'      \item \code{\link{getProvincesCount}}
 #'      \item \code{\link{getProvince}}
 #'      \item \code{\link{modifyProvince}}
 #' }}
-#' \item{RecurringApplicationCharge functions}{\itemize{
+#' \item{\bold{RecurringApplicationCharge} functions}{\itemize{
 #'      \item \code{\link{createRecurringCharge}}
 #'      \item \code{\link{getRecurringCharge}}
 #'      \item \code{\link{getRecurringCharges}}
 #'      \item \code{\link{activateRecurringCharge}}
 #'      \item \code{\link{cancelRecurringCharge}}
 #' }}
-#' \item{Redirect functions}{\itemize{
+#' \item{\bold{Redirect} functions}{\itemize{
 #'      \item \code{\link{getRedirects}}
 #'      \item \code{\link{getRedirectsCount}}
 #'      \item \code{\link{getRedirect}}
@@ -271,10 +271,10 @@
 #'      \item \code{\link{modifyRedirect}}
 #'      \item \code{\link{deleteRedirect}}
 #' }}
-#' \item{Refund functions}{\itemize{
+#' \item{\bold{Refund} functions}{\itemize{
 #'      \item \code{\link{getRefund}}
 #' }}
-#' \item{ScriptTag functions}{\itemize{
+#' \item{\bold{ScriptTag} functions}{\itemize{
 #'      \item \code{\link{getScriptTags}}
 #'      \item \code{\link{getScriptTagsCount}}
 #'      \item \code{\link{getScriptTag}}
@@ -282,10 +282,10 @@
 #'      \item \code{\link{modifyScriptTag}}
 #'      \item \code{\link{deleteScriptTag}}
 #' }}
-#' \item{Shop functions}{\itemize{
+#' \item{\bold{Shop} functions}{\itemize{
 #'      \item \code{\link{getShop}}
 #' }}
-#' \item{SmartCollection functions}{\itemize{
+#' \item{\bold{SmartCollection} functions}{\itemize{
 #'      \item \code{\link{getSmartCollections}}
 #'      \item \code{\link{getSmartCollectionsCount}}
 #'      \item \code{\link{getSmartCollection}}
@@ -294,20 +294,20 @@
 #'      \item \code{\link{orderSmartCollection}}
 #'      \item \code{\link{deleteSmartCollection}}
 #' }}
-#' \item{Theme functions}{\itemize{
+#' \item{\bold{Theme} functions}{\itemize{
 #'      \item \code{\link{getThemes}}
 #'      \item \code{\link{getTheme}}
 #'      \item \code{\link{createTheme}}
 #'      \item \code{\link{modifyTheme}}
 #'      \item \code{\link{deleteTheme}}
 #' }}
-#' \item{Transaction functions}{\itemize{
+#' \item{\bold{Transaction} functions}{\itemize{
 #'      \item \code{\link{getTransactions}}
 #'      \item \code{\link{getTransactionsCount}}
 #'      \item \code{\link{getTransaction}}
 #'      \item \code{\link{createTransaction}}
 #' }}
-#' \item{Webhook functions}{\itemize{
+#' \item{\bold{Webhook} functions}{\itemize{
 #'      \item \code{\link{getWebhooks}}
 #'      \item \code{\link{getWebhooksCount}}
 #'      \item \code{\link{getWebhook}}
