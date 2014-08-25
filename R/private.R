@@ -45,6 +45,13 @@
         showAnnouncements()
 }
 
+########### ShopifyShop print method ###########
+print.ShopifyShop <- function(...) {
+    cat("--", shopInfo$name, "Shopify API Client --\n")
+    cat("Site Domain:", shopInfo$domain, "\n")
+    cat("Shopify Domain:", shopInfo$myshopify_domain, "\n")
+}
+
 ########### Private ShopifyShop member functions ###########
 .params <- function(params) {
     nms <- names(params)
@@ -100,14 +107,29 @@
 }
 
 #' @importFrom RJSONIO toJSON
+#' @importFrom RJSONIO isValidJSON
+.encode <- function(data) {
+    if (is.list(data)) {
+        if (length(data) == 0)
+            data <- "{}" # use '{}' not '[]' which toJSON() would give for empty list
+        else
+            data <- toJSON(data, digits=20)
+    } else if (is.character(data)) {
+        if (!isValidJSON(data, asText=TRUE)) stop("data must be valid JSON")
+    } else {
+        stop("data must be of type list or character")
+    }
+    data
+}
+
 #' @importFrom RCurl postForm
 #' @importFrom RCurl getURL
-.request <- function(slug, 
-                            reqType = "GET", 
-                            data = NULL, ..., 
-                            parse. = TRUE, 
-                            type. = "json", 
-                            verbose = FALSE) {
+.request <- function(slug, reqType = "GET", 
+                     data = NULL, 
+                     ..., 
+                     parse. = TRUE, 
+                     type. = "json", 
+                     verbose = FALSE) {
     
     # generate url and check request type
     reqURL <- paste0(.baseUrl(), slug, ".", type.)
@@ -132,20 +154,9 @@
         
     } else if (reqType %in% c("POST","PUT")) {
         # POST or PUT request
-        if (is.list(data)) {
-            if (length(data) == 0)
-                data <- "{}" # use '{}' not '[]' toJSON would give for empty list
-            else
-                data <- toJSON(data, digits=20)
-        } else if (is.character(data)) {
-            if (!isValidJSON(data, asText=TRUE)) stop("data must be valid JSON")
-        } else {
-            stop("data must be of type list or character")
-        }
-        
         res <- try(curlPerform(url = reqURL,
                                curl = .curlHandle, 
-                               postfields = data,
+                               postfields = .encode(data),
                                post = ifelse(reqType=="POST",1L,0L),
                                customrequest = reqType,
                                verbose = verbose), silent=TRUE) 

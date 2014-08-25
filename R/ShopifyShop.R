@@ -321,6 +321,7 @@
 #' @import R6
 #' @export
 ShopifyShop <- R6Class("ShopifyShop",
+    portable = FALSE,
     public = list(
         # Public fields
         shopURL = NULL,
@@ -329,6 +330,9 @@ ShopifyShop <- R6Class("ShopifyShop",
         
         # Constructor
         initialize = .initialize,
+        
+        # print method
+        print = print.ShopifyShop,
         
         # API Announcements
         showAnnouncements = showAnnouncements,
@@ -355,7 +359,6 @@ ShopifyShop <- R6Class("ShopifyShop",
         createAsset = createAsset,
         modifyAsset = modifyAsset,
         deleteAsset = deleteAsset,
-        
         
         # Blog functions
         getBlogs = getBlogs,
@@ -590,6 +593,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         .url = .url,
         .baseUrl = .baseUrl,
         .wrap = .wrap,
+        .encode = .encode,
         .request = .request,
         .fetchAll = .fetchAll,
         
@@ -607,10 +611,3 @@ ShopifyShop <- R6Class("ShopifyShop",
         .parseShopifyTimestamp = .parseShopifyTimestamp
     )
 )
-
-#' @export
-print.ShopifyShop <- function(x, ...) {
-    cat("--",x$shopInfo$name,"Shopify API Client --\n")
-    cat("Site Domain: ", x$shopInfo$domain, "\n")
-    cat("Shopify Domain: ", x$shopInfo$myshopify_domain, "\n")
-}
