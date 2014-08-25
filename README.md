@@ -65,6 +65,12 @@ newCollect <- shop$createcollect(list(product_id=newProduct$id, collection_id=bo
 
 ```
 
+Here is an example of how to search for customers named Bob from the United States:
+
+```R
+bobs <- shop$searchCustomers("Bob country:United States")
+```
+
 For a complete list of functions and their corresponding documentation, see the `?ShopifyShop` help page. You may get to a function's documentation directly just by invoking the help with that function's name, e.g. `?searchCustomers`.
 
 ## Obtaining API credentials
