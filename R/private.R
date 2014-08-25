@@ -124,6 +124,7 @@ print.ShopifyShop <- function(...) {
 
 #' @importFrom RCurl postForm
 #' @importFrom RCurl getURL
+#' @importFrom RCurl curlPerform
 .request <- function(slug, reqType = "GET", 
                      data = NULL, 
                      ..., 

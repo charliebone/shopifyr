@@ -2,6 +2,7 @@
 
 export(ShopifyShop)
 import(R6)
+importFrom(RCurl,curlPerform)
 importFrom(RCurl,getCurlHandle)
 importFrom(RCurl,getURL)
 importFrom(RCurl,parseHTTPHeader)
