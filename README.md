@@ -61,7 +61,7 @@ collections <- shop$getCustomCollections()
 books <- Find(function(x) { x$title == "Books" }, collections)
 
 # create a new Collect linking the new product with the desired collection
-newCollect <- shop$createcollect(list(product_id=newProduct$id, collection_id=books$id))
+newCollect <- shop$createCollect(list(product_id=newProduct$id, collection_id=books$id))
 
 ```
 
