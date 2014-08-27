@@ -12,7 +12,7 @@ To get started, install the latest version of **shopifyr** from CRAN:
 install.packages("shopifyr")
 ```
 
-Atlernatively, you may install the latest development version of the **shopfiyr** package with the following code (requires the [`devtools`](https://github.com/hadley/devtools/) package):
+Alternatively, you may install the latest development version of the **shopfiyr** package with the following code (requires the [`devtools`](https://github.com/hadley/devtools/) package):
 
 ```R
 devtools:::install_github("charliebone/shopifyr")
