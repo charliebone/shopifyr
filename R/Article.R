@@ -29,56 +29,56 @@ NULL
 ## Receive a list of all Articles
 #' @rdname Article
 getArticles <- function(blogId, ...) {
-    .fetchAll(.url("blogs",blogId,"articles"), "articles", ...)
+    private$.fetchAll(private$.url("blogs",blogId,"articles"), "articles", ...)
 }
 
 ## GET /admin/blogs/#{id}/articles/count.json
 ## Receive a count of all Articles
 #' @rdname Article
 getArticlesCount <- function(blogId, ...) {
-    .request(.url("blogs",blogId,"articles","count"), ...)$count
+    private$.request(private$.url("blogs",blogId,"articles","count"), ...)$count
 } 
 
 ## GET /admin/blogs/#{id}/articles/#{id}.json
 ## Receive a single Article
 #' @rdname Article
 getArticle <- function(blogId, articleId, ...) {
-    .request(.url("blogs",blogId,"articles",articleId), ...)$article
+    private$.request(private$.url("blogs",blogId,"articles",articleId), ...)$article
 }
 
 ## POST /admin/blogs/#{id}/articles.json
 ## Create a new Article
 #' @rdname Article
 createArticle <- function(blogId, article, ...) {
-    article <- .wrap(article, "article", check=FALSE)
-    .request(.url("blogs",blogId,"articles"), reqType="POST", data=article, ...)$article
+    article <- private$.wrap(article, "article", check=FALSE)
+    private$.request(private$.url("blogs",blogId,"articles"), reqType="POST", data=article, ...)$article
 }
 
 ## PUT /admin/blogs/#{id}/articles/#{id}.json
 ## Modify an existing Article
 #' @rdname Article
 modifyArticle <- function(blogId, article, ...) {
-    article <- .wrap(article, "article")
-    .request(.url("blogs",blogId,"articles",article$article$id), reqType="PUT", data=article, ...)$article
+    article <- private$.wrap(article, "article")
+    private$.request(private$.url("blogs",blogId,"articles",article$article$id), reqType="PUT", data=article, ...)$article
 }
 
 ## GET /admin/articles/authors.json
 ## Get a list of all the authors
 #' @rdname Article
 getArticleAuthors <- function(...) {
-    .request(.url("articles","authors"), ...)$authors
+    private$.request(private$.url("articles","authors"), ...)$authors
 }
 
 ## GET /admin/articles/tags.json
 ## Get a list of all the tags
 #' @rdname Article
 getArticleTags <- function(...) {
-    .request(.url("articles","tags"), ...)$tags
+    private$.request(private$.url("articles","tags"), ...)$tags
 }
 
 ## DELETE /admin/blogs/#{id}/articles/#{id}.json
 ## Remove a Article from the database
 #' @rdname Article
 deleteArticle <- function(blogId, articleId, ...) {
-    .request(.url("blogs",blogId,"articles",articleId), reqType="DELETE", ...)
+    private$.request(private$.url("blogs",blogId,"articles",articleId), reqType="DELETE", ...)
 }

@@ -28,27 +28,27 @@ NULL
 ## Receive a list of all Transactions
 #' @rdname Transaction
 getTransactions <- function(orderId, ...) {
-    .request(.url("orders",orderId,"transactions"), ...)$transactions
+    private$.request(private$.url("orders",orderId,"transactions"), ...)$transactions
 }
 
 ## GET /admin/orders/#{id}/transactions/count.json
 ## Receive a count of all Transactions
 #' @rdname Transaction
 getTransactionsCount <- function(orderId, ...) {
-    .request(.url("orders",orderId,"transactions","count"), ...)$count
+    private$.request(private$.url("orders",orderId,"transactions","count"), ...)$count
 }
 
 ## GET /admin/orders/#{id}/transactions/#{id}.json
 ## Receive a single Transaction
 #' @rdname Transaction
 getTransaction <- function(orderId, transactionId, ...) {
-    .request(.url("orders",orderId,"transactions",transactionId), ...)$transaction
+    private$.request(private$.url("orders",orderId,"transactions",transactionId), ...)$transaction
 }
 
 ## POST /admin/orders/#{id}/transactions.json
 ## Create a new Transaction
 #' @rdname Transaction
 createTransaction <- function(orderId, transaction, ...) {
-    transaction <- .wrap(transaction, "transaction", "kind")
-    .request(.url("orders",orderId,"transactions"), reqType="POST", data=transaction, ...)$transaction
+    transaction <- private$.wrap(transaction, "transaction", "kind")
+    private$.request(private$.url("orders",orderId,"transactions"), reqType="POST", data=transaction, ...)$transaction
 }

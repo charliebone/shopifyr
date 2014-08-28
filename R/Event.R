@@ -29,19 +29,19 @@ NULL
 ## Receive a list of all Events
 #' @rdname Event
 getEvents <- function(...) {
-    .fetchAll("events", ...)
+    private$.fetchAll("events", ...)
 }
 
 ## GET /admin/events/#{id}.json
 ## Receive a single Event
 #' @rdname Event
 getEvent <- function(eventId, ...) {
-    .request(.url("events",eventId), ...)$event
+    private$.request(private$.url("events",eventId), ...)$event
 }
 
 ## GET /admin/events/count.json
 ## Receive a count of all Events
 #' @rdname Event
 getEventsCount <- function(...) {
-    .request(.url("events","count"), ...)$count
+    private$.request(private$.url("events","count"), ...)$count
 }

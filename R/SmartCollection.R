@@ -28,37 +28,37 @@ NULL
 ## Receive a list of all SmartCollections
 #' @rdname SmartCollection
 getSmartCollections <- function(...) {
-    .fetchAll("smart_collections", ...)
+    private$.fetchAll("smart_collections", ...)
 }
 
 ## GET /admin/smart_collections/count.json
 ## Receive a count of all SmartCollections
 #' @rdname SmartCollection
 getSmartCollectionsCount <- function(...) {
-    .request(.url("smart_collections","count"), ...)$count
+    private$.request(private$.url("smart_collections","count"), ...)$count
 }
 
 ## GET /admin/smart_collections/#{id}.json
 ## Receive a single SmartCollection
 #' @rdname SmartCollection
 getSmartCollection <- function(smartCollectionId, ...) {
-    .request(.url("smart_collections",smartCollectionId), ...)$smart_collection
+    private$.request(private$.url("smart_collections",smartCollectionId), ...)$smart_collection
 }
 
 ## POST /admin/smart_collections.json
 ## Create a new SmartCollection
 #' @rdname SmartCollection
 createSmartCollection <- function(smartCollection, ...) {
-    smartCollection <- .wrap(smartCollection, "smart_collection", check=FALSE)
-    .request("smart_collections", reqType="POST", data=smartCollection, ...)$smart_collection
+    smartCollection <- private$.wrap(smartCollection, "smart_collection", check=FALSE)
+    private$.request("smart_collections", reqType="POST", data=smartCollection, ...)$smart_collection
 }
 
 ## PUT /admin/smart_collections/#{id}.json
 ## Modify an existing SmartCollection
 #' @rdname SmartCollection
 modifySmartCollection <- function(smartCollection, ...) {
-    smartCollection <- .wrap(smartCollection, "smart_collection")
-    .request(.url("smart_collections",smartCollection$smart_collection$id), reqType="PUT", data=smartCollection, ...)$smart_collection
+    smartCollection <- private$.wrap(smartCollection, "smart_collection")
+    private$.request(private$.url("smart_collections",smartCollection$smart_collection$id), reqType="PUT", data=smartCollection, ...)$smart_collection
 }
 
 ## PUT /admin/smart_collections/#{id}/order.json?products[]=921728736&products[]=632910392
@@ -66,12 +66,12 @@ modifySmartCollection <- function(smartCollection, ...) {
 #' @rdname SmartCollection
 orderSmartCollection <- function(smartCollectionId, productIds, ...) {
     orderStr <- paste0(paste0("products[]=",productIds), collapse="&")
-    .request(.url("smart_collections",smartCollectionId,"order"),`products[]`=productIds, ...) 
+    private$.request(private$.url("smart_collections",smartCollectionId,"order"),`products[]`=productIds, ...) 
 }
 
 ## DELETE /admin/smart_collections/#{id}.json
 ## Remove a SmartCollection from the database
 #' @rdname SmartCollection
 deleteSmartCollection <- function(smartCollectionId, ...) {
-    .request(.url("smart_collections",smartCollectionId), reqType="DELETE", ...)
+    private$.request(private$.url("smart_collections",smartCollectionId), reqType="DELETE", ...)
 }

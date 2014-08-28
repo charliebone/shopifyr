@@ -28,27 +28,27 @@ NULL
 ## Receive a list of all Provinces
 #' @rdname Province
 getProvinces <- function(countryId, ...) {
-    .request(.url("countries",countryId,"provinces"), ...)$provinces
+    private$.request(private$.url("countries",countryId,"provinces"), ...)$provinces
 }
 
 ## GET /admin/countries/#{id}/provinces/count.json
 ## Receive a count of all Provinces
 #' @rdname Province
 getProvincesCount <- function(countryId, ...) {
-    .request(.url("countries",countryId,"provinces","count"), ...)$count
+    private$.request(private$.url("countries",countryId,"provinces","count"), ...)$count
 }
 
 ## GET /admin/countries/#{id}/provinces/#{id}.json
 ## Receive a single Province
 #' @rdname Province
 getProvince <- function(countryId, provinceId, ...) {
-    .request(.url("countries",countryId,"provinces",provinceId), ...)$province
+    private$.request(private$.url("countries",countryId,"provinces",provinceId), ...)$province
 }
 
 ## PUT /admin/countries/#{id}/provinces/#{id}.json
 ## Modify an existing Province
 #' @rdname Province
 modifyProvince <- function(countryId, province, ...) {
-    province <- .wrap(province, "province")
-    .request(.url("countries",countryId,"provinces",province$province$id), reqType="PUT", data=province, ...)$province
+    province <- private$.wrap(province, "province")
+    private$.request(private$.url("countries",countryId,"provinces",province$province$id), reqType="PUT", data=province, ...)$province
 }

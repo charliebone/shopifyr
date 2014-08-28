@@ -329,7 +329,7 @@
 #' @import R6
 #' @export
 ShopifyShop <- R6Class("ShopifyShop",
-    portable = FALSE,
+    portable = TRUE,
     public = list(
         # Public fields
         shopURL = NULL,
@@ -608,7 +608,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         .getResponseHeaders = .getResponseHeaders,
         .updateResponseHeaders = .updateResponseHeaders,
         .clearResponseHeaders = .clearResponseHeaders,
-        .parseResponseHeader = .parseResponseHeader,
+        .parseResponseHeaders = .parseResponseHeaders,
         .getHeaderStatus = .getHeaderStatus,
         
         .getResponseBody = .getResponseBody,
@@ -621,4 +621,4 @@ ShopifyShop <- R6Class("ShopifyShop",
 )
 
 # list of supposedly 'global' names to appease R CMD check
-.__global__ <- c("self","shopURL","password","shopInfo",".curlHandle",".responseHeaders",".responseBody")
+.__global__ <- c("self","private")

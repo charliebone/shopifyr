@@ -27,35 +27,35 @@ NULL
 ## Receive a list of all Themes
 #' @rdname Theme
 getThemes <- function(...) {
-    .request("themes", ...)$themes
+    private$.request("themes", ...)$themes
 }
 
 ## GET /admin/themes/#{id}.json
 ## Receive a single Theme
 #' @rdname Theme
 getTheme <- function(themeId, ...) {
-    .request(.url("themes",themeId), ...)$theme
+    private$.request(private$.url("themes",themeId), ...)$theme
 }
 
 ## POST /admin/themes.json
 ## Create a new Theme
 #' @rdname Theme
 createTheme <- function(theme, ...) {
-    theme <- .wrap(theme, "theme", check="name")
-    .request("themes", reqType="POST", data=theme, ...)$theme
+    theme <- private$.wrap(theme, "theme", check="name")
+    private$.request("themes", reqType="POST", data=theme, ...)$theme
 }
 
 ## PUT /admin/themes/#{id}.json
 ## Modify an existing Theme
 #' @rdname Theme
 modifyTheme <- function(theme, ...) {
-    theme <- .wrap(theme, "theme")
-    .request(.url("themes",theme$theme$id), reqType="PUT", data=theme, ...)$theme
+    theme <- private$.wrap(theme, "theme")
+    private$.request(private$.url("themes",theme$theme$id), reqType="PUT", data=theme, ...)$theme
 }
 
 ## DELETE /admin/themes/#{id}.json
 ## Remove a Theme from the database
 #' @rdname Theme
 deleteTheme <- function(themeId, ...) {
-    .request(.url("themes",themeId), reqType="DELETE", ...)
+    private$.request(private$.url("themes",themeId), reqType="DELETE", ...)
 }

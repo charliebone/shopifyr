@@ -29,12 +29,12 @@ NULL
 ## Receive a list of all Locations
 #' @rdname Location
 getLocations <- function(...) {
-    .request("locations", ...)$locations
+    private$.request("locations", ...)$locations
 }
 
 ## GET /admin/locations/#{id}.json
 ## Receive a single Location
 #' @rdname Location
 getLocation <- function(locationId, ...) {
-    .request(.url("locations",locationId), ...)$location
+    private$.request(private$.url("locations",locationId), ...)$location
 }

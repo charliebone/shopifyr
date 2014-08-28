@@ -27,42 +27,42 @@ NULL
 ## Receive a list of all Redirects
 #' @rdname Redirect
 getRedirects <- function(...) {
-    .fetchAll("redirects", ...)
+    private$.fetchAll("redirects", ...)
 }
 
 ## GET /admin/redirects/count.json
 ## Receive a count of all Redirects
 #' @rdname Redirect
 getRedirectsCount <- function(...) {
-    .request(.url("redirects","count"), ...)$count
+    private$.request(private$.url("redirects","count"), ...)$count
 }
 
 ## GET /admin/redirects/#{id}.json
 ## Receive a single Redirect
 #' @rdname Redirect
 getRedirect <- function(redirectId, ...) {
-    .request(.url("redirects",redirectId), ...)$redirect
+    private$.request(private$.url("redirects",redirectId), ...)$redirect
 }
 
 ## POST /admin/redirects.json
 ## Create a new Redirect
 #' @rdname Redirect
 createRedirect <- function(redirect, ...) {
-    redirect <- .wrap(redirect, "redirect", check=c("path","target"))
-    .request("redirects", reqType="POST", data=redirect, ...)$redirect
+    redirect <- private$.wrap(redirect, "redirect", check=c("path","target"))
+    private$.request("redirects", reqType="POST", data=redirect, ...)$redirect
 }
 
 ## PUT /admin/redirects/#{id}.json
 ## Modify an existing Redirect
 #' @rdname Redirect
 modifyRedirect <- function(redirect, ...) {
-    redirect <- .wrap(redirect, "redirect")
-    .request(.url("redirects",redirect$redirect$id), reqType="PUT", data=redirect, ...)$redirect
+    redirect <- private$.wrap(redirect, "redirect")
+    private$.request(private$.url("redirects",redirect$redirect$id), reqType="PUT", data=redirect, ...)$redirect
 }
 
 ## DELETE /admin/redirects/#{id}.json
 ## Remove a Redirect from the database
 #' @rdname Redirect
 deleteRedirect <- function(redirectId, ...) {
-    .request(.url("redirects",redirectId), reqType="DELETE", ...)
+    private$.request(private$.url("redirects",redirectId), reqType="DELETE", ...)
 }

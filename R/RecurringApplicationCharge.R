@@ -28,35 +28,35 @@ NULL
 ## Create a recurring application charge
 #' @rdname RecurringApplicationCharge
 createRecurringCharge <- function(charge, ...) {
-    charge <- .wrap(charge, "recurring_application_charge", check=c("price","name"))
-    .request("recurring_application_charges", reqType="POST", data=charge, ...)$recurring_application_charge
+    charge <- private$.wrap(charge, "recurring_application_charge", check=c("price","name"))
+    private$.request("recurring_application_charges", reqType="POST", data=charge, ...)$recurring_application_charge
 }
 
 ## GET /admin/recurring_application_charges/#{id}.json
 ## Receive a single RecurringApplicationCharge
 #' @rdname RecurringApplicationCharge
 getRecurringCharge <- function(chargeId, ...) {
-    .request(.url("recurring_application_charges",chargeId), ...)$recurring_application_charge
+    private$.request(private$.url("recurring_application_charges",chargeId), ...)$recurring_application_charge
 }
 
 ## GET /admin/recurring_application_charges.json
 ## Retrieve all recurring application charges
 #' @rdname RecurringApplicationCharge
 getRecurringCharges <- function(...) {
-    .request("recurring_application_charges", ...)$recurring_application_charges
+    private$.request("recurring_application_charges", ...)$recurring_application_charges
 }
 
 ## POST /admin/recurring_application_charges/#{id}/activate.json
 ## Activate a recurring application charge
 #' @rdname RecurringApplicationCharge
 activateRecurringCharge <- function(charge, ...) {
-    charge <- .wrap(charge, "recurring_application_charge")
-    .request(.url("recurring_application_charges",charge$charge$id,"activate"), reqType="POST", data=charge, ...)
+    charge <- private$.wrap(charge, "recurring_application_charge")
+    private$.request(private$.url("recurring_application_charges",charge$charge$id,"activate"), reqType="POST", data=charge, ...)
 }
 
 ## DELETE /admin/recurring_application_charges/#{id}.json
 ## Cancel a recurring application charge
 #' @rdname RecurringApplicationCharge
 cancelRecurringCharge <- function(chargeId, ...) {
-    .request(.url("recurring_application_charges",chargeId), reqType="DELETE", ...)
+    private$.request(private$.url("recurring_application_charges",chargeId), reqType="DELETE", ...)
 }

@@ -32,7 +32,7 @@ getComments <- function(blogId, articleId, ...) {
     if (missing(blogId)) blogId <- NULL
     if (missing(articleId)) articleId <- NULL
     
-    .fetchAll("comments", blog_id=blogId, article_id=articleId, ...)
+    private$.fetchAll("comments", blog_id=blogId, article_id=articleId, ...)
 }
 
 ## GET /admin/comments/count.json?article_id=134645308&blog_id=241253187
@@ -42,62 +42,62 @@ getCommentsCount <- function(blogId, articleId, ...) {
     if (missing(blogId)) blogId <- NULL
     if (missing(articleId)) articleId <- NULL
     
-    .request(.url("comments","count"), blog_id=blogId, article_id=articleId, ...)$count
+    private$.request(private$.url("comments","count"), blog_id=blogId, article_id=articleId, ...)$count
 }
 ## GET /admin/comments/#{id}.json
 ## Receive a single Comment
 #' @rdname Comment
 getComment <- function(commentId, ...) {
-    .request(.url("comments",commentId), ...)$comment
+    private$.request(private$.url("comments",commentId), ...)$comment
 }
 
 ## POST /admin/comments.json
 ## Create a new Comment
 #' @rdname Comment
 createComment <- function(comment, ...) {
-    comment <- .wrap(comment, "comment", check=FALSE)
-    .request("comments", reqType="POST", data=comment, ...)$comment
+    comment <- private$.wrap(comment, "comment", check=FALSE)
+    private$.request("comments", reqType="POST", data=comment, ...)$comment
 }
 
 ## PUT /admin/comments/#{id}.json
 ## Modify an existing Comment
 #' @rdname Comment
 modifyComment <- function(comment, ...) {
-    comment <- .wrap(comment, "comment")
-    .request(.url("comments",comment$comment$id), reqType="PUT", data=comment, ...)$comment
+    comment <- private$.wrap(comment, "comment")
+    private$.request(private$.url("comments",comment$comment$id), reqType="PUT", data=comment, ...)$comment
 }
 
 ## POST /admin/comments/#{id}/spam.json
 ## Mark a Comment as spam
 #' @rdname Comment
 markCommentAsSpam <- function(commentId, ...) {
-    .request(.url("comments",commentId,"spam"), reqType="POST", data=list())$comment
+    private$.request(private$.url("comments",commentId,"spam"), reqType="POST", data=list())$comment
 }
 
 ## POST /admin/comments/#{id}/not_spam.json
 ## Mark a Comment as not spam
 #' @rdname Comment
 markCommentAsNotSpam <- function(commentId, ...) {
-    .request(.url("comments",commentId,"not_spam"), reqType="POST", data=list())$comment
+    private$.request(private$.url("comments",commentId,"not_spam"), reqType="POST", data=list())$comment
 }
 
 ## POST /admin/comments/#{id}/approve.json
 ## Approve a Comment
 #' @rdname Comment
 approveComment <- function(commentId, ...) {
-    .request(.url("comments",commentId,"approve"), reqType="POST", data=list())$comment
+    private$.request(private$.url("comments",commentId,"approve"), reqType="POST", data=list())$comment
 }
 
 ## POST /admin/comments/#{id}/remove.json
 ## Remove a Comment
 #' @rdname Comment
 removeComment <- function(commentId, ...) {
-    .request(.url("comments",commentId,"remove"), reqType="POST", data=list())$comment
+    private$.request(private$.url("comments",commentId,"remove"), reqType="POST", data=list())$comment
 }
 
 ## POST /admin/comments/#{id}/restore.json
 ## Restore a Comment
 #' @rdname Comment
 restoreComment <- function(commentId, ...) {
-    .request(.url("comments",commentId,"restore"), reqType="POST", data=list())$comment
+    private$.request(private$.url("comments",commentId,"restore"), reqType="POST", data=list())$comment
 }

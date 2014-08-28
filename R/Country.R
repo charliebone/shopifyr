@@ -27,42 +27,42 @@ NULL
 ## Receive a list of all Countries
 #' @rdname Country
 getCountries <- function(...) {
-    .request("countries", ...)$countries
+    private$.request("countries", ...)$countries
 }
 
 ## GET /admin/countries/count.json
 ## Receive a count of all Countries
 #' @rdname Country
 getCountriesCount <- function(...) {
-    .request(.url("countries","count"), ...)$count
+    private$.request(private$.url("countries","count"), ...)$count
 }
 
 ## GET /admin/countries/#{id}.json
 ## Receive a single Country
 #' @rdname Country
 getCountry <- function(countryId, ...) {
-    .request(.url("countries",countryId), ...)$country
+    private$.request(private$.url("countries",countryId), ...)$country
 }
 
 ## POST /admin/countries.json
 ## Create a new Country
 #' @rdname Country
 createCountry <- function(country, ...) {
-    country <- .wrap(country, "country", check=FALSE)
-    .request("countries", reqType="POST", data=country, ...)$country
+    country <- private$.wrap(country, "country", check=FALSE)
+    private$.request("countries", reqType="POST", data=country, ...)$country
 }
 
 ## PUT /admin/countries/#{id}.json
 ## Modify an existing Country
 #' @rdname Country
 modifyCountry <- function(country, ...) {
-    country <- .wrap(country, "country")
-    .request(.url("countries",country$country$id), reqType="PUT", data=country, ...)$country
+    country <- private$.wrap(country, "country")
+    private$.request(private$.url("countries",country$country$id), reqType="PUT", data=country, ...)$country
 }
 
 ## DELETE /admin/countries/#{id}.json
 ## Remove a Country from the database
 #' @rdname Country
 deleteCountry <- function(countryId, ...) {
-    .request(.url("countries",countryId), reqType="DELETE", ...)
+    private$.request(private$.url("countries",countryId), reqType="DELETE", ...)
 }

@@ -27,35 +27,35 @@ NULL
 ## Receive a list of all FulfillmentServices
 #' @rdname FulfillmentService
 getFulfillmentServices <- function(...) {
-    .request("fulfillment_services", ...)$fulfillment_services
+    private$.request("fulfillment_services", ...)$fulfillment_services
 }
 
 ## POST /admin/fulfillment_services.json
 ## Create a new FulfillmentService
 #' @rdname FulfillmentService
 createFulfillmentService <- function(fulfillmentService, ...) {
-    fulfillmentService <- .wrap(fulfillmentService, "fulfillment_service", check=FALSE)
-    .request("fulfillment_services", reqType="POST", data=fulfillmentService, ...)$fulfillment_service
+    fulfillmentService <- private$.wrap(fulfillmentService, "fulfillment_service", check=FALSE)
+    private$.request("fulfillment_services", reqType="POST", data=fulfillmentService, ...)$fulfillment_service
 }
 
 ## GET /admin/fulfillment_services/#{id}.json
 ## Receive a single FulfillmentService
 #' @rdname FulfillmentService
 getFulfillmentService <- function(fulfillmentServiceId, ...) {
-    .request(.url("fulfillment_services",fulfillmentServiceId), ...)$fulfillment_service
+    private$.request(private$.url("fulfillment_services",fulfillmentServiceId), ...)$fulfillment_service
 }
 
 ## PUT /admin/fulfillment_services/#{id}.json
 ## Modify an existing FulfillmentService
 #' @rdname FulfillmentService
 modifyFulfillmentService <- function(fulfillmentService, ...) {
-    fulfillmentService <- .wrap(fulfillmentService, "fulfillment_service")
-    .request(.url("fulfillment_services",fulfillmentService$fulfillment_service$id), reqType="PUT", data=fulfillmentService, ...)$fulfillment_service
+    fulfillmentService <- private$.wrap(fulfillmentService, "fulfillment_service")
+    private$.request(private$.url("fulfillment_services",fulfillmentService$fulfillment_service$id), reqType="PUT", data=fulfillmentService, ...)$fulfillment_service
 }
 
 ## DELETE /admin/fulfillment_services/#{id}.json
 ## Remove a FulfillmentService from the database
 #' @rdname FulfillmentService
 deleteFulfillmentService <- function(fulfillmentServiceId, ...) {
-    .request(.url("fulfillment_services",fulfillmentServiceId), reqType="DELETE", ...)
+    private$.request(private$.url("fulfillment_services",fulfillmentServiceId), reqType="DELETE", ...)
 }

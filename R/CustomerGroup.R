@@ -28,49 +28,49 @@ NULL
 ## Receive a list of all CustomerGroups
 #' @rdname CustomerGroup
 getCustomerGroups <- function(...) {
-    .fetchAll("customer_saved_searches", ...)
+    private$.fetchAll("customer_saved_searches", ...)
 }
 
 ## GET /admin/customer_saved_searches/count.json
 ## Receive a count of all CustomerGroups
 #' @rdname CustomerGroup
 getCustomerGroupsCount <- function(...) {
-    .request(.url("customer_saved_searches","count"), ...)$count
+    private$.request(private$.url("customer_saved_searches","count"), ...)$count
 }
 
 ## GET /admin/customer_saved_searches/#{id}.json
 ## Receive a single CustomerGroup
 #' @rdname CustomerGroup
 getCustomerGroup <- function(customerGroupId, ...) {
-    .request(.url("customer_saved_searches",customerGroupId), ...)$customer_saved_search
+    private$.request(private$.url("customer_saved_searches",customerGroupId), ...)$customer_saved_search
 }
 
 ## GET /admin/customer_saved_searches/#{id}/customers.json
 ## Receive all Customers belonging to a CustomerGroup
 #' @rdname CustomerGroup
 getCustomerGroupCustomers <- function(customerGroupId, ...) {
-    .fetchAll(.url("customer_saved_searches",customerGroupId,"customers"), "customers", ...)
+    private$.fetchAll(private$.url("customer_saved_searches",customerGroupId,"customers"), "customers", ...)
 }
 
 ## POST /admin/customer_saved_searches.json
 ## Create a new CustomerGroup
 #' @rdname CustomerGroup
 createCustomerGroup <- function(customerGroup, ...) {
-    customerGroup <- .wrap(customerGroup, "customer_saved_search", check=FALSE)
-    .request("customer_saved_searches", reqType="POST", data=customerGroup, ...)$customer_saved_search
+    customerGroup <- private$.wrap(customerGroup, "customer_saved_search", check=FALSE)
+    private$.request("customer_saved_searches", reqType="POST", data=customerGroup, ...)$customer_saved_search
 }
 
 ## PUT /admin/customer_saved_searches/#{id}.json
 ## Modify an existing CustomerGroup
 #' @rdname CustomerGroup
 modifyCustomerGroup <- function(customerGroup, ...) {
-    customerGroup <- .wrap(customerGroup, "customer_saved_search")
-    .request(.url("customer_saved_searches",customerGroup$customer_saved_searches$id), reqType="PUT", data=customerGroup, ...)$customer_saved_search
+    customerGroup <- private$.wrap(customerGroup, "customer_saved_search")
+    private$.request(private$.url("customer_saved_searches",customerGroup$customer_saved_searches$id), reqType="PUT", data=customerGroup, ...)$customer_saved_search
 }
 
 ## DELETE /admin/customer_saved_searches/#{id}.json
 ## Remove a CustomerGroup from the database
 #' @rdname CustomerGroup
 deleteCustomerGroup <- function(customerGroupId, ...) {
-    .request(.url("customer_saved_search",customerGroupId), reqType="DELETE", ...)
+    private$.request(private$.url("customer_saved_search",customerGroupId), reqType="DELETE", ...)
 }

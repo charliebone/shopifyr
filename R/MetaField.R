@@ -32,8 +32,8 @@ NULL
 #' @rdname Metafield
 getMetafields <- function(resourceName, resourceId = NULL, ...) {
     if (resourceName == "shop") resourceName <- NULL
-    #.fetchAll(.url(resourceName,resourceId,"metafields"), "metafields", ...)$metafield # doesn't work for all resources
-    .fetchAll("metafields", `metafield[owner_resource]`=resourceName, `metafield[owner_id]`=resourceId, ...)
+    #private$.fetchAll(private$.url(resourceName,resourceId,"metafields"), "metafields", ...)$metafield # doesn't work for all resources
+    private$.fetchAll("metafields", `metafield[owner_resource]`=resourceName, `metafield[owner_id]`=resourceId, ...)
 }
 
 ## GET /admin/metafields/count.json
@@ -42,8 +42,8 @@ getMetafields <- function(resourceName, resourceId = NULL, ...) {
 ## Get a count of metafields that belong to a product
 #' @rdname Metafield
 getMetafieldsCount <- function(resourceName, resourceId = NULL, ...) {
-    #.request(.url(resourceName,resourceId,"metafields","count"), ...) # doesn't work for all resources
-    .request(.url("metafields","count"), `metafield[owner_resource]`=resourceName, `metafield[owner_id]`=resourceId, ...)$count
+    #private$.request(private$.url(resourceName,resourceId,"metafields","count"), ...) # doesn't work for all resources
+    private$.request(private$.url("metafields","count"), `metafield[owner_resource]`=resourceName, `metafield[owner_id]`=resourceId, ...)$count
 }
 
 ## GET /admin/metafields/#{id}.json
@@ -52,7 +52,7 @@ getMetafieldsCount <- function(resourceName, resourceId = NULL, ...) {
 ## Get a single product metafield by its ID
 #' @rdname Metafield
 getMetafield <- function(metafieldId, ...) {
-    .request(.url("metafields",metafieldId), ...)$metafield
+    private$.request(private$.url("metafields",metafieldId), ...)$metafield
 }
 
 ## POST /admin/metafields.json
@@ -61,9 +61,9 @@ getMetafield <- function(metafieldId, ...) {
 ## Create a new metafield for a product
 #' @rdname Metafield
 createMetafield <- function(resourceName, resourceId = NULL, metafield, ...) {
-    metafield <- .wrap(metafield, "metafield", check="key")
+    metafield <- private$.wrap(metafield, "metafield", check="key")
     if (resourceName == "shop") resourceName <- NULL
-    .request(.url(resourceName,resourceId,"metafields"), reqType="POST", data=metafield, ...)$metafield
+    private$.request(private$.url(resourceName,resourceId,"metafields"), reqType="POST", data=metafield, ...)$metafield
 }
 
 ## PUT /admin/metafields/#{id}.json
@@ -72,8 +72,8 @@ createMetafield <- function(resourceName, resourceId = NULL, metafield, ...) {
 ## Update a product metafield
 #' @rdname Metafield
 modifyMetafield <- function(metafield, ...) {
-    metafield <- .wrap(metafield, "metafield")
-    .request(.url("metafields",metafield$metafield$id), reqType="PUT", data=metafield, ...)$metafield
+    metafield <- private$.wrap(metafield, "metafield")
+    private$.request(private$.url("metafields",metafield$metafield$id), reqType="PUT", data=metafield, ...)$metafield
 }
 
 ## DELETE /admin/metafields/#{id}.json
@@ -82,5 +82,5 @@ modifyMetafield <- function(metafield, ...) {
 ## Delete a product metafield
 #' @rdname Metafield
 deleteMetafield <- function(metafieldId, ...) {
-    .request(.url("metafields",metafieldId), reqType="DELETE", ...)
+    private$.request(private$.url("metafields",metafieldId), reqType="DELETE", ...)
 }

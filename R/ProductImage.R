@@ -30,42 +30,42 @@ NULL
 ## Receive a list of all Product Images
 #' @rdname ProductImage
 getProductImages <- function(productId, ...) {
-    .request(.url("products",productId,"images"), ...)$images
+    private$.request(private$.url("products",productId,"images"), ...)$images
 }
 
 ## GET /admin/products/#{id}/images/count.json
 ## Receive a count of all Product Images
 #' @rdname ProductImage
 getProductImagesCount <- function(productId, ...) {
-    .request(.url("products",productId,"images","count"), ...)$count
+    private$.request(private$.url("products",productId,"images","count"), ...)$count
 }
 
 ## GET /admin/products/#{id}/images/#{id}.json
 ## Receive a single Product Image
 #' @rdname ProductImage
 getProductImage <- function(productId, imageId, ...) {
-    .request(.url("products",productId,"images",imageId), ...)$image
+    private$.request(private$.url("products",productId,"images",imageId), ...)$image
 }
 
 ## POST /admin/products/#{id}/images.json
 ## Create a new Product Image
 #' @rdname ProductImage
 createProductImage <- function(productId, image, ...) {
-    image <- .wrap(image, "image", check=FALSE)
-    .request(.url("products",productId,"images"), reqType="POST", data=image,  ...)$image
+    image <- private$.wrap(image, "image", check=FALSE)
+    private$.request(private$.url("products",productId,"images"), reqType="POST", data=image,  ...)$image
 }
 
 ## PUT /admin/products/#{id}/images/#{id}.json
 ## Modify an existing Product Image
 #' @rdname ProductImage
 modifyProductImage <- function(productId, image, ...) {
-    image <- .wrap(image, "image")
-    .request(.url("products",productId,"images",image$image$id), reqType="PUT", data=image,  ...)$image
+    image <- private$.wrap(image, "image")
+    private$.request(private$.url("products",productId,"images",image$image$id), reqType="PUT", data=image,  ...)$image
 }
 
 ## DELETE /admin/products/#{id}/images/#{id}.json
 ## Remove a Product Image from the database
 #' @rdname ProductImage
 deleteProductImage <- function(productId, imageId, ...) {
-    .request(.url("products",productId,"images",imageId), reqType="DELETE",  ...)
+    private$.request(private$.url("products",productId,"images",imageId), reqType="DELETE",  ...)
 }

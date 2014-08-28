@@ -27,42 +27,42 @@ NULL
 ## Receive a list of all ScriptTags
 #' @rdname ScriptTag
 getScriptTags <- function(...) {
-    .fetchAll("script_tags", ...)
+    private$.fetchAll("script_tags", ...)
 }
 
 ## GET /admin/script_tags/count.json
 ## Receive a count of all ScriptTags
 #' @rdname ScriptTag
 getScriptTagsCount <- function(...) {
-    .request(.url("script_tags","count"), ...)$count
+    private$.request(private$.url("script_tags","count"), ...)$count
 }
 
 ## GET /admin/script_tags/#{id}.json
 ## Receive a single ScriptTag
 #' @rdname ScriptTag
 getScriptTag <- function(scriptTagId, ...) {
-    .request(.url("script_tags",scriptTagId), ...)$script_tag
+    private$.request(private$.url("script_tags",scriptTagId), ...)$script_tag
 }
 
 ## POST /admin/script_tags.json
 ## Create a new ScriptTag
 #' @rdname ScriptTag
 createScriptTag <- function(scriptTag, ...) {
-    scriptTag <- .wrap(scriptTag, "script_tag", check=c("src","event"))
-    .request("script_tags", reqType="POST", data=scriptTag, ...)$script_tag
+    scriptTag <- private$.wrap(scriptTag, "script_tag", check=c("src","event"))
+    private$.request("script_tags", reqType="POST", data=scriptTag, ...)$script_tag
 }
 
 ## PUT /admin/script_tags/#{id}.json
 ## Modify an existing ScriptTag
 #' @rdname ScriptTag
 modifyScriptTag <- function(scriptTag, ...) {
-    scriptTag <- .wrap(scriptTag, "script_tag")
-    .request(.url("script_tags",scriptTag$script_tag$id), reqType="PUT", data=scriptTag, ...)$script_tag
+    scriptTag <- private$.wrap(scriptTag, "script_tag")
+    private$.request(private$.url("script_tags",scriptTag$script_tag$id), reqType="PUT", data=scriptTag, ...)$script_tag
 }
 
 ## DELETE /admin/script_tags/#{id}.json
 ## Remove a ScriptTag from the database
 #' @rdname ScriptTag
 deleteScriptTag <- function(scriptTagId, ...) {
-    .request(.url("script_tags",scriptTagId), reqType="DELETE", ...)
+    private$.request(private$.url("script_tags",scriptTagId), reqType="DELETE", ...)
 }

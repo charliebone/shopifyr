@@ -30,5 +30,5 @@ NULL
 ## Receive a single Shop
 #' @rdname Shop
 getShop <- function(...) {
-    .request("shop", ...)$shop
+    private$.request("shop", ...)$shop
 }

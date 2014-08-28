@@ -32,5 +32,5 @@ NULL
 ## Receive a single Refund
 #' @rdname Refund
 getRefund <- function(orderId, refundId, ...) {
-    .request(.url("orders",orderId,"refunds",refundId), ...)$refund
+    private$.request(private$.url("orders",orderId,"refunds",refundId), ...)$refund
 }

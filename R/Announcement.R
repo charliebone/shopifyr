@@ -24,9 +24,9 @@
 #' @return invisibly returns the \code{\link{ShopifyShop}} object to allow for chaining
 #' @name Announcements
 showAnnouncements <- function(current = TRUE) {
-    if (!is.null(shopInfo$announcement)) {
-        announcement <- shopInfo$announcement
-        if (!current || (Sys.time() < .parseShopifyTimestamp(announcement$expire_at))) {
+    if (!is.null(self$shopInfo$announcement)) {
+        announcement <- self$shopInfo$announcement
+        if (!current || (Sys.time() < private$.parseShopifyTimestamp(announcement$expire_at))) {
             # is valid announcement
             cat(gsub("<br />", "", announcement$rendered_body, fixed=TRUE))
         }

@@ -27,42 +27,42 @@ NULL
 ## Receive a list of all Pages
 #' @rdname Page
 getPages <- function(...) {
-    .fetchAll("pages", ...)
+    private$.fetchAll("pages", ...)
 }
 
 ## GET /admin/pages/count.json
 ## Receive a count of all Pages
 #' @rdname Page
 getPagesCount <- function(...) {
-    .request(.url("pages","count"), ...)$count
+    private$.request(private$.url("pages","count"), ...)$count
 }
 
 ## GET /admin/pages/#{id}.json
 ## Receive a single Page
 #' @rdname Page
 getPage <- function(pageId, ...) {
-    .request(.url("pages",pageId), ...)$page
+    private$.request(private$.url("pages",pageId), ...)$page
 }
 
 ## POST /admin/pages.json
 ## Create a new Page
 #' @rdname Page
 createPage <- function(page, ...) {
-    page <- .wrap(page, "page", check=FALSE)
-    .request("pages", reqType="POST", data=page, ...)$page
+    page <- private$.wrap(page, "page", check=FALSE)
+    private$.request("pages", reqType="POST", data=page, ...)$page
 }
 
 ## PUT /admin/pages/#{id}.json
 ## Modify an existing Page
 #' @rdname Page
 modifyPage <- function(page, ...) {
-    page <- .wrap(page, "page")
-    .request(.url("pages",page$page$id), reqType="POST", data=page, ...)$page
+    page <- private$.wrap(page, "page")
+    private$.request(private$.url("pages",page$page$id), reqType="POST", data=page, ...)$page
 }
 
 ## DELETE /admin/pages/#{id}.json
 ## Remove a Page from the database
 #' @rdname Page
 deletePage <- function(pageId, ...) {
-    .request(.url("pages",pageId), reqType="DELETE", ...)
+    private$.request(private$.url("pages",pageId), reqType="DELETE", ...)
 }

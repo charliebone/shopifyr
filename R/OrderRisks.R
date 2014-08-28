@@ -30,35 +30,35 @@ NULL
 ## Create a new Order Risks
 #' @rdname OrderRisks
 createOrderRisk <- function(orderId, orderRisk, ...) {
-    orderRisk <- .wrap(orderRisk, "risk", check=FALSE)
-    .request(.url("orders",orderId,"risks"), reqType="POST", data=orderRisk, ...)$risk
+    orderRisk <- private$.wrap(orderRisk, "risk", check=FALSE)
+    private$.request(private$.url("orders",orderId,"risks"), reqType="POST", data=orderRisk, ...)$risk
 }
 
 ## GET /admin/orders/#{id}/risks.json
 ## Receive a list of all Order Risks
 #' @rdname OrderRisks
 getOrderRisks <- function(orderId, ...) {
-    .request(.url("orders",orderId,"risks"), ...)$risks
+    private$.request(private$.url("orders",orderId,"risks"), ...)$risks
 }
 
 ## GET /admin/orders/#{id}/risks/#{id}.json
 ## Receive a single Order Risk
 #' @rdname OrderRisks
 getOrderRisk <- function(orderId, orderRiskId, ...) {
-    .request(.url("orders",orderId,"risks",orderRiskId), ...)$risk
+    private$.request(private$.url("orders",orderId,"risks",orderRiskId), ...)$risk
 }
 
 ## PUT /admin/orders/#{id}/risks/#{id}.json
 ## Modify an existing Order Risks
 #' @rdname OrderRisks
 modifyOrderRisk <- function(orderId, orderRisk, ...) {
-    orderRisk <- .wrap(orderRisk, "risk")
-    .request(.url("orders",orderId,"risks",orderRisk$risk$id), reqType="PUT", data=orderRisk, ...)$risk
+    orderRisk <- private$.wrap(orderRisk, "risk")
+    private$.request(private$.url("orders",orderId,"risks",orderRisk$risk$id), reqType="PUT", data=orderRisk, ...)$risk
 }
 
 ## DELETE /admin/orders/#{id}/risks/#{id}.json
 ## Remove a Order Risks from the database
 #' @rdname OrderRisks
 deleteOrderRisk <- function(orderId, orderRiskId, ...) {
-    .request(.url("orders",orderId,"risks",orderRiskId), reqType="DELETE", ...)
+    private$.request(private$.url("orders",orderId,"risks",orderRiskId), reqType="DELETE", ...)
 }

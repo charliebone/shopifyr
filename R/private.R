@@ -29,27 +29,27 @@
     
     # generate curl handle and header gatherer
     private$.curlHandle <- getCurlHandle(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"),
-                                         headerfunction = .updateResponseHeaders,
-                                         writefunction = .updateResponseBody,
+                                         headerfunction = private$.updateResponseHeaders,
+                                         writefunction = private$.updateResponseBody,
                                          httpheader = c('Content-Type' = 'application/json',
                                                         'Accept' = 'application/json',
-                                                        'X-Shopify-Access-Token' = password))
+                                                        'X-Shopify-Access-Token' = self$password))
     
     # fetch shop information
-    self$shopInfo <- try(getShop(), silent=TRUE)
-    if (inherits(shopInfo, "try-error"))
-        stop(paste("Error accessing Shopify : ", attr(shopInfo,"condition")$message))
+    self$shopInfo <- try(self$getShop(), silent=TRUE)
+    if (inherits(self$shopInfo, "try-error"))
+        stop(paste("Error accessing Shopify : ", attr(self$shopInfo,"condition")$message))
     
     # show announcements if there are any
     if (!isTRUE(quiet))
-        showAnnouncements()
+        self$showAnnouncements()
 }
 
 ########### ShopifyShop print method ###########
 print.ShopifyShop <- function(...) {
-    cat("--", shopInfo$name, "Shopify API Client --\n")
-    cat("Site Domain:", shopInfo$domain, "\n")
-    cat("Shopify Domain:", shopInfo$myshopify_domain, "\n")
+    cat("--", self$shopInfo$name, "Shopify API Client --\n")
+    cat("Site Domain:", self$shopInfo$domain, "\n")
+    cat("Shopify Domain:", self$shopInfo$myshopify_domain, "\n")
 }
 
 ########### Private ShopifyShop member functions ###########
@@ -76,7 +76,7 @@ print.ShopifyShop <- function(...) {
 }
 
 .baseUrl <- function() {
-    paste0("https://", shopURL, "/admin/")
+    paste0("https://", self$shopURL, "/admin/")
 }
 
 .wrap <- function(data, name, check = "id") {
@@ -98,7 +98,7 @@ print.ShopifyShop <- function(...) {
     fetched <- NULL
     req <- 1
     while (TRUE) {
-        result <- .request(slug, limit=limit, page=req, ...)
+        result <- private$.request(slug, limit=limit, page=req, ...)
         fetched <- c(fetched, result[[name]])
         if (length(result[[name]]) < limit) break;
         req <- req + 1
@@ -133,31 +133,31 @@ print.ShopifyShop <- function(...) {
                      verbose = FALSE) {
     
     # generate url and check request type
-    reqURL <- paste0(.baseUrl(), slug, ".", type.)
+    reqURL <- paste0(private$.baseUrl(), slug, ".", type.)
     reqType <- match.arg(toupper(reqType), c("GET","POST","PUT","DELETE"))
     
     # parse url parameters
     params <- list(...)
     if (!is.null(params) && length(params) > 0)
-        reqURL <- paste0(reqURL, "?", .params(params))
+        reqURL <- paste0(reqURL, "?", private$.params(params))
     
     # clear response buffers
-    .clearResponseHeaders()
-    .clearResponseBody()
+    private$.clearResponseHeaders()
+    private$.clearResponseBody()
     
     # send request
     if (reqType %in% c("GET", "DELETE")) {
         # GET or DELETE request
         res <- try(curlPerform(url = reqURL,
-                               curl = .curlHandle,
+                               curl = private$.curlHandle,
                                customrequest = reqType,
                                verbose = verbose), silent=TRUE)
         
     } else if (reqType %in% c("POST","PUT")) {
         # POST or PUT request
         res <- try(curlPerform(url = reqURL,
-                               curl = .curlHandle, 
-                               postfields = .encode(data),
+                               curl = private$.curlHandle, 
+                               postfields = private$.encode(data),
                                post = ifelse(reqType=="POST",1L,0L),
                                customrequest = reqType,
                                verbose = verbose), silent=TRUE) 
@@ -169,19 +169,19 @@ print.ShopifyShop <- function(...) {
     }
     
     # return response
-    .getResponseBody(parse.)
+    private$.getResponseBody(parse.)
 }
 
 #' @importFrom RCurl parseHTTPHeader
 .getResponseHeaders <- function(parse = TRUE) { 
     if (isTRUE(parse))
-        .parseResponseHeader(.responseHeaders)
+        private$.parseResponseHeaders(private$.responseHeaders)
     else
-        .responseHeaders
+        private$.responseHeaders
 }
 
 .updateResponseHeaders <- function(str) { 
-    private$.responseHeaders <- c(.responseHeaders, str) 
+    private$.responseHeaders <- c(private$.responseHeaders, str) 
     nchar(str, "bytes")
 }
 
@@ -190,7 +190,7 @@ print.ShopifyShop <- function(...) {
 }
 
 # the function below is a slightly modified version of RCurl::parseHttpHeader
-.parseResponseHeader <- function(lines) {
+.parseResponseHeaders <- function(lines) {
     if (length(lines) < 1) 
         return(NULL)
     if (length(lines) == 1) 
@@ -200,7 +200,7 @@ print.ShopifyShop <- function(...) {
     status <- lines[max(i)]
     lines <- lines[seq(max(i), length(lines))]
     
-    st <- .getHeaderStatus(status)
+    st <- private$.getHeaderStatus(status)
     if (st[["status"]] == 100) {
         if ((length(lines) - length(grep("^[[:space:]]*$", lines))) == 1) 
             return(st)
@@ -224,13 +224,13 @@ print.ShopifyShop <- function(...) {
 
 .getResponseBody <- function(parse = TRUE) {
     if (isTRUE(parse))
-        .parseResponseBody(paste0(.responseBody, collapse="")) 
+        private$.parseResponseBody(paste0(private$.responseBody, collapse="")) 
     else
-        paste0(.responseBody, collapse="")
+        paste0(private$.responseBody, collapse="")
 }
 
 .updateResponseBody <- function(str) {
-    private$.responseBody <- c(.responseBody, str)
+    private$.responseBody <- c(private$.responseBody, str)
     nchar(str, "bytes")
 }
 

@@ -30,12 +30,12 @@ NULL
 ## Receive a count of all Checkouts
 #' @rdname Checkout
 getCheckoutsCount <- function(...) {
-    .request(.url("checkouts","count"), ...)$count
+    private$.request(private$.url("checkouts","count"), ...)$count
 }
 
 ## GET /admin/checkouts.json
 ## Receive a list of all Checkouts
 #' @rdname Checkout
 getCheckouts <- function(...) {
-    .fetchAll("checkouts", ...)
+    private$.fetchAll("checkouts", ...)
 }

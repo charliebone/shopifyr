@@ -28,28 +28,28 @@ NULL
 ## Create a new one-time application charge
 #' @rdname ApplicationCharge
 createApplicationCharge <- function(charge, ...) {
-    charge <- .wrap(charge, "application_charge", check=FALSE)
-    .request("application_charges", reqType="POST", data=charge, ...)$application_charge
+    charge <- private$.wrap(charge, "application_charge", check=FALSE)
+    private$.request("application_charges", reqType="POST", data=charge, ...)$application_charge
 }
 
 ## GET /admin/application_charges/#{id}.json
 ## Receive a single ApplicationCharge
 #' @rdname ApplicationCharge
 getApplicationCharge <- function(chargeId, ...) {
-    .request(.url("application_charges",chargeId), ...)$application_charge
+    private$.request(private$.url("application_charges",chargeId), ...)$application_charge
 }
 
 ## GET /admin/application_charges.json
 ## Retrieve all one-time application charges
 #' @rdname ApplicationCharge
 getApplicationCharges <- function(...) {
-    .request("application_charges", ...)$application_charges
+    private$.request("application_charges", ...)$application_charges
 }
 
 ## POST /admin/application_charges/#{id}/activate.json
 ## Activate a one-time application charge
 #' @rdname ApplicationCharge
 activateApplicationCharge <- function(charge, ...) {
-    charge <- .wrap(charge, "application_charge")
-    .request(.url("application_charges",charge$application_charge$id), reqType="POST", data=charge, ...)$application_charge
+    charge <- private$.wrap(charge, "application_charge")
+    private$.request(private$.url("application_charges",charge$application_charge$id), reqType="POST", data=charge, ...)$application_charge
 }

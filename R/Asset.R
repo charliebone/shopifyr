@@ -32,14 +32,14 @@ NULL
 ## Receive a list of all Assets
 #' @rdname Asset
 getAssets <- function(themeId, ...) {
-    .request(.url("themes",themeId,"assets"), ...)$assets
+    private$.request(private$.url("themes",themeId,"assets"), ...)$assets
 }
 
 ## GET /admin/themes/#{id}/assets.json?asset[key]=templates/index.liquid&theme_id=828155753
 ## Receive a single Asset
 #' @rdname Asset
 getAsset <- function(themeId, assetKey, ...) {
-    .request(.url("themes",themeId,"assets"), `asset[key]`=assetKey, theme_id=themeId, ...)$asset
+    private$.request(private$.url("themes",themeId,"assets"), `asset[key]`=assetKey, theme_id=themeId, ...)$asset
 }
 
 ## PUT /admin/themes/#{id}/assets.json
@@ -47,13 +47,13 @@ getAsset <- function(themeId, assetKey, ...) {
 #' @rdname Asset
 #' @aliases modifyAsset
 createAsset <- modifyAsset <- function(themeId, asset, ...) {
-    asset <- .wrap(asset, "asset", check="key")
-    .request(.url("themes",themeId,"assets"), reqType="PUT", data=asset, ...)$asset
+    asset <- private$.wrap(asset, "asset", check="key")
+    private$.request(private$.url("themes",themeId,"assets"), reqType="PUT", data=asset, ...)$asset
 }
 
 ## DELETE /admin/themes/#{id}/assets.json?asset[key]=assets/bg-body.gif
 ## Remove a Asset from the database
 #' @rdname Asset
 deleteAsset <- function(themeId, assetKey, ...) {
-    .request(.url("themes",themeId,"assets"), `asset[key]`=assetKey, theme_id=themeId, reqType="DELETE", ...)
+    private$.request(private$.url("themes",themeId,"assets"), `asset[key]`=assetKey, theme_id=themeId, reqType="DELETE", ...)
 }
