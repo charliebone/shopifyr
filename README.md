@@ -25,7 +25,7 @@ After installation is complete, read the notes below. In order to take full adva
 ## Using the ShopifyShop Class
 The workhorse of the **shopifyr** package is the **ShopifyShop** class. It is written using the relatively new [R6 class implementation](https://github.com/wch/R6), which is a lightweight implementation of R's reference class. 
 
-The **ShopifyShop** class is a simple way to encapsulate all the API functionality into a single object, allowing simple and expressive access to the Shopify API. To get started, you first must create a **Shopifyshop** object:
+The **ShopifyShop** class encapsulates all the API functionality into a single object, allowing simple and expressive access to the Shopify API. To get started, you first must create a **ShopifyShop** object:
 
 ```R
 library(shopifyr)
