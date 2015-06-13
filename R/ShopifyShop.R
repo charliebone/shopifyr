@@ -425,7 +425,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         # Customer functions
         getCustomers = getCustomers,
         searchCustomers = searchCustomers,
-        getCustomer = getCustomers,
+        getCustomer = getCustomer,
         createCustomer = createCustomer,
         modifyCustomer = modifyCustomer,
         deleteCustomer = deleteCustomer,
