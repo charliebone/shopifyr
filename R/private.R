@@ -1,8 +1,8 @@
 #
 #   shopifyr: An R Interface to the Shopify API
 #
-#   Copyright (C) 2014 Charlie Friedemann cfriedem @ gmail.com
-#   Shopify API (c) 2006-2014 Shopify Inc.
+#   Copyright (C) 2015 Charlie Friedemann cfriedem @ gmail.com
+#   Shopify API (c) 2006-2015 Shopify Inc.
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -88,20 +88,39 @@ print.ShopifyShop <- function(...) {
     if (is.character(check)) {
         missingFields <- check[which(!check %in% names(ret[[name]]))]
         if (length(missingFields) > 0)
-            stop(paste(name, "missing mandatory field(s): ", ))
+            stop(paste(name, "missing mandatory field(s): ", paste(missingFields, collapse=", ")))
     }
     ret
 }
 
-.fetchAll <- function(slug, name = NULL, limit = 250, ...) {
-    if (is.null(name)) name <- slug
-    fetched <- NULL
-    req <- 1
-    while (TRUE) {
+.fetchAll <- function(slug, name, limit = 250, page, ..., verbose) {
+    if (missing(name)) name <- slug
+    
+    if (missing(page)) {
+        env <- new.env()
+        
+        req <- 1
+        if (!missing(verbose) && verbose)
+            message(paste0("Request ",req,": fetching ",name," 1 - ",limit))
+        reqTime <- Sys.time()
         result <- private$.request(slug, limit=limit, page=req, ...)
-        fetched <- c(fetched, result[[name]])
-        if (length(result[[name]]) < limit) break;
-        req <- req + 1
+        env[[paste0("r",req)]] <- result[[name]]
+        while (length(result[[name]]) == limit) {
+            # wait 1 second between requests
+            while((Sys.time()-1) < reqTime) {}
+            req <- req + 1
+            if (!missing(verbose) && verbose)
+                message(paste0("Request ",req,": fetching ",name," ",(req-1)*limit+1," - ",req*limit))
+            reqTime <- Sys.time()
+            result <- private$.request(slug, limit=limit, page=req, ...)
+            env[[paste0("r",req)]] <- result[[name]]
+        }
+        
+        # combine results
+        fetched <- do.call(c, lapply(ls(env), function(nm) env[[nm]]))
+    } else {
+        # if page is specified, just make the request
+        fetched <- private$.request(slug, limit=limit, page=page, ...)[[name]]
     }
     fetched
 }
@@ -252,7 +271,20 @@ print.ShopifyShop <- function(...) {
 }
 
 .parseShopifyTimestamp <- function(str) {
-    # strings are in format like "2014-08-06T00:01:00-04:00" 
+    # strings are in format like "2015-01-23T00:01:00-04:00" 
     # strip out last colon so %z works
     as.POSIXct(gsub("^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}-\\d{2}):(\\d{2})$", "\\1\\2", str), format="%FT%T%z")
+}
+
+.encodeImageFile <- function(filepath) {
+    if (!file.exists(filepath))
+        stop("image file does not exist")
+    
+    found <- suppressWarnings(require(base64enc))
+    if (!found)
+        stop("The 'base64enc' package is required to upload images to Shopify")
+    
+    imgData <- base64encode(filepath)
+    image <- list(attachment = imgData, filename = basename(filepath))
+    image
 }
