@@ -15,14 +15,16 @@ getProductImagesCount(productId, ...)
 
 getProductImage(productId, imageId, ...)
 
-createProductImage(productId, image, ...)
+createProductImage(productId, image, ..., filepath)
 
-modifyProductImage(productId, image, ...)
+modifyProductImage(productId, image, ..., filepath)
 
 deleteProductImage(productId, imageId, ...)
 }
 \arguments{
 \item{productId}{a Product id number}
+
+\item{filepath}{the filepath to an image to upload}
 
 \item{imageId}{a ProductImage id number}
 

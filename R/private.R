@@ -280,11 +280,10 @@ print.ShopifyShop <- function(...) {
     if (!file.exists(filepath))
         stop("image file does not exist")
     
-    found <- suppressWarnings(require(base64enc))
-    if (!found)
+    if (!requireNamespace("base64enc"))
         stop("The 'base64enc' package is required to upload images to Shopify")
     
-    imgData <- base64encode(filepath)
+    imgData <- base64enc::base64encode(filepath)
     image <- list(attachment = imgData, filename = basename(filepath))
     image
 }

@@ -20,6 +20,7 @@
 
 ########### ProductImage functions ########### 
 #' @param productId a Product id number
+#' @param filepath the filepath to an image to upload
 #' @templateVar name ProductImage
 #' @templateVar slug image
 #' @templateVar urlSlug product_image
