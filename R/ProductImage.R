@@ -52,7 +52,7 @@ getProductImage <- function(productId, imageId, ...) {
 #' @rdname ProductImage
 createProductImage <- function(productId, image, ..., filepath) {
     if (!missing(filepath)) {
-        image <- .encodeImageFile(filepath)
+        image <- private$.encodeImageFile(filepath)
     } else {
         image <- private$.wrap(image, "image", check=FALSE)
     }
@@ -64,7 +64,7 @@ createProductImage <- function(productId, image, ..., filepath) {
 #' @rdname ProductImage
 modifyProductImage <- function(productId, image, ..., filepath) {
     if (!missing(filepath)) {
-        image <- .encodeImageFile(filepath)
+        image <- private$.encodeImageFile(filepath)
     } else {
         image <- private$.wrap(image, "image")
     }

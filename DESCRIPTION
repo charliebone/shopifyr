@@ -1,8 +1,8 @@
 Package: shopifyr
 Type: Package
 Title: An R Interface to the Shopify API
-Version: 0.30
-Date: 2014-08-28
+Version: 0.40
+Date: 2015-06-20
 Author: Charlie Friedemann
 Maintainer: Charlie Friedemann <cfriedem@gmail.com>
 Description: An interface to the API of the E-commerce service Shopify
@@ -15,6 +15,8 @@ Depends:
 Imports:
     R6 (>= 2.0),
     RJSONIO
+Suggests:
+    base64enc
 Collate:
     'Announcement.R'
     'ApplicationCharge.R'
