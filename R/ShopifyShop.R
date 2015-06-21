@@ -374,7 +374,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         getBlog = getBlog,
         createBlog = createBlog,
         modifyBlog = modifyBlog,
-        delteBlog = deleteBlog,
+        deleteBlog = deleteBlog,
         
         # CarrierService functions
         createCarrierService = createCarrierService,
@@ -417,7 +417,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         # CustomCollection functions
         getCustomCollections = getCustomCollections,
         getCustomCollectionsCount = getCustomCollectionsCount,
-        getCustomCollection = getCustomCollections,
+        getCustomCollection = getCustomCollection,
         createCustomCollection = createCustomCollection,
         modifyCustomCollection = modifyCustomCollection,
         deleteCustomCollection = deleteCustomCollection,
@@ -616,7 +616,8 @@ ShopifyShop <- R6Class("ShopifyShop",
         .clearResponseBody = .clearResponseBody,
         .parseResponseBody = .parseResponseBody,
         
-        .parseShopifyTimestamp = .parseShopifyTimestamp
+        .parseShopifyTimestamp = .parseShopifyTimestamp,
+        .encodeImageFile =.encodeImageFile
     )
 )
 
