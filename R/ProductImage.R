@@ -1,8 +1,8 @@
 #
 #   shopifyr: An R Interface to the Shopify API
 #
-#   Copyright (C) 2014 Charlie Friedemann cfriedem @ gmail.com
-#   Shopify API (c) 2006-2014 Shopify Inc.
+#   Copyright (C) 2015 Charlie Friedemann cfriedem @ gmail.com
+#   Shopify API (c) 2006-2015 Shopify Inc.
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -50,16 +50,24 @@ getProductImage <- function(productId, imageId, ...) {
 ## POST /admin/products/#{id}/images.json
 ## Create a new Product Image
 #' @rdname ProductImage
-createProductImage <- function(productId, image, ...) {
-    image <- private$.wrap(image, "image", check=FALSE)
+createProductImage <- function(productId, image, ..., filepath) {
+    if (!missing(filepath)) {
+        image <- .encodeImageFile(filepath)
+    } else {
+        image <- private$.wrap(image, "image", check=FALSE)
+    }
     private$.request(private$.url("products",productId,"images"), reqType="POST", data=image,  ...)$image
 }
 
 ## PUT /admin/products/#{id}/images/#{id}.json
 ## Modify an existing Product Image
 #' @rdname ProductImage
-modifyProductImage <- function(productId, image, ...) {
-    image <- private$.wrap(image, "image")
+modifyProductImage <- function(productId, image, ..., filepath) {
+    if (!missing(filepath)) {
+        image <- .encodeImageFile(filepath)
+    } else {
+        image <- private$.wrap(image, "image")
+    }
     private$.request(private$.url("products",productId,"images",image$image$id), reqType="PUT", data=image,  ...)$image
 }
 
