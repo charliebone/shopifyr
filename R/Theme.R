@@ -20,6 +20,7 @@
 
 ########### Theme functions ########### 
 #' @templateVar name Theme
+#' @templateVar urlSlug online_store/theme
 #' @template api
 NULL
 

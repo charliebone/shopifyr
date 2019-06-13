@@ -20,6 +20,7 @@
 
 ########### Webhook functions ########### 
 #' @templateVar name Webhook
+#' @templateVar urlSlug events/webhook
 #' @template api
 NULL
 

@@ -20,6 +20,7 @@
 
 ########### Checkout functions ########### 
 #' @templateVar name Checkout
+#' @templateVar urlSlug sales_channels/checkout
 #' @templateVar default.params FALSE
 #' @templateVar default.return FALSE
 #' @return a list of Checkouts

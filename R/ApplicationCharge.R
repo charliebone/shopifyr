@@ -19,35 +19,37 @@
 #
 
 ########### ApplicationCharge functions ########### 
-#' @templateVar slug charge
 #' @templateVar name ApplicationCharge
+#' @templateVar slug charge
+#' @templateVar article an
+#' @templateVar urlSlug billing/applicationcharge
 #' @template api
 NULL
 
 ## POST /admin/application_charges.json
-## Create a new one-time application charge
+## Creates an application charge
 #' @rdname ApplicationCharge
 createApplicationCharge <- function(charge, ...) {
     charge <- private$.wrap(charge, "application_charge", check=FALSE)
     private$.request("application_charges", reqType="POST", data=charge, ...)$application_charge
 }
 
-## GET /admin/application_charges/#{id}.json
-## Receive a single ApplicationCharge
+## GET /admin/application_charges/#{application_charge_id}.json
+## Retrieves an application charge
 #' @rdname ApplicationCharge
 getApplicationCharge <- function(chargeId, ...) {
     private$.request(private$.url("application_charges",chargeId), ...)$application_charge
 }
 
 ## GET /admin/application_charges.json
-## Retrieve all one-time application charges
+## Retrieves a list of application charges
 #' @rdname ApplicationCharge
 getApplicationCharges <- function(...) {
     private$.request("application_charges", ...)$application_charges
 }
 
-## POST /admin/application_charges/#{id}/activate.json
-## Activate a one-time application charge
+## POST /admin/application_charges/#{application_charge_id}/activate.json
+## Activates an application charge
 #' @rdname ApplicationCharge
 activateApplicationCharge <- function(charge, ...) {
     charge <- private$.wrap(charge, "application_charge")

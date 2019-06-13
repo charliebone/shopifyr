@@ -21,6 +21,7 @@
 ########### SmartCollection functions ########### 
 #' @param productIds a vector of Product ids in the desired sort order
 #' @templateVar name SmartCollection
+#' @templateVar urlSlug products/smartcollection
 #' @template api
 NULL
 

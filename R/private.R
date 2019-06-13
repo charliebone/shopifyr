@@ -19,21 +19,12 @@
 #
 
 ########### ShopifyShop constructor ###########
-#' @importFrom RCurl getCurlHandle
 .initialize <- function(shopURL, password, quiet = FALSE) {
     if (missing(shopURL)) stop("shopURL is required to create a ShopifyShop")
     if (missing(password)) stop("password is required to create a ShopifyShop")
     
     self$shopURL <- paste0(gsub(".myshopify.com", "", tolower(shopURL)), ".myshopify.com")
     self$password <- password
-    
-    # generate curl handle and header gatherer
-    private$.curlHandle <- getCurlHandle(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"),
-                                         headerfunction = private$.updateResponseHeaders,
-                                         writefunction = private$.updateResponseBody,
-                                         httpheader = c('Content-Type' = 'application/json',
-                                                        'Accept' = 'application/json',
-                                                        'X-Shopify-Access-Token' = self$password))
     
     # fetch shop information
     self$shopInfo <- try(self$getShop(), silent=TRUE)
@@ -53,6 +44,7 @@ print.ShopifyShop <- function(...) {
 }
 
 ########### Private ShopifyShop member functions ###########
+#' @importFrom utils URLencode
 .params <- function(params) {
     nms <- names(params)
     ret <- NULL
@@ -76,7 +68,11 @@ print.ShopifyShop <- function(...) {
 }
 
 .baseUrl <- function() {
-    paste0("https://", self$shopURL, "/admin/")
+    paste0("https://",self$shopURL,"/admin/")
+}
+
+.graphQlUrl <- function(type = "admin") {
+    paste0("https://",self$shopURL,"/admin/api/graphql.json")
 }
 
 .wrap <- function(data, name, check = "id") {
@@ -93,26 +89,43 @@ print.ShopifyShop <- function(...) {
     ret
 }
 
-.fetchAll <- function(slug, name, limit = 250, page, ..., verbose) {
-    if (missing(name)) name <- slug
+.fetchAll <- function(slug, name = slug, limit = 250, page = NULL, sinceId = 0, paceRequests = TRUE, queryParam = NULL, queryMax = 100, silent = FALSE, ...) {
+    if (!is.null(queryParam)) {
+        dots <- list(...)
+        if (!queryParam %in% names(dots)) 
+            stop(paste0("specified queryParam '",queryParam,"' not found as argument to fetchAll"))
+        
+        querySplits <- split(dots[[queryParam]], ceiling(seq_along(dots[[queryParam]]) / queryMax))
+        baseArgs <- list(slug=slug, name=name, limit=limit, paceRequests=paceRequests, queryParam=NULL, silent=silent)
+        baseArgs <- c(baseArgs, dots[-which(names(dots) == queryParam)])
+        
+        results <- lapply(querySplits, function(x) {
+            fargs <- baseArgs
+            fargs[[queryParam]] <- paste0(x, collapse=",")
+            do.call(private$.fetchAll, fargs)
+        })
+        
+        return(do.call(c, results))
+    }
     
-    if (missing(page)) {
+    if (is.null(page)) {
         env <- new.env()
         
         req <- 1
-        if (!missing(verbose) && verbose)
-            message(paste0("Request ",req,": fetching ",name," 1 - ",limit))
-        reqTime <- Sys.time()
-        result <- private$.request(slug, limit=limit, page=req, ...)
+        if (!isTRUE(silent))
+            message(paste0("Request ",req,": fetching ",gsub("_"," ",name,fixed=TRUE)," 1 - ",limit))
+        
+        result <- private$.request(slug, limit=limit, since_id=sinceId, ...)
         env[[paste0("r",req)]] <- result[[name]]
+        
         while (length(result[[name]]) == limit) {
-            # wait 1 second between requests
-            while((Sys.time()-1) < reqTime) {}
             req <- req + 1
-            if (!missing(verbose) && verbose)
-                message(paste0("Request ",req,": fetching ",name," ",(req-1)*limit+1," - ",req*limit))
-            reqTime <- Sys.time()
-            result <- private$.request(slug, limit=limit, page=req, ...)
+            sinceId <- sapply(result[[name]], `[[`, "id")[length(result[[name]])]
+            
+            if (!isTRUE(silent))
+                message(paste0("Request ",req,": fetching ",gsub("_"," ",name,fixed=TRUE)," ",(req-1)*limit+1," - ",req*limit))
+            
+            result <- private$.request(slug, limit=limit, since_id=sinceId, paceRequests=paceRequests, ...)
             env[[paste0("r",req)]] <- result[[name]]
         }
         
@@ -120,149 +133,164 @@ print.ShopifyShop <- function(...) {
         fetched <- do.call(c, lapply(ls(env), function(nm) env[[nm]]))
     } else {
         # if page is specified, just make the request
-        fetched <- private$.request(slug, limit=limit, page=page, ...)[[name]]
+        fetched <- private$.request(slug, limit=limit, page=page, paceRequests=paceRequests, ...)[[name]]
     }
     fetched
 }
 
-#' @importFrom RJSONIO toJSON
-#' @importFrom RJSONIO isValidJSON
+#' @importFrom jsonlite toJSON
+#' @importFrom jsonlite validate
 .encode <- function(data) {
     if (is.list(data)) {
         if (length(data) == 0)
             data <- "{}" # use '{}' not '[]' which toJSON() would give for empty list
         else
-            data <- toJSON(data, digits=20)
+            data <- jsonlite::toJSON(data, digits=20, auto_unbox=TRUE)
     } else if (is.character(data)) {
-        if (!isValidJSON(data, asText=TRUE)) stop("data must be valid JSON")
+        isValid <- jsonlite::validate(data)
+        if (!isTRUE(isValid)) stop(attr(isValid, "err"))
     } else {
         stop("data must be of type list or character")
     }
     data
 }
 
-#' @importFrom RCurl postForm
-#' @importFrom RCurl getURL
-#' @importFrom RCurl curlPerform
+#' @importFrom curl curl_fetch_memory
+#' @importFrom curl parse_headers_list
+.graphQlRequest <- function(query, paceRequests = TRUE, verbose = FALSE) {
+    # send request
+    while(isTRUE(paceRequests) && !private$.rateLimitOk()) { } 
+    
+    handle <- private$.createHandle("POST", data=query, verbose=verbose)
+    res <- try(curl::curl_fetch_memory(.graphQlUrl(), handle=handle), silent=TRUE)
+}
+
+#' @importFrom curl curl_fetch_memory
+#' @importFrom curl parse_headers_list
 .request <- function(slug, reqType = "GET", 
                      data = NULL, 
+                     paceRequests = TRUE,
                      ..., 
                      parse. = TRUE, 
                      type. = "json", 
-                     verbose = FALSE) {
+                     verbose = FALSE,
+                     retryCount = 1) {
     
     # generate url and check request type
-    reqURL <- paste0(private$.baseUrl(), slug, ".", type.)
+    reqUrl <- paste0(private$.baseUrl(), slug, ".", type.)
     reqType <- match.arg(toupper(reqType), c("GET","POST","PUT","DELETE"))
     
     # parse url parameters
     params <- list(...)
     if (!is.null(params) && length(params) > 0)
-        reqURL <- paste0(reqURL, "?", private$.params(params))
-    
-    # clear response buffers
-    private$.clearResponseHeaders()
-    private$.clearResponseBody()
+        reqUrl <- paste0(reqUrl, "?", private$.params(params))
     
     # send request
-    if (reqType %in% c("GET", "DELETE")) {
-        # GET or DELETE request
-        res <- try(curlPerform(url = reqURL,
-                               curl = private$.curlHandle,
-                               customrequest = reqType,
-                               verbose = verbose), silent=TRUE)
-        
-    } else if (reqType %in% c("POST","PUT")) {
-        # POST or PUT request
-        res <- try(curlPerform(url = reqURL,
-                               curl = private$.curlHandle, 
-                               postfields = private$.encode(data),
-                               post = ifelse(reqType=="POST",1L,0L),
-                               customrequest = reqType,
-                               verbose = verbose), silent=TRUE) 
-    }
+    while(isTRUE(paceRequests) && !private$.rateLimitOk()) { } 
+    
+    handle <- private$.createHandle(reqType, data=data, verbose=verbose)
+    res <- try(curl::curl_fetch_memory(reqUrl, handle=handle), silent=TRUE)
     
     # check result for error
     if (inherits(res, "try-error")) {
-        stop(paste("Curl error :", attr(res,"condition")$message))
+        if (retryCount > 0) {
+            return(private$.request(slug=slug, 
+                                reqType=reqType, 
+                                data=data, 
+                                ..., 
+                                parse.=parse., 
+                                type.=type., 
+                                verbose=verbose,
+                                retryCount=retryCount-1))
+        } else 
+            stop(attr(res,"condition")$message)
     }
+    
+    private$.responseHeaders <- curl::parse_headers_list(res$headers)
+    
+    # update rate limit
+    private$.updateRateLimit()
     
     # return response
-    private$.getResponseBody(parse.)
-}
-
-#' @importFrom RCurl parseHTTPHeader
-.getResponseHeaders <- function(parse = TRUE) { 
-    if (isTRUE(parse))
-        private$.parseResponseHeaders(private$.responseHeaders)
-    else
-        private$.responseHeaders
-}
-
-.updateResponseHeaders <- function(str) { 
-    private$.responseHeaders <- c(private$.responseHeaders, str) 
-    nchar(str, "bytes")
-}
-
-.clearResponseHeaders <- function() {
-    private$.responseHeaders <- NULL
-}
-
-# the function below is a slightly modified version of RCurl::parseHttpHeader
-.parseResponseHeaders <- function(lines) {
-    if (length(lines) < 1) 
-        return(NULL)
-    if (length(lines) == 1) 
-        lines <- strsplit(lines, "\r\n")[[1]]
-    
-    i <- grep("^HTTP[^_]", lines) # small fix to ensure no conflict with Shopify's HTTP_X_SHOPIFY header style
-    status <- lines[max(i)]
-    lines <- lines[seq(max(i), length(lines))]
-    
-    st <- private$.getHeaderStatus(status)
-    if (st[["status"]] == 100) {
-        if ((length(lines) - length(grep("^[[:space:]]*$", lines))) == 1) 
-            return(st)
+    result <- rawToChar(res$content)
+    if (isTRUE(parse.)) {
+        result <- try(private$.parseResponseBody(result), silent=TRUE)
+        if (inherits(result, "try-error")) {
+            if (retryCount > 0) {
+                return(private$.request(slug=slug, 
+                                        reqType=reqType, 
+                                        data=data, 
+                                        ..., 
+                                        parse.=parse., 
+                                        type.=type., 
+                                        verbose=verbose,
+                                        retryCount=retryCount-1))
+            } else 
+                stop(paste("Error parsing response body :", attr(result,"condition")$message))
+        }
     }
-    lines <- lines[-1]
-    lines <- gsub("\r\n$", "", lines)
-    lines <- lines[lines != ""]
+    result
+}
+
+.graphqlClient <- function() {
+    if (is.null(private$.graphqlClient)) {
+        if (!requireNamespace("ghql"))
+            stop("The 'ghql' package is required to use the Shopifty GraphQL Admin API")
+        
+        private$.graphqlClient <- ghql::GraphqlClient$new(url = private$.graphQlUrl(),
+                                                          headers = list('X-Shopify-Access-Token' = self$password))
+    }
+    private$.graphqlClient
+}
+
+#' @importFrom curl new_handle
+#' @importFrom curl handle_setopt
+#' @importFrom curl handle_setheaders
+.createHandle <- function(reqType, data, verbose = FALSE) {
+    handle <- curl::new_handle(sslversion = 6L, # force TLS v1.2
+                               post = ifelse(reqType=="POST",1L,0L),
+                               customrequest = reqType,
+                               verbose = verbose)
     
-    header <- structure(sub("[^:]+: (.*)", "\\1", lines), names = sub("([^:]+):.*", "\\1", lines))
+    # add form data for POST or PUT requests
+    if (reqType %in% c("POST","PUT"))
+        handle <- curl::handle_setopt(handle, postfields = private$.encode(data))
     
-    header[["status"]] <- st[["status"]]
-    header[["statusMessage"]] <- st[["message"]]
-    header
+    # set request headers
+    handle <- curl::handle_setheaders(handle, 'Content-Type' = 'application/json',
+                                              'Accept' = 'application/json',
+                                              'X-Shopify-Access-Token' = self$password)
+    private$.curlHandle <- handle
+    handle
 }
 
-# the function below is a slightly modified version of RCurl:::getStatus
-.getHeaderStatus <- function(status) {
-    els <- strsplit(status, " ")[[1]]
-    list(status = as.integer(els[2]), message = paste(els[-c(1,2)], collapse = " "))
+.updateRateLimit <- function(timestamp = Sys.time()) {
+    private$.lastReqTime <- timestamp
+    
+    limitStr <- private$.responseHeaders[["x-shopify-shop-api-call-limit"]]
+    if (!is.null(limitStr)) {
+        split <- suppressWarnings(as.integer(strsplit(limitStr,"/",fixed=TRUE)[[1]]))
+        if (length(split) == 2 && all(!is.na(split))) {
+            private$.rateLimitUsed <- split[1]
+            private$.rateLimitTotal <- split[2]
+        }
+    }
 }
 
-.getResponseBody <- function(parse = TRUE) {
-    if (isTRUE(parse))
-        private$.parseResponseBody(paste0(private$.responseBody, collapse="")) 
-    else
-        paste0(private$.responseBody, collapse="")
+.rateLimitOk <- function() {
+    if (is.null(private$.lastReqTime)) return(TRUE) 
+    if ((private$.rateLimitTotal - private$.rateLimitUsed) > 2) return (TRUE)
+    
+    # if at limit and less than a second since last request then not ok
+    return(difftime(Sys.time(), private$.lastReqTime, units="secs") >= 1)
 }
 
-.updateResponseBody <- function(str) {
-    private$.responseBody <- c(private$.responseBody, str)
-    nchar(str, "bytes")
-}
-
-.clearResponseBody <- function() {
-    private$.responseBody <- NULL
-}
-
-#' @importFrom RJSONIO fromJSON
+#' @importFrom jsonlite fromJSON
 .parseResponseBody <- function(response) {
     if (missing(response) || is.null(response) || nchar(response) < 2)
         return(NULL)
     
-    parsed <- fromJSON(response, simplify=FALSE)
+    parsed <- jsonlite::fromJSON(response, simplifyDataFrame=FALSE)
     
     if (!is.null(parsed$errors))
         stop(paste(parsed$errors, collapse="; "), call.=FALSE)

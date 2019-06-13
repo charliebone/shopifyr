@@ -20,6 +20,7 @@
 
 ########### Country functions ########### 
 #' @templateVar name Country
+#' @templateVar urlSlug store_properties/country
 #' @template api
 NULL
 

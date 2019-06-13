@@ -32,5 +32,5 @@
 #' @param ... additional request parameters
 <%= if (default.return) paste0("#' @return a list containing ",article," ",name," fields or a list of ",name,"s") %>
 #' @name <%= name %>
-#' @references Shopify API <%= name %> documentation: \url{http://docs.shopify.com/api/<%= urlSlug %>}
+#' @references Shopify API <%= name %> documentation: \url{https://help.shopify.com/api/reference/<%= urlSlug %>}
 NULL

@@ -1,39 +1,48 @@
 Package: shopifyr
 Type: Package
 Title: An R Interface to the Shopify API
-Version: 0.40
-Date: 2015-06-20
+Version: 0.6.2
+Date: 2019-06-12
 Author: Charlie Friedemann
 Maintainer: Charlie Friedemann <cfriedem@gmail.com>
-Description: An interface to the API of the E-commerce service Shopify
-    (http://docs.shopify.com/api)
+Description: An interface to the Admin API of the E-commerce service Shopify,
+    (https://help.shopify.com/en/api/reference).
 URL: https://github.com/charliebone/shopifyr/
 License: GPL-3
+Encoding: UTF-8
 Depends:
-    R (>= 3.0),
-    RCurl
+    R (>= 3.0)
 Imports:
     R6 (>= 2.0),
-    RJSONIO
+    curl,
+    jsonlite
 Suggests:
+    ghql,
     base64enc
 Collate:
+    'AbandonedCheckout.R'
+    'AccessScope.R'
     'Announcement.R'
     'ApplicationCharge.R'
+    'ApplicationCredit.R'
     'Article.R'
     'Asset.R'
     'Blog.R'
     'CarrierService.R'
     'Checkout.R'
     'Collect.R'
+    'CollectionListing.R'
     'Comment.R'
     'Country.R'
     'CustomCollection.R'
     'Customer.R'
-    'CustomerGroup.R'
+    'CustomerAddress.R'
+    'CustomerSavedSearch.R'
     'Event.R'
     'Fulfillment.R'
     'FulfillmentService.R'
+    'InventoryItem.R'
+    'InventoryLevel.R'
     'Location.R'
     'MetaField.R'
     'Order.R'
@@ -48,10 +57,12 @@ Collate:
     'Refund.R'
     'ScriptTag.R'
     'Shop.R'
-    'private.R'
     'Webhook.R'
     'Transaction.R'
     'Theme.R'
     'SmartCollection.R'
+    'private.R'
     'ShopifyShop.R'
-    'shopfyr-package.R'
+    'shopifyr-package.R'
+    'zzz.R'
+RoxygenNote: 6.1.1

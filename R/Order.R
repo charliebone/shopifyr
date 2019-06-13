@@ -20,6 +20,7 @@
 
 ########### Order functions ########### 
 #' @templateVar name Order
+#' @templateVar urlSlug orders/order
 #' @template api
 NULL
 

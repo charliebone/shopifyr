@@ -24,7 +24,7 @@
 #' The \code{ShopifyShop} class fully encapsulates the Shopify API. It is an \code{\link{R6}} class, and
 #' as such is initialized via the \sQuote{new} function (see the example section for details). 
 #' 
-#' In order to access the Shopify API, users will need a set of authorized API access credentials.
+#' In order to access the Shopify Admin API, users will need a set of authorized API access credentials.
 #' Tthese so-called \sQuote{private app} credentials can be created in the Shopify store
 #' admin section. More information about how to do this can be found 
 #' \href{http://docs.shopify.com/api/tutorials/creating-a-private-app}{here}. Once the credentials are
@@ -38,6 +38,7 @@
 #' 
 #' @param shopURL the URL of your shop, as in shopname.myshopify.com
 #' @param password a Shopify API private app password or permanent access token (see Details)
+#' @param storeFrontToken a Storefront API access token
 #' @param quiet suppress output of API announcements
 #' 
 #' @usage NULL
@@ -145,14 +146,14 @@
 #'      \item \code{\link{getCustomersCount}}
 #'      \item \code{\link{getCustomerOrders}}
 #' }}
-#' \item{\bold{CustomerGroup & CustomerSavedSearch} functions}{\itemize{
-#'      \item \code{\link{getCustomerGroups}}
-#'      \item \code{\link{getCustomerGroupsCount}}
-#'      \item \code{\link{getCustomerGroup}}
-#'      \item \code{\link{getCustomerGroupCustomers}}
-#'      \item \code{\link{createCustomerGroup}}
-#'      \item \code{\link{modifyCustomerGroup}}
-#'      \item \code{\link{deleteCustomerGroup}}
+#' \item{\bold{CustomerSavedSearch} functions}{\itemize{
+#'      \item \code{\link{getCustomerSavedSearches}}
+#'      \item \code{\link{getCustomerSavedSearchesCount}}
+#'      \item \code{\link{getCustomerSavedSearch}}
+#'      \item \code{\link{getCustomerSavedSearchResults}}
+#'      \item \code{\link{createCustomerSavedSearch}}
+#'      \item \code{\link{modifyCustomerSavedSearch}}
+#'      \item \code{\link{deleteCustomerSavedSearch}}
 #' }}
 #' \item{\bold{Event} functions}{\itemize{
 #'      \item \code{\link{getEvents}}
@@ -325,7 +326,13 @@
 #' newProduct <- shop$createProduct(product)
 #' }
 #' 
-#' @include private.R Announcement.R ApplicationCharge.R Article.R Asset.R Blog.R CarrierService.R Checkout.R Collect.R Comment.R Country.R CustomCollection.R Customer.R CustomerGroup.R Event.R Fulfillment.R FulfillmentService.R Location.R MetaField.R Order.R OrderRisks.R Page.R Product.R ProductImage.R ProductVariant.R Province.R RecurringApplicationCharge.R Redirect.R Refund.R ScriptTag.R Shop.R SmartCollection.R Theme.R Transaction.R Webhook.R
+#' @include private.R AbandonedCheckout.R AccessScope.R Announcement.R ApplicationCharge.R ApplicationCredit.R Article.R 
+#' @include Asset.R Blog.R CarrierService.R Checkout.R Collect.R CollectionListing.R Comment.R Country.R CustomCollection.R 
+#' @include Customer.R CustomerAddress.R CustomerSavedSearch.R Event.R 
+#' @include Fulfillment.R FulfillmentService.R InventoryItem.R InventoryLevel.R Location.R 
+#' @include MetaField.R Order.R OrderRisks.R Page.R Product.R ProductImage.R 
+#' @include ProductVariant.R Province.R RecurringApplicationCharge.R Redirect.R Refund.R
+#' @include ScriptTag.R Shop.R SmartCollection.R Theme.R Transaction.R Webhook.R
 #' @import R6
 #' @export
 ShopifyShop <- R6Class("ShopifyShop",
@@ -334,6 +341,7 @@ ShopifyShop <- R6Class("ShopifyShop",
         # Public fields
         shopURL = NULL,
         password = NULL,
+        storefrontToken = NULL,
         shopInfo = NULL,
         
         # Constructor
@@ -345,11 +353,23 @@ ShopifyShop <- R6Class("ShopifyShop",
         # API Announcements
         showAnnouncements = showAnnouncements,
         
+        # AbandonedCheckout functions
+        getAbandonedCheckouts = getAbandonedCheckouts,
+        getAbandonedCheckoutsCount = getAbandonedCheckoutsCount,
+        
+        # AccessScope functions
+        getAccessScopes = getAccessScopes,
+        
         # ApplicationCharge functions
         createApplicationCharge = createApplicationCharge,
         getApplicationCharge = getApplicationCharge,
         getApplicationCharges = getApplicationCharges,
         activateApplicationCharge = activateApplicationCharge,
+        
+        # ApplicationCredit functions
+        createApplicationCredit = createApplicationCredit,
+        getApplicationCredit = getApplicationCredit,
+        getApplicationCredits = getApplicationCredits,
         
         # Article functions
         getArticles = getArticles,
@@ -433,13 +453,13 @@ ShopifyShop <- R6Class("ShopifyShop",
         getCustomerOrders = getCustomerOrders,
         
         # CustomerGroup / CustomerSavedSearch functions
-        getCustomerGroups = getCustomerGroups,
-        getCustomerGroupsCount = getCustomerGroupsCount,
-        getCustomerGroup = getCustomerGroup,
-        getCustomerGroupCustomers = getCustomerGroupCustomers,
-        createCustomerGroup = createCustomerGroup,
-        modifyCustomerGroup = modifyCustomerGroup,
-        deleteCustomerGroup = deleteCustomerGroup,
+        getCustomerSavedSearches = getCustomerSavedSearches,
+        getCustomerSavedSearchesCount = getCustomerSavedSearchesCount,
+        getCustomerSavedSearch = getCustomerSavedSearch,
+        getCustomerSavedSearchResults = getCustomerSavedSearchResults,
+        createCustomerSavedSearch = createCustomerSavedSearch,
+        modifyCustomerSavedSearch = modifyCustomerSavedSearch,
+        deleteCustomerSavedSearch = deleteCustomerSavedSearch,
         
         # Event functions
         getEvents = getEvents,
@@ -461,6 +481,18 @@ ShopifyShop <- R6Class("ShopifyShop",
         getFulfillmentService = getFulfillmentService,
         modifyFulfillmentService = modifyFulfillmentService,
         deleteFulfillmentService = deleteFulfillmentService,
+        
+        # InventoryItem functions
+        getInventoryItems = getInventoryItems,
+        getInventoryItem = getInventoryItem,
+        modifyInventoryItem = modifyInventoryItem,
+        
+        # InventoryLevel functions
+        getInventoryLevels = getInventoryLevels,
+        modifyInventoryLevel = modifyInventoryLevel,
+        deleteInventoryLevel = deleteInventoryLevel,
+        connectInventoryItem = connectInventoryItem,
+        setInventoryLevel = setInventoryLevel,
         
         # Location functions
         getLocations = getLocations,
@@ -595,27 +627,26 @@ ShopifyShop <- R6Class("ShopifyShop",
         .curlHandle = NULL,
         .responseHeaders = NULL,
         .responseBody = NULL,
+        .lastReqTime = NULL,
+        .rateLimitUsed = 0,
+        .rateLimitTotal = 40,
+        .costLimitUsed = 0,
+        .costLimitTotal = 1000,
+        .costLimitRestoreRate = 50,
         
         # private methods
         .params = .params,
         .url = .url,
         .baseUrl = .baseUrl,
+        .graphQlUrl = .graphQlUrl,
         .wrap = .wrap,
         .encode = .encode,
-        .request = .request,
         .fetchAll = .fetchAll,
-        
-        .getResponseHeaders = .getResponseHeaders,
-        .updateResponseHeaders = .updateResponseHeaders,
-        .clearResponseHeaders = .clearResponseHeaders,
-        .parseResponseHeaders = .parseResponseHeaders,
-        .getHeaderStatus = .getHeaderStatus,
-        
-        .getResponseBody = .getResponseBody,
-        .updateResponseBody = .updateResponseBody,
-        .clearResponseBody = .clearResponseBody,
+        .request = .request,
+        .createHandle = .createHandle,
         .parseResponseBody = .parseResponseBody,
-        
+        .updateRateLimit = .updateRateLimit,
+        .rateLimitOk = .rateLimitOk,
         .parseShopifyTimestamp = .parseShopifyTimestamp,
         .encodeImageFile =.encodeImageFile
     )

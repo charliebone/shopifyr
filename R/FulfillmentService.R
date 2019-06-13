@@ -20,6 +20,7 @@
 
 ########### FulfillmentService functions ########### 
 #' @templateVar name FulfillmentService
+#' @templateVar urlSlug shipping_and_fulfillment/fulfillmentservice
 #' @template api
 NULL
 

@@ -20,6 +20,7 @@
 
 ########### Redirect functions ########### 
 #' @templateVar name Redirect
+#' @templateVar urlSlug online_store/redirect
 #' @template api
 NULL
 

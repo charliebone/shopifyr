@@ -23,7 +23,7 @@
 #' @param filepath the filepath to an image to upload
 #' @templateVar name ProductImage
 #' @templateVar slug image
-#' @templateVar urlSlug product_image
+#' @templateVar urlSlug products/product_image
 #' @template api
 NULL
 

@@ -22,6 +22,7 @@
 #' @param orderId an Order id number
 #' @param refundId a Refund id number
 #' @templateVar name Refund
+#' @templateVar urlSlug orders/refund
 #' @templateVar default.params FALSE
 #' @templateVar default.return FALSE
 #' @return a list corresponding to a Refund

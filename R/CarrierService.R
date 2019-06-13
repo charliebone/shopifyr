@@ -21,6 +21,7 @@
 ########### CarrierService functions ########### 
 #' @templateVar name CarrierService
 #' @templateVar slug service
+#' @templateVar urlSlug shipping_and_fulfillment/carrierservice
 #' @template api
 NULL
 

@@ -21,6 +21,7 @@
 ########### Article functions ########### 
 #' @param blogId a Blog id number
 #' @templateVar name Article
+#' @templateVar urlSlug online_store/blog_article
 #' @templateVar article an
 #' @template api
 NULL

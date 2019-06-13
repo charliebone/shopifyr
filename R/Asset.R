@@ -21,8 +21,9 @@
 ########### Asset functions ########### 
 #' @param themeId a Theme id number
 #' @param assetKey an Asset key e.g. \code{"templates/index.liquid"}
-#' @param asset a  list containing Asset fields
+#' @param asset a list containing Asset fields
 #' @templateVar name Asset
+#' @templateVar urlSlug online_store/asset
 #' @templateVar article an
 #' @templateVar default.params FALSE
 #' @template api

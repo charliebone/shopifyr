@@ -20,6 +20,7 @@
 
 ########### RecurringApplicationCharge functions ########### 
 #' @templateVar name RecurringApplicationCharge
+#' @templateVar urlSlug billing/recurringapplicationcharge
 #' @templateVar slug charge
 #' @template api
 NULL

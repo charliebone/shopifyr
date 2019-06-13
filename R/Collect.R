@@ -20,6 +20,7 @@
 
 ########### Collect functions ########### 
 #' @templateVar name Collect
+#' @templateVar urlSlug products/collect
 #' @template api
 NULL
 

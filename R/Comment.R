@@ -22,6 +22,7 @@
 #' @param blogId a Blog id number (leave blank to fetch all comments for the shop)
 #' @param articleId an Article id number (leave blank to fetch all comments for this blog)
 #' @templateVar name Comment
+#' @templateVar urlSlug online_store/comment
 #' @template api
 NULL
 

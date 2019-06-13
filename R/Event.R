@@ -21,6 +21,7 @@
 ########### Event functions ########### 
 #' @param eventId a Event id number
 #' @templateVar name Event
+#' @templateVar urlSlug events/event
 #' @templateVar default.params FALSE
 #' @template api
 NULL

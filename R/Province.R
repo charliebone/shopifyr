@@ -21,6 +21,7 @@
 ########### Province functions ########### 
 #' @param countryId a Country id number
 #' @templateVar name Province
+#' @templateVar urlSlug store_properties/province
 #' @template api
 NULL
 

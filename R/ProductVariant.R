@@ -22,7 +22,7 @@
 #' @param productId a Product id number
 #' @templateVar name ProductVariant
 #' @templateVar slug variant
-#' @templateVar urlSlug product_variant
+#' @templateVar urlSlug products/product_variant
 #' @template api
 NULL
 

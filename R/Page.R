@@ -20,25 +20,26 @@
 
 ########### Page functions ########### 
 #' @templateVar name Page
+#' @templateVar urlSlug online_store/page
 #' @template api
 NULL
 
 ## GET /admin/pages.json
-## Receive a list of all Pages
+## Retrieves a list of pages
 #' @rdname Page
 getPages <- function(...) {
     private$.fetchAll("pages", ...)
 }
 
 ## GET /admin/pages/count.json
-## Receive a count of all Pages
+##  a page count
 #' @rdname Page
 getPagesCount <- function(...) {
     private$.request(private$.url("pages","count"), ...)$count
 }
 
-## GET /admin/pages/#{id}.json
-## Receive a single Page
+## GET /admin/pages/#{page_id}.json
+## Retrieves a single page by its ID
 #' @rdname Page
 getPage <- function(pageId, ...) {
     private$.request(private$.url("pages",pageId), ...)$page
@@ -52,16 +53,16 @@ createPage <- function(page, ...) {
     private$.request("pages", reqType="POST", data=page, ...)$page
 }
 
-## PUT /admin/pages/#{id}.json
-## Modify an existing Page
+## PUT /admin/pages/#{page_id}.json
+## Updates a page
 #' @rdname Page
 modifyPage <- function(page, ...) {
     page <- private$.wrap(page, "page")
-    private$.request(private$.url("pages",page$page$id), reqType="POST", data=page, ...)$page
+    private$.request(private$.url("pages",page$page$id), reqType="PUT", data=page, ...)$page
 }
 
-## DELETE /admin/pages/#{id}.json
-## Remove a Page from the database
+## DELETE /admin/pages/#{page_id}.json
+## Deletes a page
 #' @rdname Page
 deletePage <- function(pageId, ...) {
     private$.request(private$.url("pages",pageId), reqType="DELETE", ...)

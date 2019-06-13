@@ -22,7 +22,7 @@
 #' @param orderId an Order id number
 #' @templateVar name OrderRisks
 #' @templateVar slug orderRisk
-#' @templateVar urlSlug order_risks
+#' @templateVar urlSlug orders/order_risk
 #' @template api
 NULL
 

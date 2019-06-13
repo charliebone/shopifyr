@@ -21,6 +21,7 @@
 ########### Customer functions ########### 
 #' @param query a query string to use when searching Customer records
 #' @templateVar name Customer
+#' @templateVar urlSlug customers/customer
 #' @template api
 NULL
 

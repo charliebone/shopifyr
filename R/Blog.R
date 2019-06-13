@@ -20,6 +20,7 @@
 
 ########### Blog functions ########### 
 #' @templateVar name Blog
+#' @templateVar urlSlug online_store/blog
 #' @template api
 NULL
 

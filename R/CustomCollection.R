@@ -20,7 +20,7 @@
 
 ########### CustomCollection functions ########### 
 #' @templateVar name CustomCollection
-#' @templateVar urlSlug custom_collection
+#' @templateVar urlSlug products/customcollection
 #' @template api
 NULL
 

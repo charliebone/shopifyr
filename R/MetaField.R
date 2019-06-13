@@ -22,6 +22,7 @@
 #' @param resourceName the name of a resource e.g. \code{"products", "smart_collections", "product_image"}
 #' @param resourceId the id number of the resource, if applicable (for example Shop has no id)
 #' @templateVar name Metafield
+#' @templateVar urlSlug reference/metafield
 #' @template api
 NULL
 

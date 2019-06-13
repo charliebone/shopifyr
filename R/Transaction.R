@@ -21,6 +21,7 @@
 ########### Transaction functions ########### 
 #' @param orderId an Order id number
 #' @templateVar name Transaction
+#' @templateVar urlSlug orders/transaction
 #' @template api
 NULL
 

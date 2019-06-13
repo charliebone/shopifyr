@@ -20,6 +20,7 @@
 
 ########### Product functions ########### 
 #' @templateVar name Product
+#' @templateVar urlSlug products/product
 #' @template api
 NULL
 

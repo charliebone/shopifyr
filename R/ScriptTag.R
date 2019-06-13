@@ -20,6 +20,7 @@
 
 ########### ScriptTag functions ########### 
 #' @templateVar name ScriptTag
+#' @templateVar urlSlug online_store/scripttag
 #' @template api
 NULL
 

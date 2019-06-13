@@ -20,6 +20,7 @@
 
 ########### Shop functions ########### 
 #' @templateVar name Shop
+#' @templateVar urlSlug store_properties/shop
 #' @templateVar default.params FALSE
 #' @templateVar default.return FALSE
 #' @return a list corresponding to a Shop

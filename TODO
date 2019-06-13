@@ -2,3 +2,23 @@
 - add other high-level functions (add product to collection, remove product from collection, etc)
 - built-in OAuth allowing users to use username and password w/ saved authentication token between sessions
 - add reproducible reports for users to run on their shops (sales reports, abandoned cart reports, user breakdowns, etc)
+
+## STUFF NOT DONE YET
+# DiscountCode
+# DraftOrder
+# FulfillmentEvent
+# GiftCard
+# MarketingEvent
+# Policy
+# PriceRule
+# ProductListing
+# Report
+# ResourceFeedback
+# ShippingZone
+# UsageCharge
+# User
+
+# go over everything once more, update https ## info from reference, add urlSlug for all 
+# add links / structure to ShopifyShop documentation
+# check fetchall(...)$stuff with the $ after because i dont think thats necessary
+# maybe make a nice wrapper inside getInventoryItems that can handle > 100 requests and just loop or use fetchAll

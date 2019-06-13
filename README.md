@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/charliebone/shopifyr.png)](https://travis-ci.org/charliebone/shopifyr)
 
-**shopifyr** aims to provide an easy-to-use interface to the [Shopify API](http://api.shopify.com/) within R. 
+**shopifyr** aims to provide an easy-to-use interface to the [Shopify Admin API](https://help.shopify.com/en/api/reference) within R. 
 
 ## Getting Started
 
@@ -12,18 +12,20 @@ To get started, install the latest version of **shopifyr** from CRAN:
 install.packages("shopifyr")
 ```
 
-Alternatively, you may install the latest development version of the **shopfiyr** package with the following code (requires the [`devtools`](https://github.com/hadley/devtools/) package):
+Alternatively, you may install the latest development version of the **shopfiyr** package with the following code (requires the [`remotes`](https://github.com/r-lib/remotes) package):
 
 ```R
-devtools:::install_github("charliebone/shopifyr")
+remotes:::install_github("charliebone/shopifyr")
 ```
 
-Please note that the **shopifyr** package depends on the [`RCurl`](http://cran.r-project.org/web/packages/RCurl/), [`RJSONIO`](http://cran.r-project.org/web/packages/RJSONIO/) and [`R6`](https://github.com/wch/R6) packages, and they will need to be installed in order to install **shopifyr**.
+Please note that the **shopifyr** package depends on the [`curl`](https://github.com/jeroen/curl), [`jsonlite`](https://github.com/jeroen/jsonlite) and [`R6`](https://github.com/wch/R6) packages. They will need to be installed in order to install **shopifyr**.
 
-After installation is complete, read the notes below. In order to take full advantage of this package, it is highly recommended that you become familiar with the features of the [Shopify API](http://api.shopify.com/). 
+In addition, to query the [Shopify GraphQL Admin API](https://help.shopify.com/en/api/graphql-admin-api), you will need to install the [`ghql`](https://github.com/ropensci/ghql) package.
+
+After installation is complete, read the notes below. In order to take full advantage of this package, it is highly recommended that you become familiar with the features of the [Shopify Admin API](https://help.shopify.com/en/api/getting-started). 
 
 ## Using the ShopifyShop Class
-The workhorse of the **shopifyr** package is the **ShopifyShop** class. It is written using the relatively new [R6 class implementation](https://github.com/wch/R6), which is a lightweight implementation of R's reference class. 
+The workhorse of the **shopifyr** package is the **ShopifyShop** class. It is written using the [R6 class implementation](https://github.com/wch/R6), which is a lightweight implementation of R's reference class. 
 
 The **ShopifyShop** class encapsulates all the API functionality into a single object, allowing simple and expressive access to the Shopify API. To get started, you first must create a **ShopifyShop** object:
 
@@ -87,6 +89,6 @@ bobs <- shop$searchCustomers("Bob country:United States")
 For a complete list of functions and their corresponding documentation, see the `?ShopifyShop` help page. You may get to a function's documentation directly just by invoking the help with that function's name, e.g. `?searchCustomers`.
 
 ## Obtaining API credentials
-The **ShopifyShop** class requires an authorized access token or private application password to access the Shopify API. The easiest way to obtain this is to create and authorize a private app for your Shopify store. You can find instructions for this process on [Shopify's website](http://docs.shopify.com/api/tutorials/creating-a-private-app). 
+The **ShopifyShop** class requires an authorized access token or private application password to access the Shopify API. The easiest way to obtain this is to create and authorize a private app for your Shopify store. You can find instructions for this process on [Shopify's website](https://help.shopify.com/en/api/getting-started/authentication/private-authentication). 
 
 **shopifyr** currently does not implement OAuth authentication, however you may use a permanent access token obtained via an OAuth authentication as the password when initializing a **ShopifyShop** object.

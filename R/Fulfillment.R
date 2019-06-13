@@ -21,6 +21,7 @@
 ########### Fulfillment functions ########### 
 #' @param orderId an Order id number
 #' @templateVar name Fulfillment
+#' @templateVar urlSlug shipping_and_fulfillment/fulfillment
 #' @template api
 NULL
 
