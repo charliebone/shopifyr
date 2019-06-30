@@ -1,7 +1,7 @@
 Package: shopifyr
 Type: Package
 Title: An R Interface to the Shopify API
-Version: 0.6.3
+Version: 0.6.4
 Date: 2019-06-12
 Author: Charlie Friedemann
 Maintainer: Charlie Friedemann <cfriedem@gmail.com>
@@ -16,8 +16,6 @@ Imports:
     R6 (>= 2.0),
     curl,
     jsonlite
-Suggests:
-    base64enc
 Collate:
     'AbandonedCheckout.R'
     'AccessScope.R'

@@ -348,14 +348,25 @@ print.ShopifyShop <- function(...) {
     as.POSIXct(gsub("^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}-\\d{2}):(\\d{2})$", "\\1\\2", str), format="%FT%T%z")
 }
 
-.encodeImageFile <- function(filepath) {
-    if (!file.exists(filepath))
-        stop("image file does not exist")
+.encodeImageFile <- function(fileOrPath) {
+    if (is.character(fileOrPath)) {
+        if (!file.exists(fileOrPath))
+            stop("specified file does not exist")
+        
+        fileOrPath <- file(fileOrPath, "rb")
+        on.exit(close(fileOrPath))
+    }
     
-    if (!requireNamespace("base64enc"))
-        stop("The 'base64enc' package is required to upload images to Shopify")
+    if (inherits(fileOrPath, "connection")) {
+        seek(fileOrPath, 0)
+        chunks <- list()
+        while (length(rawData <- readBin(fileOrPath, raw(0), 65535L))) 
+            chunks <- c(chunks, gsub("\n", "", jsonlite::base64_enc(rawData), fixed=TRUE)) # remove linebreaks added by jsonlite encoder
+        
+        imgData <- unlist(chunks)
+    } else stop("fileOrPath must be a valid filepath or connection to encode")
     
-    imgData <- base64enc::base64encode(filepath)
-    image <- list(attachment = imgData, filename = basename(filepath))
+    image <- list(attachment = imgData, filename = basename(summary.connection(fileOrPath)$description))
     image
 }
+
