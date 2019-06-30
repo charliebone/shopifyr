@@ -68,11 +68,11 @@ print.ShopifyShop <- function(...) {
 }
 
 .baseUrl <- function() {
-    paste0("https://",self$shopURL,"/admin/")
+    paste0("https://",self$shopURL,"/admin/api/",private$.apiVersion,"/")
 }
 
 .graphQlUrl <- function(type = "admin") {
-    paste0("https://",self$shopURL,"/admin/api/graphql.json")
+    paste0(private$.baseUrl(),"graphql.json")
 }
 
 .wrap <- function(data, name, check = "id") {
@@ -140,14 +140,14 @@ print.ShopifyShop <- function(...) {
 
 #' @importFrom jsonlite toJSON
 #' @importFrom jsonlite validate
-.encode <- function(data) {
+.encode <- function(data, validate = TRUE) {
     if (is.list(data)) {
         if (length(data) == 0)
             data <- "{}" # use '{}' not '[]' which toJSON() would give for empty list
         else
             data <- jsonlite::toJSON(data, digits=20, auto_unbox=TRUE)
     } else if (is.character(data)) {
-        isValid <- jsonlite::validate(data)
+        isValid <- !isTRUE(validate) || jsonlite::validate(data)
         if (!isTRUE(isValid)) stop(attr(isValid, "err"))
     } else {
         stop("data must be of type list or character")
@@ -155,14 +155,17 @@ print.ShopifyShop <- function(...) {
     data
 }
 
-#' @importFrom curl curl_fetch_memory
-#' @importFrom curl parse_headers_list
-.graphQlRequest <- function(query, paceRequests = TRUE, verbose = FALSE) {
-    # send request
-    while(isTRUE(paceRequests) && !private$.rateLimitOk()) { } 
-    
-    handle <- private$.createHandle("POST", data=query, verbose=verbose)
-    res <- try(curl::curl_fetch_memory(.graphQlUrl(), handle=handle), silent=TRUE)
+.graphQlRequest <- function(query, 
+                            paceRequests = TRUE, 
+                            parse. = TRUE, 
+                            verbose = FALSE, 
+                            retryCount = 1) {
+    private$.request(data=query, 
+                     graphQl=TRUE, 
+                     paceRequests=paceRequests,
+                     parse.=parse., 
+                     verbose=verbose,
+                     retryCount = retryCount)
 }
 
 #' @importFrom curl curl_fetch_memory
@@ -172,23 +175,30 @@ print.ShopifyShop <- function(...) {
                      paceRequests = TRUE,
                      ..., 
                      parse. = TRUE, 
-                     type. = "json", 
+                     type. = "json",
+                     graphQl = FALSE,
                      verbose = FALSE,
                      retryCount = 1) {
     
     # generate url and check request type
-    reqUrl <- paste0(private$.baseUrl(), slug, ".", type.)
-    reqType <- match.arg(toupper(reqType), c("GET","POST","PUT","DELETE"))
+    if (isTRUE(graphQl)) {
+        reqUrl <- private$.graphQlUrl()
+        reqType <- "POST"
+    } else {
+        reqUrl <- paste0(private$.baseUrl(), slug, ".", type.)
+        reqType <- match.arg(toupper(reqType), c("GET","POST","PUT","DELETE"))
+    }
     
     # parse url parameters
     params <- list(...)
     if (!is.null(params) && length(params) > 0)
         reqUrl <- paste0(reqUrl, "?", private$.params(params))
     
-    # send request
-    while(isTRUE(paceRequests) && !private$.rateLimitOk()) { } 
+    # pace requests
+    while(isTRUE(paceRequests) && ((isTRUE(graphQl) && !private$.costLimitOk()) || (!isTRUE(graphQl) && !private$.rateLimitOk()))) { } 
     
-    handle <- private$.createHandle(reqType, data=data, verbose=verbose)
+    # send request
+    handle <- private$.createHandle(reqType, data=data, verbose=verbose, graphQl=graphQl, encodeData=parse.)
     res <- try(curl::curl_fetch_memory(reqUrl, handle=handle), silent=TRUE)
     
     # check result for error
@@ -200,6 +210,7 @@ print.ShopifyShop <- function(...) {
                                 ..., 
                                 parse.=parse., 
                                 type.=type., 
+                                graphQl=graphQl,
                                 verbose=verbose,
                                 retryCount=retryCount-1))
         } else 
@@ -208,14 +219,11 @@ print.ShopifyShop <- function(...) {
     
     private$.responseHeaders <- curl::parse_headers_list(res$headers)
     
-    # update rate limit
-    private$.updateRateLimit()
-    
-    # return response
-    result <- rawToChar(res$content)
+    # parse response
+    rawResult <- rawToChar(res$content)
     if (isTRUE(parse.)) {
-        result <- try(private$.parseResponseBody(result), silent=TRUE)
-        if (inherits(result, "try-error")) {
+        parsedResult <- try(private$.parseResponseBody(rawResult), silent=TRUE)
+        if (inherits(parsedResult, "try-error")) {
             if (retryCount > 0) {
                 return(private$.request(slug=slug, 
                                         reqType=reqType, 
@@ -223,41 +231,61 @@ print.ShopifyShop <- function(...) {
                                         ..., 
                                         parse.=parse., 
                                         type.=type., 
+                                        graphQl=graphQl,
                                         verbose=verbose,
                                         retryCount=retryCount-1))
             } else 
-                stop(paste("Error parsing response body :", attr(result,"condition")$message))
+                stop(paste("Error parsing response body :", attr(parsedResult,"condition")$message))
         }
     }
-    result
-}
-
-.graphqlClient <- function() {
-    if (is.null(private$.graphqlClient)) {
-        if (!requireNamespace("ghql"))
-            stop("The 'ghql' package is required to use the Shopifty GraphQL Admin API")
-        
-        private$.graphqlClient <- ghql::GraphqlClient$new(url = private$.graphQlUrl(),
-                                                          headers = list('X-Shopify-Access-Token' = self$password))
+    
+    # update rate limit
+    if (isTRUE(paceRequests)) {
+        if (isTRUE(graphQl)) {
+            # parse results if we haven't already to get cost info
+            if (!isTRUE(parse.)) 
+                parsedResult <- try(private$.parseResponseBody(rawResult), silent=TRUE)
+            
+            if (!inherits(parsedResult, "try-error")) 
+                private$.updateCostLimit(parsedResult$extensions)
+        } else {
+            private$.updateRateLimit()
+        }
     }
-    private$.graphqlClient
+    
+    # return response
+    if (!isTRUE(parse.)) 
+        return(rawResult)
+    else
+        return(parsedResult)
 }
 
 #' @importFrom curl new_handle
 #' @importFrom curl handle_setopt
 #' @importFrom curl handle_setheaders
-.createHandle <- function(reqType, data, verbose = FALSE) {
+.createHandle <- function(reqType, data, verbose = FALSE, graphQl = FALSE, encodeData = TRUE) {
     handle <- curl::new_handle(sslversion = 6L, # force TLS v1.2
                                post = ifelse(reqType=="POST",1L,0L),
                                customrequest = reqType,
                                verbose = verbose)
     
+    if (isTRUE(graphQl)) {
+        reqType <- "POST"
+        contentType <- "application/graphql"
+    } else {
+        contentType <- "application/json"
+    }
+    
     # add form data for POST or PUT requests
-    if (reqType %in% c("POST","PUT"))
-        handle <- curl::handle_setopt(handle, postfields = private$.encode(data))
+    if (reqType %in% c("POST","PUT")){
+        if (isTRUE(encodeData) && !is.null(data))
+            data <- private$.encode(data, validate=!isTRUE(graphQl))
+    
+        handle <- curl::handle_setopt(handle, postfields=data)
+    }
     
     # set request headers
-    handle <- curl::handle_setheaders(handle, 'Content-Type' = 'application/json',
+    handle <- curl::handle_setheaders(handle, 'Content-Type' = contentType,
                                               'Accept' = 'application/json',
                                               'X-Shopify-Access-Token' = self$password)
     private$.curlHandle <- handle
@@ -279,10 +307,26 @@ print.ShopifyShop <- function(...) {
 
 .rateLimitOk <- function() {
     if (is.null(private$.lastReqTime)) return(TRUE) 
+    
     if ((private$.rateLimitTotal - private$.rateLimitUsed) > 2) return (TRUE)
     
     # if at limit and less than a second since last request then not ok
     return(difftime(Sys.time(), private$.lastReqTime, units="secs") >= 1)
+}
+
+.updateCostLimit <- function(extensions, timestamp = Sys.time()) {
+    private$.costLimitUsed <- extensions$cost$throttleStatus$currentlyAvailable
+    private$.costLimitTotal <- extensions$cost$throttleStatus$maximumAvailable
+    private$.costLimitRestoreRate <- extensions$cost$throttleStatus$restoreRate
+    
+    return(TRUE)
+}
+
+.costLimitOk <- function() {
+    if (is.null(private$.lastReqTime)) return(TRUE) 
+    
+    # not sure of best method as it depends on future query cost
+    return(TRUE)
 }
 
 #' @importFrom jsonlite fromJSON

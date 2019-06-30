@@ -482,6 +482,9 @@ ShopifyShop <- R6Class("ShopifyShop",
         modifyFulfillmentService = modifyFulfillmentService,
         deleteFulfillmentService = deleteFulfillmentService,
         
+        # GraphQL functions
+        graphQlQuery = graphQlQuery,
+        
         # InventoryItem functions
         getInventoryItems = getInventoryItems,
         getInventoryItem = getInventoryItem,
@@ -633,12 +636,14 @@ ShopifyShop <- R6Class("ShopifyShop",
         .costLimitUsed = 0,
         .costLimitTotal = 1000,
         .costLimitRestoreRate = 50,
+        .apiVersion = "2019-04",
         
         # private methods
         .params = .params,
         .url = .url,
         .baseUrl = .baseUrl,
         .graphQlUrl = .graphQlUrl,
+        .graphQlRequest = .graphQlRequest,
         .wrap = .wrap,
         .encode = .encode,
         .fetchAll = .fetchAll,
@@ -647,6 +652,8 @@ ShopifyShop <- R6Class("ShopifyShop",
         .parseResponseBody = .parseResponseBody,
         .updateRateLimit = .updateRateLimit,
         .rateLimitOk = .rateLimitOk,
+        .updateCostLimit = .updateCostLimit,
+        .costLimitOk = .costLimitOk,
         .parseShopifyTimestamp = .parseShopifyTimestamp,
         .encodeImageFile =.encodeImageFile
     )

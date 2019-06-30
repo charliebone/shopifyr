@@ -1,7 +1,7 @@
 Package: shopifyr
 Type: Package
 Title: An R Interface to the Shopify API
-Version: 0.6.2
+Version: 0.6.3
 Date: 2019-06-12
 Author: Charlie Friedemann
 Maintainer: Charlie Friedemann <cfriedem@gmail.com>
@@ -17,7 +17,6 @@ Imports:
     curl,
     jsonlite
 Suggests:
-    ghql,
     base64enc
 Collate:
     'AbandonedCheckout.R'
@@ -41,6 +40,7 @@ Collate:
     'Event.R'
     'Fulfillment.R'
     'FulfillmentService.R'
+    'GraphQL.R'
     'InventoryItem.R'
     'InventoryLevel.R'
     'Location.R'

@@ -20,7 +20,7 @@ remotes:::install_github("charliebone/shopifyr")
 
 Please note that the **shopifyr** package depends on the [`curl`](https://github.com/jeroen/curl), [`jsonlite`](https://github.com/jeroen/jsonlite) and [`R6`](https://github.com/wch/R6) packages. They will need to be installed in order to install **shopifyr**.
 
-In addition, to query the [Shopify GraphQL Admin API](https://help.shopify.com/en/api/graphql-admin-api), you will need to install the [`ghql`](https://github.com/ropensci/ghql) package.
+In addition, you may query the [Shopify GraphQL Admin API](https://help.shopify.com/en/api/graphql-admin-api) using this package.
 
 After installation is complete, read the notes below. In order to take full advantage of this package, it is highly recommended that you become familiar with the features of the [Shopify Admin API](https://help.shopify.com/en/api/getting-started). 
 
