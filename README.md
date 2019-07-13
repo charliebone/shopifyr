@@ -31,9 +31,9 @@ The **ShopifyShop** class encapsulates all the API functionality into a single o
 
 ```R
 library(shopifyr)
-shopURL <- "shopname.myshopify.com"
+shopUrl <- "shopname.myshopify.com"
 password <- "your_private_app_password"
-shop <- ShopifyShop$new(shopURL, password)
+shop <- ShopifyShop$new(shopUrl, password)
 
 # view shop information
 shop$shopInfo       # displays cached shop information
@@ -46,7 +46,7 @@ For example, it's fairly straightforward to create a new product for your store:
 
 ```R
 product <- list(title="The R Inferno",
-                body="<b>The R Inferno</b><i>by Patrick Burns</i>",
+                body_html="<b>The R Inferno</b> <i>by Patrick Burns</i>",
                 vendor="Burns Statistics",
                 product_type="Paperback",
                 images=list(list(src="http://www.burns-stat.com/wp-content/
@@ -63,7 +63,8 @@ Given the product _id_, adding a metafield to the new product is relatively stra
 ```R
 metafield <- list(namespace="books",
                   key="author",
-                  value="Patrick Burns")
+                  value="Patrick Burns",
+                  value_type="string")
 newMetafield <- shop$createMetafield("products", resourceId=newProduct$id, metafield=metafield)
 ```
 

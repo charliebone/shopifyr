@@ -89,19 +89,19 @@ print.ShopifyShop <- function(...) {
     ret
 }
 
-.fetchAll <- function(slug, name = slug, limit = 250, page = NULL, sinceId = 0, paceRequests = TRUE, queryParam = NULL, queryMax = 100, silent = FALSE, ...) {
-    if (!is.null(queryParam)) {
+.fetchAll <- function(slug, name = slug, limit = 250, page = NULL, sinceId = 0, paceRequests = TRUE, .queryParam = NULL, .queryMax = 100, silent = FALSE, ...) {
+    if (!is.null(.queryParam)) {
         dots <- list(...)
-        if (!queryParam %in% names(dots)) 
-            stop(paste0("specified queryParam '",queryParam,"' not found as argument to fetchAll"))
+        if (!.queryParam %in% names(dots)) 
+            stop(paste0("specified queryParam '",.queryParam,"' not found as argument to fetchAll"))
         
-        querySplits <- split(dots[[queryParam]], ceiling(seq_along(dots[[queryParam]]) / queryMax))
-        baseArgs <- list(slug=slug, name=name, limit=limit, paceRequests=paceRequests, queryParam=NULL, silent=silent)
-        baseArgs <- c(baseArgs, dots[-which(names(dots) == queryParam)])
+        querySplits <- split(dots[[.queryParam]], ceiling(seq_along(dots[[.queryParam]]) / .queryMax))
+        baseArgs <- list(slug=slug, name=name, limit=limit, paceRequests=paceRequests, .queryParam=NULL, silent=silent)
+        baseArgs <- c(baseArgs, dots[-which(names(dots) == .queryParam)])
         
         results <- lapply(querySplits, function(x) {
             fargs <- baseArgs
-            fargs[[queryParam]] <- paste0(x, collapse=",")
+            fargs[[.queryParam]] <- paste0(x, collapse=",")
             do.call(private$.fetchAll, fargs)
         })
         
@@ -237,6 +237,26 @@ print.ShopifyShop <- function(...) {
             } else 
                 stop(paste("Error parsing response body :", attr(parsedResult,"condition")$message))
         }
+        
+        if (!is.null(parsedResult$errors)) {
+            if (retryCount > 0) {
+                return(private$.request(slug=slug, 
+                                        reqType=reqType, 
+                                        data=data, 
+                                        ..., 
+                                        parse.=parse., 
+                                        type.=type., 
+                                        graphQl=graphQl,
+                                        verbose=verbose,
+                                        retryCount=retryCount-1))
+            } else {
+                nms <- names(parsedResult$errors)
+                if (!is.null(nms))
+                    stop(paste0("Shopify returned error(s): ", paste0(unlist(lapply(nms, function(x) paste0("'",x,"' ", parsedResult$errors[[x]], collapse="; "))), collapse="; ")), call.=FALSE)
+                else 
+                    stop(paste0("Shopify returned error(s): ", paste(parsedResult$errors, collapse="; ")), call.=FALSE)
+            }
+        }
     }
     
     # update rate limit
@@ -334,12 +354,7 @@ print.ShopifyShop <- function(...) {
     if (missing(response) || is.null(response) || nchar(response) < 2)
         return(NULL)
     
-    parsed <- jsonlite::fromJSON(response, simplifyDataFrame=FALSE)
-    
-    if (!is.null(parsed$errors))
-        stop(paste(parsed$errors, collapse="; "), call.=FALSE)
-    
-    parsed
+    jsonlite::fromJSON(response, simplifyDataFrame=FALSE)
 }
 
 .parseShopifyTimestamp <- function(str) {

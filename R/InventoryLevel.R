@@ -38,9 +38,9 @@ getInventoryLevels <- function(locationIds, inventoryItemIds, ...) {
         stop("must provide 'locationIds', 'inventoryItemIds' or both")
     
     if (missing(locationIds)) {
-        private$.fetchAll("inventory_levels", inventory_item_ids=inventoryItemIds, queryParam="inventory_item_ids", queryMax=50, ...)
+        private$.fetchAll("inventory_levels", inventory_item_ids=inventoryItemIds, .queryParam="inventory_item_ids", .queryMax=50, ...)
     } else if (missing(inventoryItemIds)) {
-        private$.fetchAll("inventory_levels", location_ids=locationIds, queryParam="location_ids", queryMax=50, ...)
+        private$.fetchAll("inventory_levels", location_ids=locationIds, .queryParam="location_ids", .queryMax=50, ...)
     } else {
         # have both
         inventoryItemIds <- paste0(inventoryItemIds, collapse=",") 

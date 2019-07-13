@@ -36,7 +36,7 @@ getCustomers <- function(...) {
 ## Search for customers matching supplied query
 #' @rdname Customer
 searchCustomers <- function(query, ...) {
-    private$.fetchAll(private$.url("customers","search"), "customers", query=query, ...)
+    private$.fetchAll(private$.url("customers","search"), "customers", query=query, .queryParam="query", ...)
 }
 
 ## GET /admin/customers/#{id}.json

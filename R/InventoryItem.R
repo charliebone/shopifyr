@@ -29,7 +29,7 @@ NULL
 ## Retrieves a list of inventory items
 #' @rdname InventoryItem
 getInventoryItems <- function(inventoryItemIds, ...) {
-    private$.fetchAll("inventory_items", ids=inventoryItemIds, queryParam="ids", queryMax=100, ...)
+    private$.fetchAll("inventory_items", ids=inventoryItemIds, .queryParam="ids", .queryMax=100, ...)
 }
 
 ## GET /admin/inventory_items/#{inventory_item_id}.json
