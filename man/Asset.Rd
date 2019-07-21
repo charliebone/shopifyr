@@ -18,7 +18,7 @@ createAsset(themeId, asset, ...)
 deleteAsset(themeId, assetKey, ...)
 }
 \arguments{
-\item{themeId}{a Theme id number}
+\item{themeId}{a \code{\link{Theme}} id number}
 
 \item{...}{additional request parameters}
 

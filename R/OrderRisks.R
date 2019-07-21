@@ -19,14 +19,14 @@
 #
 
 ########### OrderRisks functions ########### 
-#' @param orderId an Order id number
+#' @param orderId an \code{\link{Order}} id number
 #' @templateVar name OrderRisks
 #' @templateVar slug orderRisk
 #' @templateVar urlSlug orders/order_risk
 #' @template api
 NULL
 
-## POST /admin/orders/#{id}/risks.json
+## POST /admin/api/#{api_version}/orders/#{id}/risks.json
 ## Create a new Order Risks
 #' @rdname OrderRisks
 createOrderRisk <- function(orderId, orderRisk, ...) {
@@ -34,21 +34,21 @@ createOrderRisk <- function(orderId, orderRisk, ...) {
     private$.request(private$.url("orders",orderId,"risks"), reqType="POST", data=orderRisk, ...)$risk
 }
 
-## GET /admin/orders/#{id}/risks.json
+## GET /admin/api/#{api_version}/orders/#{id}/risks.json
 ## Receive a list of all Order Risks
 #' @rdname OrderRisks
 getOrderRisks <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"risks"), ...)$risks
 }
 
-## GET /admin/orders/#{id}/risks/#{id}.json
+## GET /admin/api/#{api_version}/orders/#{id}/risks/#{id}.json
 ## Receive a single Order Risk
 #' @rdname OrderRisks
 getOrderRisk <- function(orderId, orderRiskId, ...) {
     private$.request(private$.url("orders",orderId,"risks",orderRiskId), ...)$risk
 }
 
-## PUT /admin/orders/#{id}/risks/#{id}.json
+## PUT /admin/api/#{api_version}/orders/#{id}/risks/#{id}.json
 ## Modify an existing Order Risks
 #' @rdname OrderRisks
 modifyOrderRisk <- function(orderId, orderRisk, ...) {
@@ -56,7 +56,7 @@ modifyOrderRisk <- function(orderId, orderRisk, ...) {
     private$.request(private$.url("orders",orderId,"risks",orderRisk$risk$id), reqType="PUT", data=orderRisk, ...)$risk
 }
 
-## DELETE /admin/orders/#{id}/risks/#{id}.json
+## DELETE /admin/api/#{api_version}/orders/#{id}/risks/#{id}.json
 ## Remove a Order Risks from the database
 #' @rdname OrderRisks
 deleteOrderRisk <- function(orderId, orderRiskId, ...) {

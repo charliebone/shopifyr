@@ -23,7 +23,7 @@ modifyProductImage(productId, image, ..., filepath)
 deleteProductImage(productId, imageId, ...)
 }
 \arguments{
-\item{productId}{a Product id number}
+\item{productId}{a \code{\link{Product}} id number}
 
 \item{...}{additional request parameters}
 

@@ -22,14 +22,13 @@
 #' @param collectionId a Collection id
 #' @param collectionListingId a CollectionListing id
 #' @templateVar name CollectionListing
-#' @templateVar urlSlug sales_channels/checkout
+#' @templateVar urlSlug sales-channels/collectionlisting
 #' @templateVar default.params FALSE
-#' @templateVar default.return FALSE
 #' @return a list of Checkouts
 #' @template api
 NULL
 
-## PUT /admin/collection_listings/#{collection_listing_id}.json
+## PUT /admin/api/#{api_version}/collection_listings/#{collection_listing_id}.json
 ## Create a collection listing to publish a collection to your app
 #' @rdname CollectionListing
 createCollectionListing <- function(collectionId, ...) {
@@ -37,7 +36,7 @@ createCollectionListing <- function(collectionId, ...) {
     private$.request(private$.url("collection_listings",collectionId), reqType="PUT", data=collect, ...)$collection_listing
 }
 
-## DELETE /admin/collection_listings/#{collection_listing_id}.json
+## DELETE /admin/api/#{api_version}/collection_listings/#{collection_listing_id}.json
 ## Delete a collection listing to unpublish a collection from your app
 #' @rdname CollectionListing
 deleteCollectionListing <- function(collectionListingId, ...) {
@@ -45,21 +44,21 @@ deleteCollectionListing <- function(collectionListingId, ...) {
 }
 
 
-## GET /admin/collection_listings.json
+## GET /admin/api/#{api_version}/collection_listings.json
 ## Retrieve collection listings that are published to your app
 #' @rdname CollectionListing
 getCollectionListings <- function(...) {
     private$.fetchAll("collection_listings", ...)
 }
 
-## GET /admin/collection_listings/#{collection_listing_id}.json
+## GET /admin/api/#{api_version}/collection_listings/#{collection_listing_id}.json
 ## Retrieve a specific collection listing that is published to your app
 #' @rdname CollectionListing
 getCollectionListingCount <- function(...) {
     private$.request(private$.url("collection_listings","count"), ...)$count
 }
 
-## GET /admin/collection_listings/#{collection_listing_id}/product_ids.json
+## GET /admin/api/#{api_version}/collection_listings/#{collection_listing_id}/product_ids.json
 ## Retrieve product_ids that are published to a collection_id
 #' @rdname CollectionListing
 getCollectionListingProductIds <- function(collectionListingId, ...) {

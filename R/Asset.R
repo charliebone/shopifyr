@@ -19,7 +19,7 @@
 #
 
 ########### Asset functions ########### 
-#' @param themeId a Theme id number
+#' @param themeId a \code{\link{Theme}} id number
 #' @param assetKey an Asset key e.g. \code{"templates/index.liquid"}
 #' @param asset a list containing Asset fields
 #' @templateVar name Asset
@@ -29,21 +29,21 @@
 #' @template api
 NULL
 
-## GET /admin/themes/#{id}/assets.json
+## GET /admin/api/#{api_version}/themes/#{id}/assets.json
 ## Receive a list of all Assets
 #' @rdname Asset
 getAssets <- function(themeId, ...) {
     private$.request(private$.url("themes",themeId,"assets"), ...)$assets
 }
 
-## GET /admin/themes/#{id}/assets.json?asset[key]=templates/index.liquid&theme_id=828155753
+## GET /admin/api/#{api_version}/themes/#{id}/assets.json?asset[key]=templates/index.liquid&theme_id=828155753
 ## Receive a single Asset
 #' @rdname Asset
 getAsset <- function(themeId, assetKey, ...) {
     private$.request(private$.url("themes",themeId,"assets"), `asset[key]`=assetKey, theme_id=themeId, ...)$asset
 }
 
-## PUT /admin/themes/#{id}/assets.json
+## PUT /admin/api/#{api_version}/themes/#{id}/assets.json
 ## Creating or Modifying an Asset
 #' @rdname Asset
 #' @aliases modifyAsset
@@ -52,7 +52,7 @@ createAsset <- modifyAsset <- function(themeId, asset, ...) {
     private$.request(private$.url("themes",themeId,"assets"), reqType="PUT", data=asset, ...)$asset
 }
 
-## DELETE /admin/themes/#{id}/assets.json?asset[key]=assets/bg-body.gif
+## DELETE /admin/api/#{api_version}/themes/#{id}/assets.json?asset[key]=assets/bg-body.gif
 ## Remove a Asset from the database
 #' @rdname Asset
 deleteAsset <- function(themeId, assetKey, ...) {

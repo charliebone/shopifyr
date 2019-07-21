@@ -25,21 +25,21 @@
 #' @template api
 NULL
 
-## GET /admin/inventory_items.json?ids=808950810,39072856,457924702
+## GET /admin/api/#{api_version}/inventory_items.json?ids=808950810,39072856,457924702
 ## Retrieves a list of inventory items
 #' @rdname InventoryItem
 getInventoryItems <- function(inventoryItemIds, ...) {
     private$.fetchAll("inventory_items", ids=inventoryItemIds, .queryParam="ids", .queryMax=100, ...)
 }
 
-## GET /admin/inventory_items/#{inventory_item_id}.json
+## GET /admin/api/#{api_version}/inventory_items/#{inventory_item_id}.json
 ## Retrieves a single inventory item by its ID
 #' @rdname InventoryItem
 getInventoryItem <- function(inventoryItemId, ...) {
     private$.request(private$.url("inventory_items",inventoryItemId), ...)$inventory_item
 }
 
-## PUT /admin/inventory_items/#{inventory_item_id}.json
+## PUT /admin/api/#{api_version}/inventory_items/#{inventory_item_id}.json
 ## Updates an existing inventory item
 #' @rdname InventoryItem
 modifyInventoryItem <- function(inventoryItem, ...) {

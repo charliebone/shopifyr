@@ -19,35 +19,35 @@
 #
 
 ########### ProductVariant functions ########### 
-#' @param productId a Product id number
+#' @param productId a \code{\link{Product}} id number
 #' @templateVar name ProductVariant
 #' @templateVar slug variant
 #' @templateVar urlSlug products/product_variant
 #' @template api
 NULL
 
-## GET /admin/products/#{id}/variants.json
+## GET /admin/api/#{api_version}/products/#{id}/variants.json
 ## Receive a list of all Product Variants
 #' @rdname ProductVariant
 getProductVariants <- function(productId, ...) {
     private$.fetchAll(private$.url("products",productId,"variants"), "variants", ...)
 }
 
-## GET /admin/products/#{id}/variants/count.json
+## GET /admin/api/#{api_version}/products/#{id}/variants/count.json
 ## Receive a count of all Product Variants
 #' @rdname ProductVariant
 getProductVariantsCount <- function(productId, ...) {
     private$.request(private$.url("products",productId,"variants","count"), ...)$count
 }
 
-## GET /admin/variants/#{id}.json
+## GET /admin/api/#{api_version}/variants/#{id}.json
 ## Receive a single Product Variant
 #' @rdname ProductVariant
 getProductVariant<- function(variantId, ...) {
     private$.request(private$.url("variants",variantId), ...)$variant
 }
 
-## POST /admin/products/#{id}/variants.json
+## POST /admin/api/#{api_version}/products/#{id}/variants.json
 ## Create a new Product Variant
 #' @rdname ProductVariant
 createProductVariant<- function(productId, variant, ...) {
@@ -55,7 +55,7 @@ createProductVariant<- function(productId, variant, ...) {
     private$.request(private$.url("products",productId,"variants"), reqType="POST", data=variant, ...)$variant
 }
 
-## PUT /admin/variants/#{id}.json
+## PUT /admin/api/#{api_version}/variants/#{id}.json
 ## Modify an existing Product Variant
 #' @rdname ProductVariant
 modifyProductVariant<- function(productId, variant, ...) {
@@ -63,7 +63,7 @@ modifyProductVariant<- function(productId, variant, ...) {
     private$.request(private$.url("variants", variant$variant$id), reqType="PUT", data=variant, ...)$variant
 }
 
-## DELETE /admin/products/#{id}/variants/#{id}.json
+## DELETE /admin/api/#{api_version}/products/#{id}/variants/#{id}.json
 ## Remove a Product Variant from the database
 #' @rdname ProductVariant
 deleteProductVariant<- function(productId, variantId, ...) {

@@ -23,7 +23,7 @@ deleteCustomerAddress(customerId, customerAddressId, ...)
 setCustomerDefaultAddress(customerId, customerAddressId, ...)
 }
 \arguments{
-\item{customerId}{a Customer id}
+\item{customerId}{a \code{\link{Customer}} id}
 
 \item{...}{additional request parameters}
 

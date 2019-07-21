@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/pages.json
+## GET /admin/api/#{api_version}/pages.json
 ## Retrieves a list of pages
 #' @rdname Page
 getPages <- function(...) {
     private$.fetchAll("pages", ...)
 }
 
-## GET /admin/pages/count.json
+## GET /admin/api/#{api_version}/pages/count.json
 ##  a page count
 #' @rdname Page
 getPagesCount <- function(...) {
     private$.request(private$.url("pages","count"), ...)$count
 }
 
-## GET /admin/pages/#{page_id}.json
+## GET /admin/api/#{api_version}/pages/#{page_id}.json
 ## Retrieves a single page by its ID
 #' @rdname Page
 getPage <- function(pageId, ...) {
     private$.request(private$.url("pages",pageId), ...)$page
 }
 
-## POST /admin/pages.json
+## POST /admin/api/#{api_version}/pages.json
 ## Create a new Page
 #' @rdname Page
 createPage <- function(page, ...) {
@@ -53,7 +53,7 @@ createPage <- function(page, ...) {
     private$.request("pages", reqType="POST", data=page, ...)$page
 }
 
-## PUT /admin/pages/#{page_id}.json
+## PUT /admin/api/#{api_version}/pages/#{page_id}.json
 ## Updates a page
 #' @rdname Page
 modifyPage <- function(page, ...) {
@@ -61,7 +61,7 @@ modifyPage <- function(page, ...) {
     private$.request(private$.url("pages",page$page$id), reqType="PUT", data=page, ...)$page
 }
 
-## DELETE /admin/pages/#{page_id}.json
+## DELETE /admin/api/#{api_version}/pages/#{page_id}.json
 ## Deletes a page
 #' @rdname Page
 deletePage <- function(pageId, ...) {

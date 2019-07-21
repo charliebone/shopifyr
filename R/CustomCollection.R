@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/custom_collections.json
+## GET /admin/api/#{api_version}/custom_collections.json
 ## Receive a list of all CustomCollections
 #' @rdname CustomCollection
 getCustomCollections <- function(...) {
     private$.fetchAll("custom_collections", ...)
 }
 
-## GET /admin/custom_collections/count.json
+## GET /admin/api/#{api_version}/custom_collections/count.json
 ## Receive a count of all CustomCollections
 #' @rdname CustomCollection
 getCustomCollectionsCount <- function(...) {
     private$.request(private$.url("custom_collections","count"), ...)$count
 }
 
-## GET /admin/custom_collections/#{id}.json
+## GET /admin/api/#{api_version}/custom_collections/#{id}.json
 ## Receive a single CustomCollection
 #' @rdname CustomCollection
 getCustomCollection <- function(customCollectionId, ...) {
     private$.request(private$.url("custom_collections",customCollectionId), ...)$custom_collection
 }
 
-## POST /admin/custom_collections.json
+## POST /admin/api/#{api_version}/custom_collections.json
 ## Create a new CustomCollection
 #' @rdname CustomCollection
 createCustomCollection <- function(customCollection, ...) {
@@ -53,7 +53,7 @@ createCustomCollection <- function(customCollection, ...) {
     private$.request("custom_collections", reqType="POST", data=customCollection, ...)$custom_collection
 }
 
-## PUT /admin/custom_collections/#{id}.json
+## PUT /admin/api/#{api_version}/custom_collections/#{id}.json
 ## Modify an existing CustomCollection
 #' @rdname CustomCollection
 modifyCustomCollection <- function(customCollection, ...) {
@@ -61,7 +61,7 @@ modifyCustomCollection <- function(customCollection, ...) {
     private$.request(private$.url("custom_collections",customCollection$custom_collection$id), reqType="PUT", data=customCollection, ...)$custom_collection
 }
 
-## DELETE /admin/custom_collections/#{id}.json
+## DELETE /admin/api/#{api_version}/custom_collections/#{id}.json
 ## Remove a CustomCollection from the database
 #' @rdname CustomCollection
 deleteCustomCollection <- function(customCollectionId, ...) {

@@ -19,7 +19,7 @@
 #
 
 ########### Refund functions ########### 
-#' @param orderId an Order id number
+#' @param orderId an \code{\link{Order}} id number
 #' @param refundId a Refund id number
 #' @templateVar name Refund
 #' @templateVar urlSlug orders/refund
@@ -29,7 +29,7 @@
 #' @template api
 NULL
 
-## GET /admin/orders/#{id}/refunds/#{id}.json
+## GET /admin/api/#{api_version}/orders/#{id}/refunds/#{id}.json
 ## Receive a single Refund
 #' @rdname Refund
 getRefund <- function(orderId, refundId, ...) {

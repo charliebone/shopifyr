@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/blogs.json
+## GET /admin/api/#{api_version}/blogs.json
 ## Receive a list of all Blogs
 #' @rdname Blog
 getBlogs <- function(...) {
     private$.request("blogs", ...)$blogs
 }
 
-## GET /admin/blogs/count.json
+## GET /admin/api/#{api_version}/blogs/count.json
 ## Receive a count of all Blogs
 #' @rdname Blog
 getBlogsCount <- function(...) {
     private$.request(private$.url("blogs","count"), ...)$count
 }
 
-## GET /admin/blogs/#{id}.json
+## GET /admin/api/#{api_version}/blogs/#{id}.json
 ## Receive a single Blog
 #' @rdname Blog
 getBlog <- function(blogId, ...) {
     private$.request(private$.url("blogs",blogId), ...)$blog
 }
 
-## POST /admin/blogs.json
+## POST /admin/api/#{api_version}/blogs.json
 ## Create a new Blog
 #' @rdname Blog
 createBlog <- function(blog, ...) {
@@ -53,7 +53,7 @@ createBlog <- function(blog, ...) {
     private$.request("blogs", reqType="POST", data=blog, ...)$blog
 }
 
-## PUT /admin/blogs/#{id}.json
+## PUT /admin/api/#{api_version}/blogs/#{id}.json
 ## Modify an existing Blog
 #' @rdname Blog
 modifyBlog <- function(blog, ...) {
@@ -61,7 +61,7 @@ modifyBlog <- function(blog, ...) {
     private$.request(private$.url("blogs",blog$blog$id), reqType="PUT", data=blog, ...)$blog
 }
 
-## DELETE /admin/blogs/#{id}.json
+## DELETE /admin/api/#{api_version}/blogs/#{id}.json
 ## Remove a Blog from the database
 #' @rdname Blog
 deleteBlog <- function(blogId, ...) {

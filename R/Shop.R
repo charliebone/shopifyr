@@ -27,7 +27,7 @@
 #' @template api
 NULL
 
-## GET /admin/shop.json
+## GET /admin/api/#{api_version}/shop.json
 ## Receive a single Shop
 #' @rdname Shop
 getShop <- function(...) {

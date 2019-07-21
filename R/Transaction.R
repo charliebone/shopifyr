@@ -19,34 +19,34 @@
 #
 
 ########### Transaction functions ########### 
-#' @param orderId an Order id number
+#' @param orderId an \code{\link{Order}} id number
 #' @templateVar name Transaction
 #' @templateVar urlSlug orders/transaction
 #' @template api
 NULL
 
-## GET /admin/orders/#{id}/transactions.json
+## GET /admin/api/#{api_version}/orders/#{id}/transactions.json
 ## Receive a list of all Transactions
 #' @rdname Transaction
 getTransactions <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"transactions"), ...)$transactions
 }
 
-## GET /admin/orders/#{id}/transactions/count.json
+## GET /admin/api/#{api_version}/orders/#{id}/transactions/count.json
 ## Receive a count of all Transactions
 #' @rdname Transaction
 getTransactionsCount <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"transactions","count"), ...)$count
 }
 
-## GET /admin/orders/#{id}/transactions/#{id}.json
+## GET /admin/api/#{api_version}/orders/#{id}/transactions/#{id}.json
 ## Receive a single Transaction
 #' @rdname Transaction
 getTransaction <- function(orderId, transactionId, ...) {
     private$.request(private$.url("orders",orderId,"transactions",transactionId), ...)$transaction
 }
 
-## POST /admin/orders/#{id}/transactions.json
+## POST /admin/api/#{api_version}/orders/#{id}/transactions.json
 ## Create a new Transaction
 #' @rdname Transaction
 createTransaction <- function(orderId, transaction, ...) {

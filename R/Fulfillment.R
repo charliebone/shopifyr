@@ -19,34 +19,34 @@
 #
 
 ########### Fulfillment functions ########### 
-#' @param orderId an Order id number
+#' @param orderId an \code{\link{Order}}id number
 #' @templateVar name Fulfillment
 #' @templateVar urlSlug shipping_and_fulfillment/fulfillment
 #' @template api
 NULL
 
-## GET /admin/orders/#{id}/fulfillments.json
+## GET /admin/api/#{api_version}/orders/#{id}/fulfillments.json
 ## Receive a list of all Fulfillments
 #' @rdname Fulfillment
 getFulfillments <- function(orderId, ...) {
     private$.fetchAll(private$.url("orders",orderId,"fulfillments"), "fulfillments", ...)
 }
 
-## GET /admin/orders/#{id}/fulfillments/count.json
+## GET /admin/api/#{api_version}/orders/#{id}/fulfillments/count.json
 ## Receive a count of all Fulfillments
 #' @rdname Fulfillment
 getFulfillmentsCount <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"fulfillments","count"), ...)$count
 }
 
-## GET /admin/orders/#{id}/fulfillments/#{id}.json
+## GET /admin/api/#{api_version}/orders/#{id}/fulfillments/#{id}.json
 ## Receive a single Fulfillment
 #' @rdname Fulfillment
 getFulfillment <- function(orderId, fulfillmentId, ...) {
     private$.request(private$.url("orders",orderId,"fulfillments",fulfillmentId), ...)$fulfillment
 }
 
-## POST /admin/orders/#{id}/fulfillments.json
+## POST /admin/api/#{api_version}/orders/#{id}/fulfillments.json
 ## Create a new Fulfillment
 #' @rdname Fulfillment
 createFulfillment <- function(orderId, fulfillment, ...) {
@@ -54,7 +54,7 @@ createFulfillment <- function(orderId, fulfillment, ...) {
     private$.request(private$.url("orders",orderId,"fulfillments"), reqType="POST", data=fulfillment, ...)$fulfillment
 }
 
-## PUT /admin/orders/#{id}/fulfillments/#{id}.json
+## PUT /admin/api/#{api_version}/orders/#{id}/fulfillments/#{id}.json
 ## Modify an existing Fulfillment
 #' @rdname Fulfillment
 modifyFulfillment <- function(orderId, fulfillment, ...) {
@@ -62,14 +62,14 @@ modifyFulfillment <- function(orderId, fulfillment, ...) {
     private$.request(private$.url("orders",orderId,"fulfillments",fulfillment$fulfillment$id), reqType="PUT", data=fulfillment, ...)$fulfillment
 }
 
-## POST /admin/orders/#{id}/fulfillments/#{id}/complete.json
+## POST /admin/api/#{api_version}/orders/#{id}/fulfillments/#{id}/complete.json
 ## Complete a pending fulfillment
 #' @rdname Fulfillment
 completeFulfillment <- function(orderId, fulfillmentId, ...) {
     private$.request(private$.url("orders",orderId,"fulfillments",fulfillmentId,"complete"), reqType="POST", data=list(), ...)$fulfillment
 }
 
-## POST /admin/orders/#{id}/fulfillments/#{id}/cancel.json
+## POST /admin/api/#{api_version}/orders/#{id}/fulfillments/#{id}/cancel.json
 ## Cancel a pending fulfillment
 #' @rdname Fulfillment
 cancelFulfillment <- function(orderId, fulfillmentId, ...) {

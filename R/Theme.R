@@ -24,21 +24,21 @@
 #' @template api
 NULL
 
-## GET /admin/themes.json
+## GET /admin/api/#{api_version}/themes.json
 ## Receive a list of all Themes
 #' @rdname Theme
 getThemes <- function(...) {
     private$.request("themes", ...)$themes
 }
 
-## GET /admin/themes/#{id}.json
+## GET /admin/api/#{api_version}/themes/#{id}.json
 ## Receive a single Theme
 #' @rdname Theme
 getTheme <- function(themeId, ...) {
     private$.request(private$.url("themes",themeId), ...)$theme
 }
 
-## POST /admin/themes.json
+## POST /admin/api/#{api_version}/themes.json
 ## Create a new Theme
 #' @rdname Theme
 createTheme <- function(theme, ...) {
@@ -46,7 +46,7 @@ createTheme <- function(theme, ...) {
     private$.request("themes", reqType="POST", data=theme, ...)$theme
 }
 
-## PUT /admin/themes/#{id}.json
+## PUT /admin/api/#{api_version}/themes/#{id}.json
 ## Modify an existing Theme
 #' @rdname Theme
 modifyTheme <- function(theme, ...) {
@@ -54,7 +54,7 @@ modifyTheme <- function(theme, ...) {
     private$.request(private$.url("themes",theme$theme$id), reqType="PUT", data=theme, ...)$theme
 }
 
-## DELETE /admin/themes/#{id}.json
+## DELETE /admin/api/#{api_version}/themes/#{id}.json
 ## Remove a Theme from the database
 #' @rdname Theme
 deleteTheme <- function(themeId, ...) {

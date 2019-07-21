@@ -17,7 +17,7 @@ getProvince(countryId, provinceId, ...)
 modifyProvince(countryId, province, ...)
 }
 \arguments{
-\item{countryId}{a Country id number}
+\item{countryId}{a \code{\link{Country}} id number}
 
 \item{...}{additional request parameters}
 

@@ -26,7 +26,7 @@
 #' @template api
 NULL
 
-## POST /admin/application_credits.json
+## POST /admin/api/#{api_version}/application_credits.json
 ## Creates an application credit
 #' @rdname ApplicationCredit
 createApplicationCredit <- function(credit, ...) {
@@ -34,14 +34,14 @@ createApplicationCredit <- function(credit, ...) {
     private$.request("application_credits", reqType="POST", data=credit, ...)$application_credit
 }
 
-## GET /admin/application_credits/#{application_credit_id}.json
+## GET /admin/api/#{api_version}/application_credits/#{application_credit_id}.json
 ## Retrieves a single application credit
 #' @rdname ApplicationCredit
 getApplicationCredit <- function(creditId, ...) {
     private$.request(private$.url("application_credits",creditId), ...)$application_credit
 }
 
-## GET /admin/application_credits.json
+## GET /admin/api/#{api_version}/application_credits.json
 ## Retrieves all application credits
 #' @rdname ApplicationCredit
 getApplicationCredits <- function(...) {

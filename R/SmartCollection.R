@@ -19,34 +19,34 @@
 #
 
 ########### SmartCollection functions ########### 
-#' @param productIds a vector of Product ids in the desired sort order
+#' @param productIds a vector of \code{\link{Product}} ids in the desired sort order
 #' @templateVar name SmartCollection
 #' @templateVar urlSlug products/smartcollection
 #' @template api
 NULL
 
-## GET /admin/smart_collections.json
+## GET /admin/api/#{api_version}/smart_collections.json
 ## Receive a list of all SmartCollections
 #' @rdname SmartCollection
 getSmartCollections <- function(...) {
     private$.fetchAll("smart_collections", ...)
 }
 
-## GET /admin/smart_collections/count.json
+## GET /admin/api/#{api_version}/smart_collections/count.json
 ## Receive a count of all SmartCollections
 #' @rdname SmartCollection
 getSmartCollectionsCount <- function(...) {
     private$.request(private$.url("smart_collections","count"), ...)$count
 }
 
-## GET /admin/smart_collections/#{id}.json
+## GET /admin/api/#{api_version}/smart_collections/#{id}.json
 ## Receive a single SmartCollection
 #' @rdname SmartCollection
 getSmartCollection <- function(smartCollectionId, ...) {
     private$.request(private$.url("smart_collections",smartCollectionId), ...)$smart_collection
 }
 
-## POST /admin/smart_collections.json
+## POST /admin/api/#{api_version}/smart_collections.json
 ## Create a new SmartCollection
 #' @rdname SmartCollection
 createSmartCollection <- function(smartCollection, ...) {
@@ -54,7 +54,7 @@ createSmartCollection <- function(smartCollection, ...) {
     private$.request("smart_collections", reqType="POST", data=smartCollection, ...)$smart_collection
 }
 
-## PUT /admin/smart_collections/#{id}.json
+## PUT /admin/api/#{api_version}/smart_collections/#{id}.json
 ## Modify an existing SmartCollection
 #' @rdname SmartCollection
 modifySmartCollection <- function(smartCollection, ...) {
@@ -62,7 +62,7 @@ modifySmartCollection <- function(smartCollection, ...) {
     private$.request(private$.url("smart_collections",smartCollection$smart_collection$id), reqType="PUT", data=smartCollection, ...)$smart_collection
 }
 
-## PUT /admin/smart_collections/#{id}/order.json?products[]=921728736&products[]=632910392
+## PUT /admin/api/#{api_version}/smart_collections/#{id}/order.json?products[]=921728736&products[]=632910392
 ## Set the ordering type and/or the manual order of products in a smart collection
 #' @rdname SmartCollection
 orderSmartCollection <- function(smartCollectionId, productIds, ...) {
@@ -70,7 +70,7 @@ orderSmartCollection <- function(smartCollectionId, productIds, ...) {
     private$.request(private$.url("smart_collections",smartCollectionId,"order"),`products[]`=productIds, ...) 
 }
 
-## DELETE /admin/smart_collections/#{id}.json
+## DELETE /admin/api/#{api_version}/smart_collections/#{id}.json
 ## Remove a SmartCollection from the database
 #' @rdname SmartCollection
 deleteSmartCollection <- function(smartCollectionId, ...) {

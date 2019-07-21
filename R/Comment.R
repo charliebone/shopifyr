@@ -19,14 +19,14 @@
 #
 
 ########### Comment functions ########### 
-#' @param blogId a Blog id number (leave blank to fetch all comments for the shop)
-#' @param articleId an Article id number (leave blank to fetch all comments for this blog)
+#' @param blogId a \code{\link{Blog}} id (leave blank to fetch all comments for the shop)
+#' @param articleId an Article id (leave blank to fetch all comments for this blog)
 #' @templateVar name Comment
 #' @templateVar urlSlug online_store/comment
 #' @template api
 NULL
 
-## GET /admin/comments.json?article_id=134645308&blog_id=241253187
+## GET /admin/api/#{api_version}/comments.json?article_id=134645308&blog_id=241253187
 ## Receive a list of all Comments
 #' @rdname Comment
 getComments <- function(blogId, articleId, ...) {
@@ -36,7 +36,7 @@ getComments <- function(blogId, articleId, ...) {
     private$.fetchAll("comments", blog_id=blogId, article_id=articleId, ...)
 }
 
-## GET /admin/comments/count.json?article_id=134645308&blog_id=241253187
+## GET /admin/api/#{api_version}/comments/count.json?article_id=134645308&blog_id=241253187
 ## Receive a count of all Comments
 #' @rdname Comment
 getCommentsCount <- function(blogId, articleId, ...) {
@@ -45,14 +45,14 @@ getCommentsCount <- function(blogId, articleId, ...) {
     
     private$.request(private$.url("comments","count"), blog_id=blogId, article_id=articleId, ...)$count
 }
-## GET /admin/comments/#{id}.json
+## GET /admin/api/#{api_version}/comments/#{id}.json
 ## Receive a single Comment
 #' @rdname Comment
 getComment <- function(commentId, ...) {
     private$.request(private$.url("comments",commentId), ...)$comment
 }
 
-## POST /admin/comments.json
+## POST /admin/api/#{api_version}/comments.json
 ## Create a new Comment
 #' @rdname Comment
 createComment <- function(comment, ...) {
@@ -60,7 +60,7 @@ createComment <- function(comment, ...) {
     private$.request("comments", reqType="POST", data=comment, ...)$comment
 }
 
-## PUT /admin/comments/#{id}.json
+## PUT /admin/api/#{api_version}/comments/#{id}.json
 ## Modify an existing Comment
 #' @rdname Comment
 modifyComment <- function(comment, ...) {
@@ -68,35 +68,35 @@ modifyComment <- function(comment, ...) {
     private$.request(private$.url("comments",comment$comment$id), reqType="PUT", data=comment, ...)$comment
 }
 
-## POST /admin/comments/#{id}/spam.json
+## POST /admin/api/#{api_version}/comments/#{id}/spam.json
 ## Mark a Comment as spam
 #' @rdname Comment
 markCommentAsSpam <- function(commentId, ...) {
     private$.request(private$.url("comments",commentId,"spam"), reqType="POST", data=list())$comment
 }
 
-## POST /admin/comments/#{id}/not_spam.json
+## POST /admin/api/#{api_version}/comments/#{id}/not_spam.json
 ## Mark a Comment as not spam
 #' @rdname Comment
 markCommentAsNotSpam <- function(commentId, ...) {
     private$.request(private$.url("comments",commentId,"not_spam"), reqType="POST", data=list())$comment
 }
 
-## POST /admin/comments/#{id}/approve.json
+## POST /admin/api/#{api_version}/comments/#{id}/approve.json
 ## Approve a Comment
 #' @rdname Comment
 approveComment <- function(commentId, ...) {
     private$.request(private$.url("comments",commentId,"approve"), reqType="POST", data=list())$comment
 }
 
-## POST /admin/comments/#{id}/remove.json
+## POST /admin/api/#{api_version}/comments/#{id}/remove.json
 ## Remove a Comment
 #' @rdname Comment
 removeComment <- function(commentId, ...) {
     private$.request(private$.url("comments",commentId,"remove"), reqType="POST", data=list())$comment
 }
 
-## POST /admin/comments/#{id}/restore.json
+## POST /admin/api/#{api_version}/comments/#{id}/restore.json
 ## Restore a Comment
 #' @rdname Comment
 restoreComment <- function(commentId, ...) {

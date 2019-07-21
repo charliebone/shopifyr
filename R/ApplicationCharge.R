@@ -26,7 +26,7 @@
 #' @template api
 NULL
 
-## POST /admin/application_charges.json
+## POST /admin/api/#{api_version}/application_charges.json
 ## Creates an application charge
 #' @rdname ApplicationCharge
 createApplicationCharge <- function(charge, ...) {
@@ -34,21 +34,21 @@ createApplicationCharge <- function(charge, ...) {
     private$.request("application_charges", reqType="POST", data=charge, ...)$application_charge
 }
 
-## GET /admin/application_charges/#{application_charge_id}.json
+## GET /admin/api/#{api_version}/application_charges/#{application_charge_id}.json
 ## Retrieves an application charge
 #' @rdname ApplicationCharge
 getApplicationCharge <- function(chargeId, ...) {
     private$.request(private$.url("application_charges",chargeId), ...)$application_charge
 }
 
-## GET /admin/application_charges.json
+## GET /admin/api/#{api_version}/application_charges.json
 ## Retrieves a list of application charges
 #' @rdname ApplicationCharge
 getApplicationCharges <- function(...) {
     private$.request("application_charges", ...)$application_charges
 }
 
-## POST /admin/application_charges/#{application_charge_id}/activate.json
+## POST /admin/api/#{api_version}/application_charges/#{application_charge_id}/activate.json
 ## Activates an application charge
 #' @rdname ApplicationCharge
 activateApplicationCharge <- function(charge, ...) {

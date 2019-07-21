@@ -19,27 +19,27 @@
 #
 
 ########### Customer functions ########### 
-#' @param customerId a Customer id
+#' @param customerId a \code{\link{Customer}} id
 #' @templateVar name CustomerAddress
 #' @templateVar urlSlug customers/customer_address
 #' @template api
 NULL
 
-## GET /admin/customers/#{customer_id}/addresses.json
+## GET /admin/api/#{api_version}/customers/#{customer_id}/addresses.json
 ## Retrieves a list of addresses for a customer
 #' @rdname CustomerAddress
 getCustomerAddresses <- function(customerId, ...) {
     private$.request(private$.url("customers",customerId,"addresses"), ...)$addresses
 }
 
-## GET /admin/customers/#{customer_id}/addresses/#{address_id}.json
+## GET /admin/api/#{api_version}/customers/#{customer_id}/addresses/#{address_id}.json
 ## Retrieves details for a single customer address
 #' @rdname CustomerAddress
 getCustomerAddress <- function(customerId, customerAddressId, ...) {
     private$.request(private$.url("customers",customerId,"addresses",customerAddressId), ...)$address
 }
 
-## POST /admin/customers/#{customer_id}/addresses.json
+## POST /admin/api/#{api_version}/customers/#{customer_id}/addresses.json
 ## Creates a new address for a customer
 #' @rdname CustomerAddress
 createCustomerAddress <- function(customerAddress, customerId, ...) {
@@ -47,7 +47,7 @@ createCustomerAddress <- function(customerAddress, customerId, ...) {
     private$.request(private$.url("customers",customerId,"addresses"), reqType="POST", data=customerAddress, ...)$address
 }
 
-## PUT /admin/customers/#{customer_id}/addresses/#{address_id}.json
+## PUT /admin/api/#{api_version}/customers/#{customer_id}/addresses/#{address_id}.json
 ## Updates an existing customer address
 #' @rdname CustomerAddress
 modifyCustomerAddress <- function(customerAddress, customerId, ...) {
@@ -55,14 +55,14 @@ modifyCustomerAddress <- function(customerAddress, customerId, ...) {
     private$.request(private$.url("customers",customerId,"addressess",customerAddress$address$id), reqType="PUT", data=customerAddress, ...)$address
 }
 
-## DELETE /admin/customers/#{customer_id}/addresses/#{address_id}.json
+## DELETE /admin/api/#{api_version}/customers/#{customer_id}/addresses/#{address_id}.json
 ## Removes an address from a customer's address list
 #' @rdname CustomerAddress
 deleteCustomerAddress <- function(customerId, customerAddressId, ...) {
     private$.request(private$.url("customers",customerId,"addresses",customerAddressId), reqType="DELETE", ...)
 }
 
-## PUT /admin/customers/#{customer_id}/addresses/#{address_id}/default.json
+## PUT /admin/api/#{api_version}/customers/#{customer_id}/addresses/#{address_id}/default.json
 ## Sets the default address for a customer
 #' @rdname CustomerAddress
 setCustomerDefaultAddress <- function(customerId, customerAddressId, ...) {

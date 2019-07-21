@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/products.json
+## GET /admin/api/#{api_version}/products.json
 ## Receive a list of all Products
 #' @rdname Product
 getProducts <- function(...) {
     private$.fetchAll("products", ...)
 }
 
-## GET /admin/products/count.json
+## GET /admin/api/#{api_version}/products/count.json
 ## Receive a count of all Products
 #' @rdname Product
 getProductsCount <- function(...) {
     private$.request(private$.url("products","count"), ...)$count
 }
 
-## GET /admin/products/#{id}.json
+## GET /admin/api/#{api_version}/products/#{id}.json
 ## Receive a single Product
 #' @rdname Product
 getProduct <- function(productId, ...) {
     private$.request(private$.url("products",productId), ...)$product
 }
 
-## POST /admin/products.json
+## POST /admin/api/#{api_version}/products.json
 ## Create a new Product
 #' @rdname Product
 createProduct <- function(product, ...) {
@@ -53,7 +53,7 @@ createProduct <- function(product, ...) {
     private$.request("products", reqType="POST", data=product, ...)$product
 }
 
-## PUT /admin/products/#{id}.json
+## PUT /admin/api/#{api_version}/products/#{id}.json
 ## Modify an existing Product
 #' @rdname Product
 modifyProduct <- function(product, ...) {
@@ -61,7 +61,7 @@ modifyProduct <- function(product, ...) {
     private$.request(private$.url("products",product$product$id), reqType="PUT", data=product, ...)$product
 }
 
-## DELETE /admin/products/#{id}.json
+## DELETE /admin/api/#{api_version}/products/#{id}.json
 ## Remove a product from the database
 #' @rdname Product
 deleteProduct <- function(productId, ...) {

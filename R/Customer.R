@@ -25,28 +25,28 @@
 #' @template api
 NULL
 
-## GET /admin/customers.json
+## GET /admin/api/#{api_version}/customers.json
 ## Receive a list of all Customers
 #' @rdname Customer
 getCustomers <- function(...) {
     private$.fetchAll("customers", ...)
 }
 
-## GET /admin/customers/search.json?query=Bob country:United States
+## GET /admin/api/#{api_version}/customers/search.json?query=Bob country:United States
 ## Search for customers matching supplied query
 #' @rdname Customer
 searchCustomers <- function(query, ...) {
     private$.fetchAll(private$.url("customers","search"), "customers", query=query, .queryParam="query", ...)
 }
 
-## GET /admin/customers/#{id}.json
+## GET /admin/api/#{api_version}/customers/#{id}.json
 ## Receive a single Customer
 #' @rdname Customer
 getCustomer <- function(customerId, ...) {
     private$.request(private$.url("customers",customerId), ...)$customer
 }
 
-## POST /admin/customers.json
+## POST /admin/api/#{api_version}/customers.json
 ## Create a new Customer
 #' @rdname Customer
 createCustomer <- function(customer, ...) {
@@ -54,7 +54,7 @@ createCustomer <- function(customer, ...) {
     private$.request("customers", reqType="POST", data=customer, ...)$customer
 }
 
-## PUT /admin/customers/#{id}.json
+## PUT /admin/api/#{api_version}/customers/#{id}.json
 ## Modify an existing Customer
 #' @rdname Customer
 modifyCustomer <- function(customer, ...) {
@@ -62,21 +62,21 @@ modifyCustomer <- function(customer, ...) {
     private$.request(private$.url("customers",customer$customer$id), reqType="PUT", data=customer, ...)$customer
 }
 
-## DELETE /admin/customers/#{id}.json
+## DELETE /admin/api/#{api_version}/customers/#{id}.json
 ## Remove a Customer from the database
 #' @rdname Customer
 deleteCustomer <- function(customerId, ...) {
     private$.request(private$.url("customers",customerId), reqType="DELETE", ...)
 }
 
-## GET /admin/customers/count.json
+## GET /admin/api/#{api_version}/customers/count.json
 ## Receive a count of all Customers
 #' @rdname Customer
 getCustomersCount <- function(...) {
     private$.request(private$.url("customers","count"), ...)$count
 }
 
-## GET /admin/orders.json?customer_id=207119551
+## GET /admin/api/#{api_version}/orders.json?customer_id=207119551
 ## Find orders belonging to this customer
 #' @rdname Customer
 getCustomerOrders <- function(customerId, ...) {

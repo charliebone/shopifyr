@@ -26,7 +26,7 @@
 #' @template api
 NULL
 
-## GET /admin/oauth/access_scopes.json
+## GET /admin/api/#{api_version}/oauth/access_scopes.json
 ## Retrieves a list of access scopes associated to the access token
 #' @rdname AccessScope
 getAccessScopes <- function(...) {

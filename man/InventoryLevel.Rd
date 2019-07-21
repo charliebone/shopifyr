@@ -20,17 +20,17 @@ connectInventoryItem(locationId, inventoryItemId, ...)
 setInventoryLevel(inventoryLevel, ...)
 }
 \arguments{
-\item{locationIds}{a vector of Location ids}
+\item{locationIds}{a vector of \code{\link{Location}} ids}
 
-\item{inventoryItemIds}{a vector of InventoryItem ids}
+\item{inventoryItemIds}{a vector of \code{\link{InventoryItem}} ids}
 
 \item{...}{additional request parameters}
 
 \item{inventoryLevel}{a list containing InventoryLevel fields}
 
-\item{locationId}{a single Location id}
+\item{locationId}{a single \code{\link{Location}} id}
 
-\item{inventoryItemId}{a single InventoryItem id}
+\item{inventoryItemId}{a single \code{\link{InventoryItem}} id}
 }
 \value{
 a list containing a InventoryLevel fields or a list of InventoryLevels

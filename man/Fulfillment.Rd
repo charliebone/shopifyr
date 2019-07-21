@@ -26,7 +26,7 @@ completeFulfillment(orderId, fulfillmentId, ...)
 cancelFulfillment(orderId, fulfillmentId, ...)
 }
 \arguments{
-\item{orderId}{an Order id number}
+\item{orderId}{an \code{\link{Order}}id number}
 
 \item{...}{additional request parameters}
 

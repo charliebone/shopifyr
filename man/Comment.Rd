@@ -35,9 +35,9 @@ removeComment(commentId, ...)
 restoreComment(commentId, ...)
 }
 \arguments{
-\item{blogId}{a Blog id number (leave blank to fetch all comments for the shop)}
+\item{blogId}{a \code{\link{Blog}} id (leave blank to fetch all comments for the shop)}
 
-\item{articleId}{an Article id number (leave blank to fetch all comments for this blog)}
+\item{articleId}{an Article id (leave blank to fetch all comments for this blog)}
 
 \item{...}{additional request parameters}
 

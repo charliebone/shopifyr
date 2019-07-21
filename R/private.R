@@ -174,6 +174,7 @@ print.ShopifyShop <- function(...) {
                      data = NULL, 
                      paceRequests = TRUE,
                      ..., 
+                     getRedirectUrl = FALSE,
                      parse. = TRUE, 
                      type. = "json",
                      graphQl = FALSE,
@@ -274,7 +275,9 @@ print.ShopifyShop <- function(...) {
     }
     
     # return response
-    if (!isTRUE(parse.)) 
+    if (isTRUE(getRedirectUrl))
+        return(res$url)
+    else if (!isTRUE(parse.)) 
         return(rawResult)
     else
         return(parsedResult)

@@ -28,10 +28,12 @@ getCollectionListingProductIds(collectionListingId, ...)
 }
 \value{
 a list of Checkouts
+
+a list containing a CollectionListing fields or a list of CollectionListings
 }
 \description{
 CollectionListing Functions
 }
 \references{
-Shopify API CollectionListing documentation: \url{https://help.shopify.com/api/reference/sales_channels/checkout}
+Shopify API CollectionListing documentation: \url{https://help.shopify.com/api/reference/sales-channels/collectionlisting}
 }

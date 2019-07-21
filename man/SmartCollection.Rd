@@ -32,7 +32,7 @@ deleteSmartCollection(smartCollectionId, ...)
 
 \item{smartCollection}{a list containing SmartCollection fields}
 
-\item{productIds}{a vector of Product ids in the desired sort order}
+\item{productIds}{a vector of \code{\link{Product}} ids in the desired sort order}
 }
 \value{
 a list containing a SmartCollection fields or a list of SmartCollections

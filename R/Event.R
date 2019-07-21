@@ -26,21 +26,21 @@
 #' @template api
 NULL
 
-## GET /admin/events.json
+## GET /admin/api/#{api_version}/events.json
 ## Receive a list of all Events
 #' @rdname Event
 getEvents <- function(...) {
     private$.fetchAll("events", ...)
 }
 
-## GET /admin/events/#{id}.json
+## GET /admin/api/#{api_version}/events/#{id}.json
 ## Receive a single Event
 #' @rdname Event
 getEvent <- function(eventId, ...) {
     private$.request(private$.url("events",eventId), ...)$event
 }
 
-## GET /admin/events/count.json
+## GET /admin/api/#{api_version}/events/count.json
 ## Receive a count of all Events
 #' @rdname Event
 getEventsCount <- function(...) {

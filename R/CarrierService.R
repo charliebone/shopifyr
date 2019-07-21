@@ -25,7 +25,7 @@
 #' @template api
 NULL
 
-## POST /admin/carrier_services.json
+## POST /admin/api/#{api_version}/carrier_services.json
 ## Create a new CarrierService
 #' @rdname CarrierService
 createCarrierService <- function(service, ...) {
@@ -33,7 +33,7 @@ createCarrierService <- function(service, ...) {
     private$.request("carrier_services", reqType="POST", data=service, ...)$carrier_service
 }
 
-## PUT /admin/carrier_services/#{id}.json
+## PUT /admin/api/#{api_version}/carrier_services/#{id}.json
 ## Modify an existing CarrierService
 #' @rdname CarrierService
 modifyCarrierService <- function(service, ...) {
@@ -41,21 +41,21 @@ modifyCarrierService <- function(service, ...) {
     private$.request(private$.url("carrier_services",service$carrier_service$id), reqType="PUT", data=service, ...)$carrier_service
 }
 
-## GET /admin/carrier_services.json
+## GET /admin/api/#{api_version}/carrier_services.json
 ## Receive a list of all CarrierServices
 #' @rdname CarrierService
 getCarrierServices <- function(...) {
     private$.request("carrier_services", ...)$carrier_services
 }
 
-## GET /admin/carrier_services/#{id}.json
+## GET /admin/api/#{api_version}/carrier_services/#{id}.json
 ## Receive a single CarrierService
 #' @rdname CarrierService
 getCarrierService <- function(serviceId, ...) {
     private$.request(private$.url("carrier_services",serviceId), ...)$carrier_service
 }
 
-## DELETE /admin/carrier_services/#{id}.json
+## DELETE /admin/api/#{api_version}/carrier_services/#{id}.json
 ## Remove a CarrierService from the database
 #' @rdname CarrierService
 deleteCarrierService <- function(serviceId, ...) {

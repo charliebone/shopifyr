@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/countries.json
+## GET /admin/api/#{api_version}/countries.json
 ## Receive a list of all Countries
 #' @rdname Country
 getCountries <- function(...) {
     private$.request("countries", ...)$countries
 }
 
-## GET /admin/countries/count.json
+## GET /admin/api/#{api_version}/countries/count.json
 ## Receive a count of all Countries
 #' @rdname Country
 getCountriesCount <- function(...) {
     private$.request(private$.url("countries","count"), ...)$count
 }
 
-## GET /admin/countries/#{id}.json
+## GET /admin/api/#{api_version}/countries/#{id}.json
 ## Receive a single Country
 #' @rdname Country
 getCountry <- function(countryId, ...) {
     private$.request(private$.url("countries",countryId), ...)$country
 }
 
-## POST /admin/countries.json
+## POST /admin/api/#{api_version}/countries.json
 ## Create a new Country
 #' @rdname Country
 createCountry <- function(country, ...) {
@@ -53,7 +53,7 @@ createCountry <- function(country, ...) {
     private$.request("countries", reqType="POST", data=country, ...)$country
 }
 
-## PUT /admin/countries/#{id}.json
+## PUT /admin/api/#{api_version}/countries/#{id}.json
 ## Modify an existing Country
 #' @rdname Country
 modifyCountry <- function(country, ...) {
@@ -61,7 +61,7 @@ modifyCountry <- function(country, ...) {
     private$.request(private$.url("countries",country$country$id), reqType="PUT", data=country, ...)$country
 }
 
-## DELETE /admin/countries/#{id}.json
+## DELETE /admin/api/#{api_version}/countries/#{id}.json
 ## Remove a Country from the database
 #' @rdname Country
 deleteCountry <- function(countryId, ...) {

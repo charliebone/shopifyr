@@ -24,35 +24,35 @@
 #' @template api
 NULL
 
-## GET /admin/customer_saved_searches.json
+## GET /admin/api/#{api_version}/customer_saved_searches.json
 ## Retrieves a list of customer saved searches
 #' @rdname CustomerSavedSearch
 getCustomerSavedSearches <- function(...) {
     private$.fetchAll("customer_saved_searches", ...)$customer_saved_searches
 }
 
-## GET /admin/customer_saved_searches/count.json
+## GET /admin/api/#{api_version}/customer_saved_searches/count.json
 ## Retrieves a count of all customer saved searches
 #' @rdname CustomerSavedSearch
 getCustomerSavedSearchesCount <- function(...) {
     private$.request(private$.url("customer_saved_searches","count"), ...)$count
 }
 
-## GET /admin/customer_saved_searches/#{customer_saved_search_id}.json
+## GET /admin/api/#{api_version}/customer_saved_searches/#{customer_saved_search_id}.json
 ## Retrieves a single customer saved search
 #' @rdname CustomerSavedSearch
 getCustomerSavedSearch <- function(customerSavedSearchId, ...) {
     private$.request(private$.url("customer_saved_searches",customerSavedSearchId), ...)$customer_saved_search
 }
 
-## GET /admin/customer_saved_searches/#{customer_saved_search_id}/customers.json
+## GET /admin/api/#{api_version}/customer_saved_searches/#{customer_saved_search_id}/customers.json
 ## Retrieves all customers returned by a customer saved search
 #' @rdname CustomerSavedSearch
 getCustomerSavedSearchResults <- function(customerSavedSearchId, ...) {
     private$.request(private$.url("customer_saved_searches",customerSavedSearchId,"customers"), ...)$customers
 }
 
-## POST /admin/customer_saved_searches.json
+## POST /admin/api/#{api_version}/customer_saved_searches.json
 ## Creates a customer saved search
 #' @rdname CustomerSavedSearch
 createCustomerSavedSearch <- function(customerSavedSearch, ...) {
@@ -60,7 +60,7 @@ createCustomerSavedSearch <- function(customerSavedSearch, ...) {
     private$.request("customer_saved_searches", reqType="POST", data=customerSavedSearch, ...)$customer_saved_search
 }
 
-## PUT /admin/customer_saved_searches/#{customer_saved_search_id}.json
+## PUT /admin/api/#{api_version}/customer_saved_searches/#{customer_saved_search_id}.json
 ## Updates a customer saved search
 #' @rdname CustomerSavedSearch
 modifyCustomerSavedSearch <- function(customerSavedSearch, ...) {
@@ -68,7 +68,7 @@ modifyCustomerSavedSearch <- function(customerSavedSearch, ...) {
     private$.request(private$.url("customer_saved_searches",customerSavedSearch$customer_saved_search$id), reqType="PUT", data=customerSavedSearch, ...)$customer_saved_search
 }
 
-## DELETE /admin/customer_saved_searches/#{customer_saved_search_id}.json
+## DELETE /admin/api/#{api_version}/customer_saved_searches/#{customer_saved_search_id}.json
 ## Deletes a customer saved search
 #' @rdname CustomerSavedSearch
 deleteCustomerSavedSearch <- function(customerSavedSearchId, ...) {

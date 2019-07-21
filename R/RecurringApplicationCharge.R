@@ -25,7 +25,7 @@
 #' @template api
 NULL
 
-## POST /admin/recurring_application_charges.json
+## POST /admin/api/#{api_version}/recurring_application_charges.json
 ## Create a recurring application charge
 #' @rdname RecurringApplicationCharge
 createRecurringCharge <- function(charge, ...) {
@@ -33,21 +33,21 @@ createRecurringCharge <- function(charge, ...) {
     private$.request("recurring_application_charges", reqType="POST", data=charge, ...)$recurring_application_charge
 }
 
-## GET /admin/recurring_application_charges/#{id}.json
+## GET /admin/api/#{api_version}/recurring_application_charges/#{id}.json
 ## Receive a single RecurringApplicationCharge
 #' @rdname RecurringApplicationCharge
 getRecurringCharge <- function(chargeId, ...) {
     private$.request(private$.url("recurring_application_charges",chargeId), ...)$recurring_application_charge
 }
 
-## GET /admin/recurring_application_charges.json
+## GET /admin/api/#{api_version}/recurring_application_charges.json
 ## Retrieve all recurring application charges
 #' @rdname RecurringApplicationCharge
 getRecurringCharges <- function(...) {
     private$.request("recurring_application_charges", ...)$recurring_application_charges
 }
 
-## POST /admin/recurring_application_charges/#{id}/activate.json
+## POST /admin/api/#{api_version}/recurring_application_charges/#{id}/activate.json
 ## Activate a recurring application charge
 #' @rdname RecurringApplicationCharge
 activateRecurringCharge <- function(charge, ...) {
@@ -55,7 +55,7 @@ activateRecurringCharge <- function(charge, ...) {
     private$.request(private$.url("recurring_application_charges",charge$charge$id,"activate"), reqType="POST", data=charge, ...)
 }
 
-## DELETE /admin/recurring_application_charges/#{id}.json
+## DELETE /admin/api/#{api_version}/recurring_application_charges/#{id}.json
 ## Cancel a recurring application charge
 #' @rdname RecurringApplicationCharge
 cancelRecurringCharge <- function(chargeId, ...) {

@@ -19,7 +19,7 @@
 #
 
 ########### ProductImage functions ########### 
-#' @param productId a Product id number
+#' @param productId a \code{\link{Product}} id number
 #' @param filepath the filepath to an image to upload
 #' @templateVar name ProductImage
 #' @templateVar slug image
@@ -27,28 +27,28 @@
 #' @template api
 NULL
 
-## GET /admin/products/#{id}/images.json
+## GET /admin/api/#{api_version}/products/#{id}/images.json
 ## Receive a list of all Product Images
 #' @rdname ProductImage
 getProductImages <- function(productId, ...) {
     private$.request(private$.url("products",productId,"images"), ...)$images
 }
 
-## GET /admin/products/#{id}/images/count.json
+## GET /admin/api/#{api_version}/products/#{id}/images/count.json
 ## Receive a count of all Product Images
 #' @rdname ProductImage
 getProductImagesCount <- function(productId, ...) {
     private$.request(private$.url("products",productId,"images","count"), ...)$count
 }
 
-## GET /admin/products/#{id}/images/#{id}.json
+## GET /admin/api/#{api_version}/products/#{id}/images/#{id}.json
 ## Receive a single Product Image
 #' @rdname ProductImage
 getProductImage <- function(productId, imageId, ...) {
     private$.request(private$.url("products",productId,"images",imageId), ...)$image
 }
 
-## POST /admin/products/#{id}/images.json
+## POST /admin/api/#{api_version}/products/#{id}/images.json
 ## Create a new Product Image
 #' @rdname ProductImage
 createProductImage <- function(productId, image, ..., filepath) {
@@ -60,7 +60,7 @@ createProductImage <- function(productId, image, ..., filepath) {
     private$.request(private$.url("products",productId,"images"), reqType="POST", data=image,  ...)$image
 }
 
-## PUT /admin/products/#{id}/images/#{id}.json
+## PUT /admin/api/#{api_version}/products/#{id}/images/#{id}.json
 ## Modify an existing Product Image
 #' @rdname ProductImage
 modifyProductImage <- function(productId, image, ..., filepath) {
@@ -72,7 +72,7 @@ modifyProductImage <- function(productId, image, ..., filepath) {
     private$.request(private$.url("products",productId,"images",image$image$id), reqType="PUT", data=image,  ...)$image
 }
 
-## DELETE /admin/products/#{id}/images/#{id}.json
+## DELETE /admin/api/#{api_version}/products/#{id}/images/#{id}.json
 ## Remove a Product Image from the database
 #' @rdname ProductImage
 deleteProductImage <- function(productId, imageId, ...) {

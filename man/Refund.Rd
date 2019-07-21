@@ -8,7 +8,7 @@
 getRefund(orderId, refundId, ...)
 }
 \arguments{
-\item{orderId}{an Order id number}
+\item{orderId}{an \code{\link{Order}} id number}
 
 \item{refundId}{a Refund id number}
 

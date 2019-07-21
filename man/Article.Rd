@@ -29,7 +29,7 @@ getArticleTags(...)
 deleteArticle(blogId, articleId, ...)
 }
 \arguments{
-\item{blogId}{a Blog id number}
+\item{blogId}{a \code{\link{Blog}} id number}
 
 \item{...}{additional request parameters}
 

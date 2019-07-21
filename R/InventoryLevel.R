@@ -19,10 +19,10 @@
 #
 
 ########### InventoryLevel functions ###########
-#' @param locationIds a vector of Location ids
-#' @param locationId a single Location id
-#' @param inventoryItemIds a vector of InventoryItem ids
-#' @param inventoryItemId a single InventoryItem id
+#' @param locationIds a vector of \code{\link{Location}} ids
+#' @param locationId a single \code{\link{Location}} id
+#' @param inventoryItemIds a vector of \code{\link{InventoryItem}} ids
+#' @param inventoryItemId a single \code{\link{InventoryItem}} id
 #' @param inventoryLevel a list containing InventoryLevel fields
 #' @templateVar name InventoryLevel
 #' @templateVar urlSlug inventory/inventorylevel
@@ -30,7 +30,7 @@
 #' @template api
 NULL
 
-## GET /admin/inventory_levels.json
+## GET /admin/api/#{api_version}/inventory_levels.json
 ## Retrieves a list of inventory levels
 #' @rdname InventoryLevel
 getInventoryLevels <- function(locationIds, inventoryItemIds, ...) {
@@ -49,21 +49,21 @@ getInventoryLevels <- function(locationIds, inventoryItemIds, ...) {
     }
 }
 
-## POST /admin/inventory_levels/adjust.json
+## POST /admin/api/#{api_version}/inventory_levels/adjust.json
 ## Adjusts the inventory level of an inventory item at a location
 #' @rdname InventoryLevel
 modifyInventoryLevel <- function(inventoryLevel, ...) {
     private$.request(private$.url("inventory_levels","adjust"), reqType="POST", data=inventoryLevel, ...)$inventory_level
 }
 
-## DELETE /admin/inventory_levels.json?inventory_item_id=808950810&location_id=905684977
+## DELETE /admin/api/#{api_version}/inventory_levels.json?inventory_item_id=808950810&location_id=905684977
 ## Deletes an inventory level from a location
 #' @rdname InventoryLevel
 deleteInventoryLevel <- function(locationId, inventoryItemId, ...) {
     private$.request("inventory_levels", inventory_item_id=inventoryItemId, location_id=locationId, ...)
 }
 
-## POST /admin/inventory_levels/connect.json
+## POST /admin/api/#{api_version}/inventory_levels/connect.json
 ## Connects an inventory item to a location
 #' @rdname InventoryLevel
 connectInventoryItem <- function(locationId, inventoryItemId, ...) {
@@ -71,7 +71,7 @@ connectInventoryItem <- function(locationId, inventoryItemId, ...) {
     private$.request(private$.url("inventory_levels","connect"), reqType="POST", data=inventoryLevel, ...)$inventory_level
 }
 
-## POST /admin/inventory_levels/set.json
+## POST /admin/api/#{api_version}/inventory_levels/set.json
 ## Sets the inventory level for an inventory item at a location
 #' @rdname InventoryLevel
 setInventoryLevel <- function(inventoryLevel, ...) {

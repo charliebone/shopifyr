@@ -17,7 +17,7 @@ getTransaction(orderId, transactionId, ...)
 createTransaction(orderId, transaction, ...)
 }
 \arguments{
-\item{orderId}{an Order id number}
+\item{orderId}{an \code{\link{Order}} id number}
 
 \item{...}{additional request parameters}
 

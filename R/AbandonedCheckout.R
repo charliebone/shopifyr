@@ -25,14 +25,14 @@
 #' @template api
 NULL
 
-## GET /admin/checkouts.json
+## GET /admin/api/#{api_version}/checkouts.json
 ## Receive a list of all Abandoned checkouts
 #' @rdname AbandonedCheckout
 getAbandonedCheckouts <- function(...) {
     private$.fetchAll("checkouts", ...)
 }
 
-## GET /admin/checkouts/count.json
+## GET /admin/api/#{api_version}/checkouts/count.json
 ## Receive a count of all Abandoned Checkouts
 #' @rdname AbandonedCheckout
 getAbandonedCheckoutsCount <- function(...) {

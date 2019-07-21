@@ -27,14 +27,14 @@
 #' @template api
 NULL
 
-## GET /admin/checkouts/count.json
+## GET /admin/api/#{api_version}/checkouts/count.json
 ## Receive a count of all Checkouts
 #' @rdname Checkout
 getCheckoutsCount <- function(...) {
     private$.request(private$.url("checkouts","count"), ...)$count
 }
 
-## GET /admin/checkouts.json
+## GET /admin/api/#{api_version}/checkouts.json
 ## Receive a list of all Checkouts
 #' @rdname Checkout
 getCheckouts <- function(...) {

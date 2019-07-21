@@ -26,28 +26,28 @@
 #' @template api
 NULL
 
-## GET /admin/locations.json
+## GET /admin/api/#{api_version}/locations.json
 ## Retrieves a list of locations
 #' @rdname Location
 getLocations <- function(...) {
     private$.request("locations", ...)$locations
 }
 
-## GET /admin/locations/#{location_id}.json
+## GET /admin/api/#{api_version}/locations/#{location_id}.json
 ## Retrieves a single location by its ID
 #' @rdname Location
 getLocation <- function(locationId, ...) {
     private$.request(private$.url("locations",locationId), ...)$location
 }
 
-## GET /admin/locations/count.json
+## GET /admin/api/#{api_version}/locations/count.json
 ## Retrieves a count of locations
 #' @rdname Location
 getLocationsCount <- function(...) {
     private$.request(private$.url("locations","count"), ...)$count
 }
 
-## GET /admin/locations/#{location_id}/inventory_levels.json
+## GET /admin/api/#{api_version}/locations/#{location_id}/inventory_levels.json
 ## Retrieves a list of inventory levels for a location
 #' @rdname Location
 getLocationInventoryLevels <- function(locationId, ...) {

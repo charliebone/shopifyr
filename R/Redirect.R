@@ -24,28 +24,28 @@
 #' @template api
 NULL
 
-## GET /admin/redirects.json
+## GET /admin/api/#{api_version}/redirects.json
 ## Receive a list of all Redirects
 #' @rdname Redirect
 getRedirects <- function(...) {
     private$.fetchAll("redirects", ...)
 }
 
-## GET /admin/redirects/count.json
+## GET /admin/api/#{api_version}/redirects/count.json
 ## Receive a count of all Redirects
 #' @rdname Redirect
 getRedirectsCount <- function(...) {
     private$.request(private$.url("redirects","count"), ...)$count
 }
 
-## GET /admin/redirects/#{id}.json
+## GET /admin/api/#{api_version}/redirects/#{id}.json
 ## Receive a single Redirect
 #' @rdname Redirect
 getRedirect <- function(redirectId, ...) {
     private$.request(private$.url("redirects",redirectId), ...)$redirect
 }
 
-## POST /admin/redirects.json
+## POST /admin/api/#{api_version}/redirects.json
 ## Create a new Redirect
 #' @rdname Redirect
 createRedirect <- function(redirect, ...) {
@@ -53,7 +53,7 @@ createRedirect <- function(redirect, ...) {
     private$.request("redirects", reqType="POST", data=redirect, ...)$redirect
 }
 
-## PUT /admin/redirects/#{id}.json
+## PUT /admin/api/#{api_version}/redirects/#{id}.json
 ## Modify an existing Redirect
 #' @rdname Redirect
 modifyRedirect <- function(redirect, ...) {
@@ -61,7 +61,7 @@ modifyRedirect <- function(redirect, ...) {
     private$.request(private$.url("redirects",redirect$redirect$id), reqType="PUT", data=redirect, ...)$redirect
 }
 
-## DELETE /admin/redirects/#{id}.json
+## DELETE /admin/api/#{api_version}/redirects/#{id}.json
 ## Remove a Redirect from the database
 #' @rdname Redirect
 deleteRedirect <- function(redirectId, ...) {

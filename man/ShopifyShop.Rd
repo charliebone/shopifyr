@@ -146,6 +146,27 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{modifyCustomerSavedSearch}}
      \item \code{\link{deleteCustomerSavedSearch}}
 }}
+\item{\bold{DiscountCode} functions}{\itemize{
+     \item \code{\link{createDiscountCode}}
+     \item \code{\link{modifyDiscountCode}}
+     \item \code{\link{getDiscountCodes}}
+     \item \code{\link{getDiscountCode}}
+     \item \code{\link{deleteDiscountCode}}
+     \item \code{\link{deleteDiscountCode}}
+     \item \code{\link{createDiscountCodesCreationJob}}
+     \item \code{\link{getDiscountCodesCreationJob}}
+     \item \code{\link{getDiscountCodesFromCreationJob}}
+}}
+\item{\bold{DraftOrder} functions}{\itemize{
+     \item \code{\link{createDraftOrder}}
+     \item \code{\link{modifyDraftOrder}}
+     \item \code{\link{getDraftOrders}}
+     \item \code{\link{getDraftOrder}}
+     \item \code{\link{getDraftOrdersCount}}
+     \item \code{\link{sendDraftOrderInvoice}}
+     \item \code{\link{deleteDraftOrder}}
+     \item \code{\link{completeDraftOrder}}
+}}
 \item{\bold{Event} functions}{\itemize{
      \item \code{\link{getEvents}}
      \item \code{\link{getEvent}}
@@ -160,6 +181,12 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{completeFulfillment}}
      \item \code{\link{cancelFulfillment}}
 }}
+\item{\bold{FulfillmentEvent} functions}{\itemize{
+     \item \code{\link{getFulfillmentEvents}}
+     \item \code{\link{getFulfillmentEvent}}
+     \item \code{\link{createFulfillmentEvent}}
+     \item \code{\link{deleteFulfillmentEvent}}
+}}
 \item{\bold{FulfillmentService} functions}{\itemize{
      \item \code{\link{getFulfillmentServices}}
      \item \code{\link{createFulfillmentService}}
@@ -167,9 +194,27 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{modifyFulfillmentService}}
      \item \code{\link{deleteFulfillmentService}}
 }}
+\item{\bold{GiftCard} functions}{\itemize{
+     \item \code{\link{getGiftCards}}
+     \item \code{\link{getGiftCard}}
+     \item \code{\link{getGiftCardsCount}}
+     \item \code{\link{createGiftCard}}
+     \item \code{\link{modifyGiftCard}}
+     \item \code{\link{disableGiftCard}}
+     \item \code{\link{searchGiftCards}}
+}}
 \item{\bold{Location} functions}{\itemize{
      \item \code{\link{getLocations}}
      \item \code{\link{getLocation}}
+}}
+\item{\bold{MarketingEvent} functions}{\itemize{
+     \item \code{\link{getMarketingEvents}}
+     \item \code{\link{getMarketingEventsCount}}
+     \item \code{\link{getMarketingEvent}}
+     \item \code{\link{createMarketingEvent}}
+     \item \code{\link{updateMarketingEvent}}
+     \item \code{\link{deleteMarketingEvent}}
+     \item \code{\link{createMarketingEventEngagements}}
 }}
 \item{\bold{Metafield} functions}{\itemize{
      \item \code{\link{getMetafields}}
@@ -205,6 +250,17 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{modifyPage}}
      \item \code{\link{deletePage}}
 }}
+\item{\bold{PriceRule} functions}{\itemize{
+     \item \code{\link{getPriceRules}}
+     \item \code{\link{getPriceRulesCount}}
+     \item \code{\link{getPriceRule}}
+     \item \code{\link{createPriceRule}}
+     \item \code{\link{modifyPriceRule}}
+     \item \code{\link{deletePriceRule}}
+}}
+\item{\bold{Policy} functions}{\itemize{
+     \item \code{\link{getPolicies}}
+}}
 \item{\bold{Product} functions}{\itemize{
      \item \code{\link{getProducts}}
      \item \code{\link{getProductsCount}}
@@ -220,6 +276,14 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{createProductImage}}
      \item \code{\link{modifyProductImage}}
      \item \code{\link{deleteProductImage}}
+}}
+\item{\bold{ProductListing} functions}{\itemize{
+     \item \code{\link{getProductListings}}
+     \item \code{\link{getProductListingProducts}}
+     \item \code{\link{getProductListingsCount}}
+     \item \code{\link{getProductListing}}
+     \item \code{\link{createProductListing}}
+     \item \code{\link{deleteProductListing}}
 }}
 \item{\bold{Product Variant} functions}{\itemize{
      \item \code{\link{getProductVariants}}
@@ -253,6 +317,17 @@ information about the shop as returned by \code{\link{getShop}}
 \item{\bold{Refund} functions}{\itemize{
      \item \code{\link{getRefund}}
 }}
+\item{\bold{Report} functions}{\itemize{
+     \item \code{\link{getReports}}
+     \item \code{\link{getReport}}
+     \item \code{\link{createReport}}
+     \item \code{\link{modifyReport}}
+     \item \code{\link{deleteReport}}
+}}
+\item{\bold{ResourceFeedback} functions}{\itemize{
+     \item \code{\link{createResourceFeedback}}
+     \item \code{\link{getResourceFeedbacks}}
+}}
 \item{\bold{ScriptTag} functions}{\itemize{
      \item \code{\link{getScriptTags}}
      \item \code{\link{getScriptTagsCount}}
@@ -260,6 +335,9 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{createScriptTag}}
      \item \code{\link{modifyScriptTag}}
      \item \code{\link{deleteScriptTag}}
+}}
+\item{\bold{ShippingZone} functions}{\itemize{
+     \item \code{\link{getShippingZones}}
 }}
 \item{\bold{Shop} functions}{\itemize{
      \item \code{\link{getShop}}
@@ -285,6 +363,16 @@ information about the shop as returned by \code{\link{getShop}}
      \item \code{\link{getTransactionsCount}}
      \item \code{\link{getTransaction}}
      \item \code{\link{createTransaction}}
+}}
+\item{\bold{UsageCharge} functions}{\itemize{
+     \item \code{\link{createUsageCharge}}
+     \item \code{\link{getUsageCharge}}
+     \item \code{\link{getUsageCharges}}
+}}
+\item{\bold{User} functions}{\itemize{
+     \item \code{\link{getUsers}}
+     \item \code{\link{getUser}}
+     \item \code{\link{getCurrentUser}}
 }}
 \item{\bold{Webhook} functions}{\itemize{
      \item \code{\link{getWebhooks}}

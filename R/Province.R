@@ -19,34 +19,34 @@
 #
 
 ########### Province functions ########### 
-#' @param countryId a Country id number
+#' @param countryId a \code{\link{Country}} id number
 #' @templateVar name Province
 #' @templateVar urlSlug store_properties/province
 #' @template api
 NULL
 
-## GET /admin/countries/#{id}/provinces.json
+## GET /admin/api/#{api_version}/countries/#{id}/provinces.json
 ## Receive a list of all Provinces
 #' @rdname Province
 getProvinces <- function(countryId, ...) {
     private$.request(private$.url("countries",countryId,"provinces"), ...)$provinces
 }
 
-## GET /admin/countries/#{id}/provinces/count.json
+## GET /admin/api/#{api_version}/countries/#{id}/provinces/count.json
 ## Receive a count of all Provinces
 #' @rdname Province
 getProvincesCount <- function(countryId, ...) {
     private$.request(private$.url("countries",countryId,"provinces","count"), ...)$count
 }
 
-## GET /admin/countries/#{id}/provinces/#{id}.json
+## GET /admin/api/#{api_version}/countries/#{id}/provinces/#{id}.json
 ## Receive a single Province
 #' @rdname Province
 getProvince <- function(countryId, provinceId, ...) {
     private$.request(private$.url("countries",countryId,"provinces",provinceId), ...)$province
 }
 
-## PUT /admin/countries/#{id}/provinces/#{id}.json
+## PUT /admin/api/#{api_version}/countries/#{id}/provinces/#{id}.json
 ## Modify an existing Province
 #' @rdname Province
 modifyProvince <- function(countryId, province, ...) {

@@ -24,49 +24,49 @@
 #' @template api
 NULL
 
-## GET /admin/orders.json
+## GET /admin/api/#{api_version}/orders.json
 ## Receive a list of all Orders
 #' @rdname Order
 getOrders <- function(...) {
     private$.fetchAll("orders", ...)
 }
 
-## GET /admin/orders/#{id}.json
+## GET /admin/api/#{api_version}/orders/#{id}.json
 ## Receive a single Order
 #' @rdname Order
 getOrder <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId), ...)$order
 }
 
-## GET /admin/orders/count.json
+## GET /admin/api/#{api_version}/orders/count.json
 ## Receive a count of all Orders
 #' @rdname Order
 getOrdersCount <- function(...) {
     private$.request(private$.url("orders","count"), ...)$count
 }
 
-## POST /admin/orders/#{id}/close.json
+## POST /admin/api/#{api_version}/orders/#{id}/close.json
 ## Close an Order
 #' @rdname Order
 closeOrder <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"close"), reqType="POST", data=list(), ...)$order
 }
 
-## POST /admin/orders/#{id}/open.json
+## POST /admin/api/#{api_version}/orders/#{id}/open.json
 ## Re-open a closed Order
 #' @rdname Order
 openOrder <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"open"), reqType="POST", data=list(), ...)$order
 }
 
-## POST /admin/orders/#{id}/cancel.json
+## POST /admin/api/#{api_version}/orders/#{id}/cancel.json
 ## Cancel an Order
 #' @rdname Order
 cancelOrder <- function(orderId, ...) {
     private$.request(private$.url("orders",orderId,"cancel"), reqType="POST", data=list(), ...)$order
 }
 
-## POST /admin/orders.json
+## POST /admin/api/#{api_version}/orders.json
 ## Create a new Order
 #' @rdname Order
 createOrder <- function(order, ...) {
@@ -74,7 +74,7 @@ createOrder <- function(order, ...) {
     private$.request("orders", reqType="POST", data=order, ...)$order
 }
 
-## PUT /admin/orders/#{id}.json
+## PUT /admin/api/#{api_version}/orders/#{id}.json
 ## Modify an existing Order
 #' @rdname Order
 modifyOrder <- function(order, ...) {
@@ -82,7 +82,7 @@ modifyOrder <- function(order, ...) {
     private$.request(private$.url("orders",order$order$id), reqType="PUT", data=order, ...)$order
 }
 
-## DELETE /admin/orders/#{id}.json
+## DELETE /admin/api/#{api_version}/orders/#{id}.json
 ## Remove a Order from the database
 #' @rdname Order
 deleteOrder <- function(orderId, ...) {

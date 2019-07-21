@@ -155,6 +155,27 @@
 #'      \item \code{\link{modifyCustomerSavedSearch}}
 #'      \item \code{\link{deleteCustomerSavedSearch}}
 #' }}
+#' \item{\bold{DiscountCode} functions}{\itemize{
+#'      \item \code{\link{createDiscountCode}}
+#'      \item \code{\link{modifyDiscountCode}}
+#'      \item \code{\link{getDiscountCodes}}
+#'      \item \code{\link{getDiscountCode}}
+#'      \item \code{\link{deleteDiscountCode}}
+#'      \item \code{\link{deleteDiscountCode}}
+#'      \item \code{\link{createDiscountCodesCreationJob}}
+#'      \item \code{\link{getDiscountCodesCreationJob}}
+#'      \item \code{\link{getDiscountCodesFromCreationJob}}
+#' }}
+#' \item{\bold{DraftOrder} functions}{\itemize{
+#'      \item \code{\link{createDraftOrder}}
+#'      \item \code{\link{modifyDraftOrder}}
+#'      \item \code{\link{getDraftOrders}}
+#'      \item \code{\link{getDraftOrder}}
+#'      \item \code{\link{getDraftOrdersCount}}
+#'      \item \code{\link{sendDraftOrderInvoice}}
+#'      \item \code{\link{deleteDraftOrder}}
+#'      \item \code{\link{completeDraftOrder}}
+#' }}
 #' \item{\bold{Event} functions}{\itemize{
 #'      \item \code{\link{getEvents}}
 #'      \item \code{\link{getEvent}}
@@ -169,6 +190,12 @@
 #'      \item \code{\link{completeFulfillment}}
 #'      \item \code{\link{cancelFulfillment}}
 #' }}
+#' \item{\bold{FulfillmentEvent} functions}{\itemize{
+#'      \item \code{\link{getFulfillmentEvents}}
+#'      \item \code{\link{getFulfillmentEvent}}
+#'      \item \code{\link{createFulfillmentEvent}}
+#'      \item \code{\link{deleteFulfillmentEvent}}
+#' }}
 #' \item{\bold{FulfillmentService} functions}{\itemize{
 #'      \item \code{\link{getFulfillmentServices}}
 #'      \item \code{\link{createFulfillmentService}}
@@ -176,9 +203,27 @@
 #'      \item \code{\link{modifyFulfillmentService}}
 #'      \item \code{\link{deleteFulfillmentService}}
 #' }}
+#' \item{\bold{GiftCard} functions}{\itemize{
+#'      \item \code{\link{getGiftCards}}
+#'      \item \code{\link{getGiftCard}}
+#'      \item \code{\link{getGiftCardsCount}}
+#'      \item \code{\link{createGiftCard}}
+#'      \item \code{\link{modifyGiftCard}}
+#'      \item \code{\link{disableGiftCard}}
+#'      \item \code{\link{searchGiftCards}}
+#' }}
 #' \item{\bold{Location} functions}{\itemize{
 #'      \item \code{\link{getLocations}}
 #'      \item \code{\link{getLocation}}
+#' }}
+#' \item{\bold{MarketingEvent} functions}{\itemize{
+#'      \item \code{\link{getMarketingEvents}}
+#'      \item \code{\link{getMarketingEventsCount}}
+#'      \item \code{\link{getMarketingEvent}}
+#'      \item \code{\link{createMarketingEvent}}
+#'      \item \code{\link{updateMarketingEvent}}
+#'      \item \code{\link{deleteMarketingEvent}}
+#'      \item \code{\link{createMarketingEventEngagements}}
 #' }}
 #' \item{\bold{Metafield} functions}{\itemize{
 #'      \item \code{\link{getMetafields}}
@@ -214,6 +259,17 @@
 #'      \item \code{\link{modifyPage}}
 #'      \item \code{\link{deletePage}}
 #' }}
+#' \item{\bold{PriceRule} functions}{\itemize{
+#'      \item \code{\link{getPriceRules}}
+#'      \item \code{\link{getPriceRulesCount}}
+#'      \item \code{\link{getPriceRule}}
+#'      \item \code{\link{createPriceRule}}
+#'      \item \code{\link{modifyPriceRule}}
+#'      \item \code{\link{deletePriceRule}}
+#' }}
+#' \item{\bold{Policy} functions}{\itemize{
+#'      \item \code{\link{getPolicies}}
+#' }}
 #' \item{\bold{Product} functions}{\itemize{
 #'      \item \code{\link{getProducts}}
 #'      \item \code{\link{getProductsCount}}
@@ -229,6 +285,14 @@
 #'      \item \code{\link{createProductImage}}
 #'      \item \code{\link{modifyProductImage}}
 #'      \item \code{\link{deleteProductImage}}
+#' }}
+#' \item{\bold{ProductListing} functions}{\itemize{
+#'      \item \code{\link{getProductListings}}
+#'      \item \code{\link{getProductListingProducts}}
+#'      \item \code{\link{getProductListingsCount}}
+#'      \item \code{\link{getProductListing}}
+#'      \item \code{\link{createProductListing}}
+#'      \item \code{\link{deleteProductListing}}
 #' }}
 #' \item{\bold{Product Variant} functions}{\itemize{
 #'      \item \code{\link{getProductVariants}}
@@ -262,6 +326,17 @@
 #' \item{\bold{Refund} functions}{\itemize{
 #'      \item \code{\link{getRefund}}
 #' }}
+#' \item{\bold{Report} functions}{\itemize{
+#'      \item \code{\link{getReports}}
+#'      \item \code{\link{getReport}}
+#'      \item \code{\link{createReport}}
+#'      \item \code{\link{modifyReport}}
+#'      \item \code{\link{deleteReport}}
+#' }}
+#' \item{\bold{ResourceFeedback} functions}{\itemize{
+#'      \item \code{\link{createResourceFeedback}}
+#'      \item \code{\link{getResourceFeedbacks}}
+#' }}
 #' \item{\bold{ScriptTag} functions}{\itemize{
 #'      \item \code{\link{getScriptTags}}
 #'      \item \code{\link{getScriptTagsCount}}
@@ -269,6 +344,9 @@
 #'      \item \code{\link{createScriptTag}}
 #'      \item \code{\link{modifyScriptTag}}
 #'      \item \code{\link{deleteScriptTag}}
+#' }}
+#' \item{\bold{ShippingZone} functions}{\itemize{
+#'      \item \code{\link{getShippingZones}}
 #' }}
 #' \item{\bold{Shop} functions}{\itemize{
 #'      \item \code{\link{getShop}}
@@ -294,6 +372,16 @@
 #'      \item \code{\link{getTransactionsCount}}
 #'      \item \code{\link{getTransaction}}
 #'      \item \code{\link{createTransaction}}
+#' }}
+#' \item{\bold{UsageCharge} functions}{\itemize{
+#'      \item \code{\link{createUsageCharge}}
+#'      \item \code{\link{getUsageCharge}}
+#'      \item \code{\link{getUsageCharges}}
+#' }}
+#' \item{\bold{User} functions}{\itemize{
+#'      \item \code{\link{getUsers}}
+#'      \item \code{\link{getUser}}
+#'      \item \code{\link{getCurrentUser}}
 #' }}
 #' \item{\bold{Webhook} functions}{\itemize{
 #'      \item \code{\link{getWebhooks}}
@@ -326,13 +414,15 @@
 #' newProduct <- shop$createProduct(product)
 #' }
 #' 
-#' @include private.R AbandonedCheckout.R AccessScope.R Announcement.R ApplicationCharge.R ApplicationCredit.R Article.R 
-#' @include Asset.R Blog.R CarrierService.R Checkout.R Collect.R CollectionListing.R Comment.R Country.R CustomCollection.R 
-#' @include Customer.R CustomerAddress.R CustomerSavedSearch.R Event.R 
-#' @include Fulfillment.R FulfillmentService.R InventoryItem.R InventoryLevel.R Location.R 
-#' @include MetaField.R Order.R OrderRisks.R Page.R Product.R ProductImage.R 
-#' @include ProductVariant.R Province.R RecurringApplicationCharge.R Redirect.R Refund.R
-#' @include ScriptTag.R Shop.R SmartCollection.R Theme.R Transaction.R Webhook.R
+#' @include private.R AbandonedCheckout.R AccessScope.R Announcement.R ApplicationCharge.R
+#' @include ApplicationCredit.R Article.R Asset.R Blog.R CarrierService.R Checkout.R 
+#' @include Collect.R CollectionListing.R Comment.R Country.R CustomCollection.R 
+#' @include Customer.R CustomerAddress.R CustomerSavedSearch.R DraftOrder.R Event.R Fulfillment.R
+#' @include FulfillmentEvent.R FulfillmentService.R GiftCard.R InventoryItem.R InventoryLevel.R Location.R 
+#' @include MarketingEvent.R MetaField.R Order.R OrderRisks.R Page.R Policy.R PriceRule.R Product.R ProductImage.R 
+#' @include ProductListing.R ProductVariant.R Province.R RecurringApplicationCharge.R Redirect.R Refund.R 
+#' @include Report.R ResourceFeedback.R ScriptTag.R ShippingZone.R Shop.R SmartCollection.R Theme.R Transaction.R 
+#' @include UsageCharge.R User.R Webhook.R 
 #' @import R6
 #' @export
 ShopifyShop <- R6Class("ShopifyShop",
@@ -461,6 +551,27 @@ ShopifyShop <- R6Class("ShopifyShop",
         modifyCustomerSavedSearch = modifyCustomerSavedSearch,
         deleteCustomerSavedSearch = deleteCustomerSavedSearch,
         
+        # DiscountCode functions
+        createDiscountCode = createDiscountCode,
+        modifyDiscountCode = modifyDiscountCode,
+        getDiscountCodes = getDiscountCodes,
+        getDiscountCode = getDiscountCode,
+        getDiscountCodeLocation = getDiscountCodeLocation,
+        deleteDiscountCode = deleteDiscountCode,
+        createDiscountCodesCreationJob = createDiscountCodesCreationJob,
+        getDiscountCodesCreationJob = getDiscountCodesCreationJob,
+        getDiscountCodesFromCreationJob = getDiscountCodesFromCreationJob,
+        
+        # DraftOrder functions
+        createDraftOrder = createDraftOrder,
+        modifyDraftOrder = modifyDraftOrder,
+        getDraftOrders = getDraftOrders,
+        getDraftOrder = getDraftOrder,
+        getDraftOrdersCount = getDraftOrdersCount,
+        sendDraftOrderInvoice = sendDraftOrderInvoice,
+        deleteDraftOrder = deleteDraftOrder,
+        completeDraftOrder = completeDraftOrder,
+        
         # Event functions
         getEvents = getEvents,
         getEvent = getEvent,
@@ -475,12 +586,27 @@ ShopifyShop <- R6Class("ShopifyShop",
         completeFulfillment = completeFulfillment,
         cancelFulfillment = cancelFulfillment,
         
+        # FulfillmentEvent functions
+        getFulfillmentEvents = getFulfillmentEvents,
+        getFulfillmentEvent = getFulfillmentEvent,
+        createFulfillmentEvent = createFulfillmentEvent,
+        deleteFulfillmentEvent = deleteFulfillmentEvent,
+        
         # FulfillmentService functions
         getFulfillmentServices = getFulfillmentServices,
         createFulfillmentService = createFulfillmentService,
         getFulfillmentService = getFulfillmentService,
         modifyFulfillmentService = modifyFulfillmentService,
         deleteFulfillmentService = deleteFulfillmentService,
+        
+        # GiftCard functions
+        getGiftCards = getGiftCards,
+        getGiftCard = getGiftCard,
+        getGiftCardsCount = getGiftCardsCount,
+        createGiftCard = createGiftCard,
+        modifyGiftCard = modifyGiftCard,
+        disableGiftCard = disableGiftCard,
+        searchGiftCards = searchGiftCards,
         
         # GraphQL functions
         graphQlQuery = graphQlQuery,
@@ -500,6 +626,15 @@ ShopifyShop <- R6Class("ShopifyShop",
         # Location functions
         getLocations = getLocations,
         getLocation = getLocation,
+        
+        # MarketingEvent functions
+        getMarketingEvents = getMarketingEvents,
+        getMarketingEventsCount = getMarketingEventsCount,
+        getMarketingEvent = getMarketingEvent,
+        createMarketingEvent = createMarketingEvent,
+        updateMarketingEvent = updateMarketingEvent,
+        deleteMarketingEvent = deleteMarketingEvent,
+        createMarketingEventEngagements = createMarketingEventEngagements,
         
         # Metafield functions
         getMetafields = getMetafields,
@@ -535,6 +670,17 @@ ShopifyShop <- R6Class("ShopifyShop",
         modifyPage = modifyPage,
         deletePage = deletePage,
         
+        # Policy functions
+        getPolicies = getPolicies,
+        
+        # PriceRule functions
+        getPriceRules = getPriceRules,
+        getPriceRulesCount = getPriceRulesCount,
+        getPriceRule = getPriceRule,
+        createPriceRule = createPriceRule,
+        modifyPriceRule = modifyPriceRule,
+        deletePriceRule = deletePriceRule,
+        
         # Product functions
         getProducts = getProducts,
         getProductsCount = getProductsCount,
@@ -543,13 +689,21 @@ ShopifyShop <- R6Class("ShopifyShop",
         modifyProduct = modifyProduct,
         deleteProduct = deleteProduct,
         
-        # Product Image functions
+        # ProductImage functions
         getProductImages = getProductImages,
         getProductImagesCount = getProductImagesCount,
         getProductImage = getProductImage,
         createProductImage = createProductImage,
         modifyProductImage = modifyProductImage,
         deleteProductImage = deleteProductImage,
+        
+        # ProductListing functions
+        getProductListings = getProductListings,
+        getProductListingProducts = getProductListingProducts,
+        getProductListingsCount = getProductListingsCount,
+        getProductListing = getProductListing,
+        createProductListing = createProductListing,
+        deleteProductListing = deleteProductListing,
         
         # Product Variant functions
         getProductVariants = getProductVariants,
@@ -583,6 +737,17 @@ ShopifyShop <- R6Class("ShopifyShop",
         # Refund functions
         getRefund = getRefund,
         
+        # Report functions
+        getReports = getReports,
+        getReport = getReport,
+        createReport = createReport,
+        modifyReport = modifyReport,
+        deleteReport = deleteReport,
+        
+        # ResourceFeedback functions
+        createResourceFeedback = createResourceFeedback,
+        getResourceFeedbacks = getResourceFeedbacks,
+        
         # ScriptTag functions
         getScriptTags = getScriptTags,
         getScriptTagsCount = getScriptTagsCount,
@@ -590,6 +755,9 @@ ShopifyShop <- R6Class("ShopifyShop",
         createScriptTag = createScriptTag,
         modifyScriptTag = modifyScriptTag,
         deleteScriptTag = deleteScriptTag,
+        
+        # ShippingZone functions
+        getShippingZones = getShippingZones,
         
         # Shop functions
         getShop = getShop,
@@ -615,6 +783,16 @@ ShopifyShop <- R6Class("ShopifyShop",
         getTransactionsCount = getTransactionsCount,
         getTransaction = getTransaction,
         createTransaction = createTransaction,
+        
+        # UsageCharge functions
+        createUsageCharge = createUsageCharge,
+        getUsageCharge = getUsageCharge,
+        getUsageCharges = getUsageCharges,
+        
+        # User functions
+        getUsers = getUsers,
+        getUser = getUser,
+        getCurrentUser = getCurrentUser,
         
         # Webhook functions
         getWebhooks = getWebhooks,

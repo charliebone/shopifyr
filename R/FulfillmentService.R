@@ -24,14 +24,14 @@
 #' @template api
 NULL
 
-## GET /admin/fulfillment_services.json
+## GET /admin/api/#{api_version}/fulfillment_services.json
 ## Receive a list of all FulfillmentServices
 #' @rdname FulfillmentService
 getFulfillmentServices <- function(...) {
     private$.request("fulfillment_services", ...)$fulfillment_services
 }
 
-## POST /admin/fulfillment_services.json
+## POST /admin/api/#{api_version}/fulfillment_services.json
 ## Create a new FulfillmentService
 #' @rdname FulfillmentService
 createFulfillmentService <- function(fulfillmentService, ...) {
@@ -39,14 +39,14 @@ createFulfillmentService <- function(fulfillmentService, ...) {
     private$.request("fulfillment_services", reqType="POST", data=fulfillmentService, ...)$fulfillment_service
 }
 
-## GET /admin/fulfillment_services/#{id}.json
+## GET /admin/api/#{api_version}/fulfillment_services/#{id}.json
 ## Receive a single FulfillmentService
 #' @rdname FulfillmentService
 getFulfillmentService <- function(fulfillmentServiceId, ...) {
     private$.request(private$.url("fulfillment_services",fulfillmentServiceId), ...)$fulfillment_service
 }
 
-## PUT /admin/fulfillment_services/#{id}.json
+## PUT /admin/api/#{api_version}/fulfillment_services/#{id}.json
 ## Modify an existing FulfillmentService
 #' @rdname FulfillmentService
 modifyFulfillmentService <- function(fulfillmentService, ...) {
@@ -54,7 +54,7 @@ modifyFulfillmentService <- function(fulfillmentService, ...) {
     private$.request(private$.url("fulfillment_services",fulfillmentService$fulfillment_service$id), reqType="PUT", data=fulfillmentService, ...)$fulfillment_service
 }
 
-## DELETE /admin/fulfillment_services/#{id}.json
+## DELETE /admin/api/#{api_version}/fulfillment_services/#{id}.json
 ## Remove a FulfillmentService from the database
 #' @rdname FulfillmentService
 deleteFulfillmentService <- function(fulfillmentServiceId, ...) {

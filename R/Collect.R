@@ -24,7 +24,7 @@
 #' @template api
 NULL
 
-## POST /admin/collects.json
+## POST /admin/api/#{api_version}/collects.json
 ## Create a new Collect
 #' @rdname Collect
 createCollect <- function(collect, ...) {
@@ -32,28 +32,28 @@ createCollect <- function(collect, ...) {
     private$.request("collects", reqType="POST", data=collect, ...)$collect
 }
 
-## DELETE /admin/collects/#{id}.json
+## DELETE /admin/api/#{api_version}/collects/#{id}.json
 ## Remove a Collect from the database
 #' @rdname Collect
 deleteCollect <- function(collectId, ...) {
     private$.request(private$.url("collects",collectId), reqType="DELETE", ...)
 }
 
-## GET /admin/collects.json
+## GET /admin/api/#{api_version}/collects.json
 ## Receive a list of all Collects
 #' @rdname Collect
 getCollects <- function(...) {
     private$.fetchAll("collects", ...)
 }
 
-## GET /admin/collects/count.json
+## GET /admin/api/#{api_version}/collects/count.json
 ## Receive a count of all Collects
 #' @rdname Collect
 getCollectsCount <- function(...) {
     private$.request(private$.url("collects","count"), ...)$count
 }
 
-## GET /admin/collects/#{id}.json
+## GET /admin/api/#{api_version}/collects/#{id}.json
 ## Receive a single Collect
 #' @rdname Collect
 getCollect <- function(collectId, ...) {
