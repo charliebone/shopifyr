@@ -21,7 +21,7 @@
 ########### DraftOrder functions ###########
 #' @param draftOrderInvoice an list of draft order invoice fields
 #' @templateVar name DraftOrder
-#' @templateVar urlSlug orders/draft_order
+#' @templateVar urlSlug orders/draftorder
 #' @template api
 NULL
 

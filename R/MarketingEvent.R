@@ -21,7 +21,7 @@
 ########### MarketingEvent functions ########### 
 #' @param engagements a list of one or more engagements
 #' @templateVar name MarketingEvent
-#' @templateVar urlSlug reference/marketingevent
+#' @templateVar urlSlug marketingevent
 #' @template api
 NULL
 
