@@ -2,7 +2,7 @@ Package: shopifyr
 Type: Package
 Title: An R Interface to the Shopify API
 Version: 0.7.0
-Date: 2019-06-12
+Date: 2019-07-21
 Author: Charlie Friedemann
 Maintainer: Charlie Friedemann <cfriedem@gmail.com>
 Description: An interface to the Admin API of the E-commerce service Shopify,
