@@ -41,5 +41,5 @@ a list containing a MarketingEvent fields or a list of MarketingEvents
 MarketingEvent Functions
 }
 \references{
-Shopify API MarketingEvent documentation: \url{https://help.shopify.com/api/reference/reference/marketingevent}
+Shopify API MarketingEvent documentation: \url{https://help.shopify.com/api/reference/marketingevent}
 }

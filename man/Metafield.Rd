@@ -40,5 +40,5 @@ a list containing a Metafield fields or a list of Metafields
 Metafield Functions
 }
 \references{
-Shopify API Metafield documentation: \url{https://help.shopify.com/api/reference/reference/metafield}
+Shopify API Metafield documentation: \url{https://help.shopify.com/api/reference/metafield}
 }

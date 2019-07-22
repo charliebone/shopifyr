@@ -44,5 +44,5 @@ a list containing a DraftOrder fields or a list of DraftOrders
 DraftOrder Functions
 }
 \references{
-Shopify API DraftOrder documentation: \url{https://help.shopify.com/api/reference/orders/draft_order}
+Shopify API DraftOrder documentation: \url{https://help.shopify.com/api/reference/orders/draftorder}
 }
