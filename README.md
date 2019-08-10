@@ -87,12 +87,12 @@ In addition to manipulating products and collections, the Shopify API provides a
 bobs <- shop$searchCustomers("Bob country:United States")
 ```
 
-To execute a query on the [Shopify GraphQL Admin API](https://help.shopify.com/en/api/graphql-admin-api) as described here. For example, to query for all paperback books, you could do the following:
+To execute a query on the [Shopify GraphQL Admin API](https://help.shopify.com/en/api/graphql-admin-api) as described here. For example, to query for all books with 'Inferno' in the title, you could do the following:
 
 ```R
 query <- '
 {
-  products(first:5, query:"collection_type:t-shirt"){
+  products(first:5, query:"title=Inferno"){
     edges{
       node{
         id
@@ -101,7 +101,7 @@ query <- '
   }
 }'
 
-paperbacks <- shop$graphQlQuery(query)
+inferno_books <- shop$graphQlQuery(query)
 ```
 
 For a complete list of functions and their corresponding documentation, see the `?ShopifyShop` help page. You may get to a function's documentation directly just by invoking the help with that function's name, e.g. `?searchCustomers`.
