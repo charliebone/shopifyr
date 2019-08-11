@@ -1,6 +1,7 @@
 # shopifyr
 
 [![Build Status](https://travis-ci.org/charliebone/shopifyr.png)](https://travis-ci.org/charliebone/shopifyr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/shopifyr)](https://cran.r-project.org/package=shopifyr)
 
 **shopifyr** aims to provide an easy-to-use interface to the [Shopify Admin API](https://help.shopify.com/en/api/reference) within R. 
 
@@ -101,7 +102,7 @@ query <- '
   }
 }'
 
-inferno_books <- shop$graphQlQuery(query)
+infernoBooks <- shop$graphQlQuery(query)
 ```
 
 For a complete list of functions and their corresponding documentation, see the `?ShopifyShop` help page. You may get to a function's documentation directly just by invoking the help with that function's name, e.g. `?searchCustomers`.
